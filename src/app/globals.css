@@ -7,14 +7,28 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-lora);
+  --font-inter: var(--font-inter);
+  --font-lora: var(--font-lora);
+  --color-primary:var(--primary);
+  --color-primary-hover:var(--primary-hover);
+  --color-secondary:var(--secondary);
+  --color-secondary-hover:var(--secondary-hover);
+  --color-background:var(--background);
+  --color-surface:var(--surface);
+  --color-card:var(--card);
+  --color-text-primary:var(--text-primary);
+  --color-text-secondary:var(--text-secondary);
+  --color-text-muted:var(--text-muted);
+  --color-border:var(--border);
+  --color-success:var(--success);
+  --color-warning:var(--warning);
+  --color-error:var(--error);
 }
 
 :root {
   /* Brand Colors */
-  --primary: #6d28d9;
-  --primary-hover: #5b21b6;
+  --primary: #7C3AED;
+  --primary-hover: #6D28D9;
 
   --secondary: #16a34a;
   --secondary-hover: #15803d;
@@ -42,8 +56,8 @@
 
 .dark {
   /* Brand Colors */
-  --primary: #a78bfa;
-  --primary-hover: #c4b5fd;
+  --primary: #8B5CF6;
+  --primary-hover: #A78BFA;
 
   --secondary: #4ade80;
   --accent: #f9a300;
@@ -67,31 +81,3 @@
   --error: #f87171;
 }
 
-/* Font family bindings: use only Inter for UI and Lora for headings */
-:root {
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-lora);
-}
-
-body {
-  font-family:
-    var(--font-sans),
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    Roboto,
-    "Helvetica Neue",
-    Arial;
-  color: var(--text-primary);
-  background: var(--background);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-serif), Georgia, "Times New Roman", Times, serif;
-}
