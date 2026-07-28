@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-
 const ThemeToggle = () => {
   const { setTheme, resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
@@ -22,7 +21,7 @@ const ThemeToggle = () => {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: "spring", stiffness: 200, damping: 15 }}
         className={`absolute inset-0 rounded-full ${
-          isDark ? "bg-accent-soft" : "bg-accent"
+          isDark ? "bg-primary" : "bg-primary-hover"
         }`}
       />
 

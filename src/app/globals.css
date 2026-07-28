@@ -24,60 +24,64 @@
   --color-warning:var(--warning);
   --color-error:var(--error);
 }
-
 :root {
-  /* Brand Colors */
-  --primary: #7C3AED;
-  --primary-hover: #6D28D9;
+  /* Brand */
+  --primary: #166534;          /* Forest Green */
+  --primary-hover: #14532D;
 
-  --secondary: #16a34a;
-  --secondary-hover: #15803d;
+  --secondary: #0F766E;        /* Teal */
+  --secondary-hover: #115E59;
 
-  --accent: #f9a300;
+  --accent: #F9A300;           /* Warm Gold */
+
 
   /* Background */
-  --background: #fafaf7;
-  --surface: #ffffff;
-  --card: #ffffff;
+  --background: #FAFAF5;
+  --surface: #FFFFFF;
+  --card: #FFFFFF;
+
 
   /* Text */
-  --text-primary: #1f2937;
-  --text-secondary: #4b5563;
-  --text-muted: #9ca3af;
+  --text-primary: #1C1917;
+  --text-secondary: #57534E;
+  --text-muted: #A8A29E;
+
 
   /* Border */
-  --border: #e5e7eb;
+  --border: #E7E5E4;
+
 
   /* Status */
-  --success: #22c55e;
-  --warning: #f9a300;
-  --error: #ef4444;
+  --success: #16A34A;
+  --warning: #F9A300;
+  --error: #DC2626;
 }
+
 
 .dark {
-  /* Brand Colors */
-  --primary: #8B5CF6;
-  --primary-hover: #A78BFA;
+  --primary: #4ADE80;
+  --primary-hover: #86EFAC;
 
-  --secondary: #4ade80;
-  --accent: #f9a300;
+  --secondary: #2DD4BF;
+  --accent: #F9A300;
 
-  /* Background */
-  --background: #0f172a;
-  --surface: #111827;
-  --card: #1e293b;
 
-  /* Text */
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
+  --background: #0C1912;
+  --surface: #13231A;
+  --card: #1A2E22;
 
-  /* Border */
+
+  --text-primary: #F5F5F4;
+  --text-secondary: #D6D3D1;
+  --text-muted: #A8A29E;
+
+
   --border: #334155;
 
-  /* Status */
-  --success: #4ade80;
-  --warning: #f9a300;
-  --error: #f87171;
+
+  --success: #4ADE80;
+  --warning: #F9A300;
+  --error: #F87171;
 }
+
 
