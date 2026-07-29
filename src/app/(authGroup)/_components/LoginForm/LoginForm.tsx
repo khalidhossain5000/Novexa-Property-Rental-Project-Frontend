@@ -10,7 +10,8 @@ import { loginAction } from "../../_actions/authAction";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [state,action,isPending]=useActionState(loginAction,false)
+  const [state, action, isPending] = useActionState(loginAction, false);
+  const errorMessage = state?.message;
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-background px-4 py-12">
       <div className="w-full max-w-md rounded-2xl border border-border bg-card p-8 shadow-xl dark:shadow-2xl dark:shadow-black/40">
@@ -44,7 +45,9 @@ const LoginForm = () => {
                 className="border-border bg-background pl-10 text-text-primary placeholder:text-slate-400 focus-visible:ring-primary/30 dark:placeholder:text-slate-500 dark:focus-visible:ring-primary/40"
               />
             </div>
-              {state.errors?.email && <p className="text-red-600 font-inter">{state.errors.email[0]}</p>}
+            {state.errors?.email && (
+              <p className="text-red-600 font-inter">{state.errors.email[0]}</p>
+            )}
           </div>
 
           {/* Password */}
@@ -75,17 +78,23 @@ const LoginForm = () => {
                 )}
               </button>
             </div>
-  {state.errors?.password && <p className="text-red-600 font-inter">{state.errors.password[0]}</p>}
+            {state.errors?.password && (
+              <p className="text-red-600 font-inter">
+                {state.errors.password[0]}
+              </p>
+            )}
           </div>
-
+          {!state.success && (
+            <p className="font-lora text-red-600 text-center py-1">
+              {errorMessage}
+            </p>
+          )}
           {/* Submit */}
           <button
             type="submit"
             className="w-full rounded-lg bg-primary py-2.5 text-sm font-semibold text-white shadow-sm shadow-primary/20 transition-colors hover:bg-primary-hover dark:text-background dark:shadow-primary/10"
           >
-           {
-            isPending ? "signing in ......" : " Log in"
-           }
+            {isPending ? "signing in ......" : " Log in"}
           </button>
         </form>
 

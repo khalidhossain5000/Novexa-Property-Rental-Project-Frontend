@@ -43,10 +43,12 @@ export const loginAction = async (
 
   const result = await res.json();
 
-  const accessToken = result?.data.accessToken;
-  const refreshToken = result?.data.refreshToken;
+console.log(result,'login result')
 
   if (result.success) {
+      const accessToken = result?.data.accessToken;
+  const refreshToken = result?.data.refreshToken;
+
     cookieStore.set("accessToken", accessToken, {
       httpOnly: true,
       maxAge: 60 * 60 * 24,
