@@ -43,11 +43,9 @@ export const loginAction = async (
 
   const result = await res.json();
 
-console.log(result,'login result')
-
   if (result.success) {
-      const accessToken = result?.data.accessToken;
-  const refreshToken = result?.data.refreshToken;
+    const accessToken = result?.data.accessToken;
+    const refreshToken = result?.data.refreshToken;
 
     cookieStore.set("accessToken", accessToken, {
       httpOnly: true,
@@ -139,8 +137,3 @@ export const registerAction = async (
   }
   return loginResult;
 };
-
-
-
-
-
