@@ -11,10 +11,22 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Link from "next/link";
-import { useState } from "react";
+import { useActionState, useState } from "react";
+import { registerAction } from "../../_actions/authAction";
+import { toast } from "sonner";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [role, setRole] = useState("TENANT");
+
+  //form handle
+  const [state, action, isPending] = useActionState(registerAction, false);
+
+  if (state.success) {
+    toast.success("Registration Successfull");
+  }
+
+  console.log(state, "eror state");
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-background px-4 py-12">
       <div className="w-full max-w-md rounded-2xl border border-border bg-card p-8 shadow-xl dark:shadow-2xl dark:shadow-black/40">
@@ -32,7 +44,7 @@ const RegisterForm = () => {
         </div>
 
         {/* Form */}
-        <form className="space-y-5">
+        <form action={action} className="space-y-5">
           {/* First / Last name */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="space-y-2">
@@ -44,10 +56,16 @@ const RegisterForm = () => {
               </Label>
               <Input
                 id="firstName"
+                name="firstName"
                 type="text"
                 placeholder="Rahim"
                 className="border-border bg-background text-text-primary placeholder:text-slate-400 focus-visible:ring-primary/30 dark:placeholder:text-slate-500 dark:focus-visible:ring-primary/40"
               />
+              {state.errors?.firstName && (
+                <p className="text-red-600 font-lora">
+                  {state.errors.firstName[0]}
+                </p>
+              )}
             </div>
             <div className="space-y-2">
               <Label
@@ -59,9 +77,15 @@ const RegisterForm = () => {
               <Input
                 id="lastName"
                 type="text"
+                name="lastName"
                 placeholder="Uddin"
                 className="border-border bg-background text-text-primary placeholder:text-slate-400 focus-visible:ring-primary/30 dark:placeholder:text-slate-500 dark:focus-visible:ring-primary/40"
               />
+              {state.errors?.lastName && (
+                <p className="text-red-600 font-lora">
+                  {state.errors.lastName[0]}
+                </p>
+              )}
             </div>
           </div>
 
@@ -74,10 +98,16 @@ const RegisterForm = () => {
               <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
               <Input
                 id="email"
+                name="email"
                 type="email"
                 placeholder="you@example.com"
                 className="border-border bg-background pl-10 text-text-primary placeholder:text-slate-400 focus-visible:ring-primary/30 dark:placeholder:text-slate-500 dark:focus-visible:ring-primary/40"
               />
+              {state.errors?.email && (
+                <p className="text-red-600 font-lora">
+                  {state.errors.email[0]}
+                </p>
+              )}
             </div>
           </div>
 
@@ -93,6 +123,7 @@ const RegisterForm = () => {
               <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
               <Input
                 id="password"
+                name="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="***********"
                 className="border-border bg-background pl-10 pr-10 text-text-primary placeholder:text-slate-400 focus-visible:ring-primary/30 dark:placeholder:text-slate-500 dark:focus-visible:ring-primary/40"
@@ -109,9 +140,11 @@ const RegisterForm = () => {
                 )}
               </button>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Must be at least 6 characters.
-            </p>
+            {state.errors?.password && (
+              <p className="text-red-600 font-lora">
+                {state.errors.password[0]}
+              </p>
+            )}
           </div>
 
           {/* Role */}
@@ -119,27 +152,47 @@ const RegisterForm = () => {
             <Label htmlFor="role" className="text-text-secondary">
               I want to
             </Label>
-            <Select>
+            <Select
+              value={role}
+              onValueChange={(value) => setRole(value as string)}
+            >
               <SelectTrigger
                 id="role"
-                className="w-full border-border bg-background text-text-primary focus:ring-primary/30 dark:focus:ring-primary/40"
+                className="w-full border-border cursor-pointer bg-background text-text-primary focus:ring-primary/30 dark:focus:ring-primary/40"
               >
                 <SelectValue placeholder="Select your role" />
               </SelectTrigger>
-              <SelectContent className="border-border bg-card text-text-primary">
-                <SelectItem value="TENANT">Tenant</SelectItem>
-                <SelectItem value="LANDLORD">Landlord</SelectItem>
-                <SelectItem value="ADMIN">Admin</SelectItem>
+              <SelectContent className="border-none bg-card text-text-primary">
+                <SelectItem
+                  value="TENANT"
+                  className="hover:bg-slate-300 cursor-pointer"
+                >
+                  Tenant
+                </SelectItem>
+                <SelectItem
+                  value="LANDLORD"
+                  className="hover:bg-slate-300 cursor-pointer"
+                >
+                  Landlord
+                </SelectItem>
+                <SelectItem
+                  value="ADMIN"
+                  className="hover:bg-slate-300 cursor-pointer"
+                >
+                  Admin
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
+          {/* hiddne field to get role in action */}
+          <Input name="role" type="hidden" value={role} />
 
           {/* Submit */}
           <button
             type="submit"
             className="cursor-pointer w-full rounded-lg bg-primary py-2.5 text-sm font-semibold text-white shadow-sm shadow-primary/20 transition-colors hover:bg-primary-hover dark:text-background dark:shadow-primary/10"
           >
-            Create account
+            {isPending ? "Registering......." : " Create account"}
           </button>
         </form>
 
