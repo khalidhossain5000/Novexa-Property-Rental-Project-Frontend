@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import MobileNav from "./MobileNav";
-import { Menu } from "lucide-react";
+import { LogOut, Menu } from "lucide-react";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import { IUser } from "@/app/(authGroup)/_authTypes/authTypes";
@@ -70,13 +70,22 @@ const NavBar = ({ user }: NavBarProps) => {
         <div className="auth-btns flex items-center space-x-5">
           <ThemeToggle />
           {user.success && user?.data?.profilePhoto ? (
-            <Image
+            <div className="flex items-center gap-4">   <Image
               src={user.data.profilePhoto}
               alt="User profile photo"
               width={40}
               height={40}
               className="w-12 h-12 rounded-full border-2 p-1 border-secondary"
             />
+            <button
+             
+                  className="flex items-center justify-center gap-2 px-3 md:px-4 py-2 rounded-lg bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 font-medium text-sm md:text-base hover:bg-red-100 dark:hover:bg-red-950/60 transition-all duration-300 hover:scale-105 active:scale-95 border border-red-200 dark:border-red-800 cursor-pointer"
+                  title="Logout"
+                >
+                  <LogOut size={18} className="md:w-5 md:h-5" />
+                  <span className="hidden lg:inline">Logout</span>
+                </button></div>
+          
           ) : (
             <Link href={"/login"}>
               {" "}
