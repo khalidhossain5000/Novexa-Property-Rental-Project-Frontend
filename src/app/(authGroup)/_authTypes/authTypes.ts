@@ -1,12 +1,12 @@
 export enum Role {
-    TENANT,
-    LANDLORD,
-    ADMIN
+  ADMIN = "ADMIN",
+  LANDLORD = "LANDLORD",
+  TENANT = "TENANT"
 }
 
 export enum UserStatus{
-    ACTIVE,
-    BAN
+    ACTIVE="ACTIVE",
+    BAN="BAN"
 }
 
 export interface IUser{

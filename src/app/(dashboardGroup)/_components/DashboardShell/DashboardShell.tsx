@@ -3,16 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import {
-  LayoutDashboard,
-  Users,
-  Settings,
-  Menu,
-  X,
-  BookOpen,
-  LogOut,
-  BookOpenText,
-} from "lucide-react";
+import { Settings, X, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import DashboardHeader from "../DashboardHeader/DashboardHeader";
@@ -23,8 +14,6 @@ import { adminDashboardRoutes } from "../../_config/adminNavItems";
 import { landLordRoutes } from "../../_config/landLordRoutes";
 import { DashboardRoutes } from "../../_config/dashboardRoutes";
 
-
-
 export function DashboardShell({
   children,
   user,
@@ -34,35 +23,33 @@ export function DashboardShell({
 }>) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();
-const router=useRouter()
-const userRole=user?.data.role
-let dashboardRoutes = []
-if(userRole===Role.ADMIN){
-    dashboardRoutes=adminDashboardRoutes
-}
-else if(userRole===Role.TENANT){
-    dashboardRoutes=landLordRoutes
-}
-else{
-    dashboardRoutes=DashboardRoutes
-}
+  const router = useRouter();
+  const userRole = user?.data.role;
 
+  let dashboardRoutes = [];
+  if (userRole === Role.ADMIN) {
+    dashboardRoutes = adminDashboardRoutes;
+  } else if (userRole === Role.LANDLORD) {
+    dashboardRoutes = landLordRoutes;
+  } else {
+    dashboardRoutes = DashboardRoutes;
+  }
 
   const closeSidebar = () => setIsSidebarOpen(false);
 
   const handleLogOut = async () => {
     await logout();
     toast.success(`Log Out Successfull`, {
-        position: "top-center",
-        className: "w-[260px] h-[72px] text-sm font-semibold",
-        style: {
-          border: "1px solid rgba(248, 113, 113, 0.65)",
-          color: "white",
-          backgroundImage: "linear-gradient(135deg, #dc2626, #ef4444, #f87171)",
-          boxShadow:
-            "0 20px 40px rgba(220, 38, 38, 0.35), 0 0 25px rgba(248, 113, 113, 0.45)",
-        },
-      })
+      position: "top-center",
+      className: "w-[260px] h-[72px] text-sm font-semibold",
+      style: {
+        border: "1px solid rgba(248, 113, 113, 0.65)",
+        color: "white",
+        backgroundImage: "linear-gradient(135deg, #dc2626, #ef4444, #f87171)",
+        boxShadow:
+          "0 20px 40px rgba(220, 38, 38, 0.35), 0 0 25px rgba(248, 113, 113, 0.45)",
+      },
+    });
     router.push("/login");
   };
 
@@ -143,7 +130,10 @@ else{
             />
             Settings
           </Link>
-          <button onClick={handleLogOut} className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-inter font-medium transition-colors text-red-500 hover:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-400/10 w-full text-left cursor-pointer">
+          <button
+            onClick={handleLogOut}
+            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-inter font-medium transition-colors text-red-500 hover:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-400/10 w-full text-left cursor-pointer"
+          >
             <LogOut className="h-5 w-5 opacity-80" />
             Logout
           </button>
