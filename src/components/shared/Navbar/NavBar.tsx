@@ -42,9 +42,9 @@ const NavBar = () => {
       <nav className="max-w-[1400px]  mx-auto flex h-16 items-center justify-between px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-14">
         <div className="logo">
           <Link href={"/"}>
-            <h2 className="text-2xl md:text-3xl  font-lora font-medium lg:font-bold text-primary">
-              RentNest
-            </h2>
+          <h2 className="text-2xl md:text-3xl font-lora font-medium lg:font-bold bg-gradient-to-r from-background to-surface bg-clip-text text-transparent">
+  RentNest
+</h2>
           </Link>
         </div>
         <nav className="hidden lg:flex items-center space-x-6 text-sm font-medium">
@@ -56,7 +56,7 @@ const NavBar = () => {
                 key={link.label}
                 href={link.href}
                 prefetch={true}
-                className={`text-text-primary font-medium font-inter transition-colors text-lg capitalize ${isActive ? "bg-background border-b-2 border-b-secondary px-4 py-2 rounded-full" : ""}`}
+                className={`text-slate-400 dark:text-slate-200 font-medium font-inter transition-colors text-lg capitalize ${isActive ? "text-white border-b-2 border-b-secondary px-4 py-2 rounded-full" : ""}`}
               >
                 {link.label}
               </Link>
