@@ -29,7 +29,7 @@ const DashboardHeader = ({setIsSidebarOpen,user}:IHeaderProps) => {
             {/* Page Title (Desktop) */}
             <div className="hidden lg:flex flex-col">
               <h1 className="text-xl font-bold font-lora text-foreground">
-                Dashboard
+               {user?.data?.role} Dashboard
               </h1>
               <p className="text-xs text-foreground/50 font-inter mt-0.5">
                 {/* {isAdmin ? "Manage your library effectively" : "Track your reading activity"} */}

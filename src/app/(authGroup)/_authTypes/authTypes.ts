@@ -1,10 +1,10 @@
-enum Role {
+export enum Role {
     TENANT,
     LANDLORD,
     ADMIN
 }
 
-enum UserStatus{
+export enum UserStatus{
     ACTIVE,
     BAN
 }
