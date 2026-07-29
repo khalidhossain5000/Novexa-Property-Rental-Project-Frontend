@@ -6,8 +6,12 @@ import MobileNav from "./MobileNav";
 import { Menu } from "lucide-react";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import PrimaryButton from "@/components/ui/PrimaryButton";
-
-const NavBar = () => {
+import { IUser } from "@/app/(authGroup)/_authTypes/authTypes";
+import Image from "next/image";
+interface NavBarProps {
+  user: IUser;
+}
+const NavBar = ({ user }: NavBarProps) => {
   const [sticky, setSticky] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -65,7 +69,22 @@ const NavBar = () => {
         </nav>
         <div className="auth-btns flex items-center space-x-5">
           <ThemeToggle />
-         <Link href={'/login'}> <PrimaryButton className='px-4 lg:px-8 rounded-xl shadow-sm text-slate-200 py-1 '>Login</PrimaryButton></Link>
+          {user.success && user?.data?.profilePhoto ? (
+            <Image
+              src={user.data.profilePhoto}
+              alt="User profile photo"
+              width={40}
+              height={40}
+              className="w-12 h-12 rounded-full border-2 p-1 border-secondary"
+            />
+          ) : (
+            <Link href={"/login"}>
+              {" "}
+              <PrimaryButton className="px-4 lg:px-8 rounded-xl shadow-sm text-slate-200 py-1 ">
+                Login
+              </PrimaryButton>
+            </Link>
+          )}
           <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsMobileMenuOpen(true)}

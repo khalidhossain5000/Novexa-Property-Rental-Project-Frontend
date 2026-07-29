@@ -4,11 +4,23 @@ enum Role {
     ADMIN
 }
 
+enum UserStatus{
+    ACTIVE,
+    BAN
+}
 
-export interface TRegister{
-    firstName:string;
-    lastName:string;
-    email:string;
-    password:string;
-    role:Role
+export interface IUser{
+    success:boolean;
+    message:string;
+    data:{
+        id:string;
+        firstName:string;
+        lastName:string;
+        email:string;
+        profilePhoto:string;
+        role:Role;
+        status:UserStatus;
+        created_At:string;
+        updated_At:string;
+    }
 }

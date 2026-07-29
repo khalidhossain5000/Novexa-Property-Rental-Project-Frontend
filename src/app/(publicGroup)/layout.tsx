@@ -8,7 +8,7 @@ const PublicLayout = async ({children}: Readonly<{
     const user=await getMe()
     return (
         <div>
-            <NavBar/>
+            <NavBar user={user}/>
             {children}
         </div>
     );
