@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Lora } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/ThemeProvider";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -39,6 +40,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+                  <Toaster richColors />
+
         </ThemeProvider>
       </body>
     </html>

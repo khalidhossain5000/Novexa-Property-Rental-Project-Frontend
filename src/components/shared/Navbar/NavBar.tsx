@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import MobileNav from "./MobileNav";
 import { Menu } from "lucide-react";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import PrimaryButton from "@/components/ui/PrimaryButton";
 
 const NavBar = () => {
   const [sticky, setSticky] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
 
   const pathname = usePathname();
 
@@ -42,9 +42,9 @@ const NavBar = () => {
       <nav className="max-w-[1400px]  mx-auto flex h-16 items-center justify-between px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-14">
         <div className="logo">
           <Link href={"/"}>
-          <h2 className="text-2xl md:text-3xl font-lora font-medium lg:font-bold bg-gradient-to-r from-background to-surface bg-clip-text text-transparent">
-  RentNest
-</h2>
+            <h2 className="text-2xl md:text-3xl font-lora font-medium lg:font-bold bg-gradient-to-r from-background to-surface bg-clip-text text-transparent">
+              RentNest
+            </h2>
           </Link>
         </div>
         <nav className="hidden lg:flex items-center space-x-6 text-sm font-medium">
@@ -65,6 +65,7 @@ const NavBar = () => {
         </nav>
         <div className="auth-btns flex items-center space-x-5">
           <ThemeToggle />
+         <Link href={'/login'}> <PrimaryButton className='px-4 lg:px-8 rounded-xl shadow-sm text-slate-200 py-1 '>Login</PrimaryButton></Link>
           <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsMobileMenuOpen(true)}
