@@ -146,7 +146,7 @@ export function DashboardShell({
 
         <DashboardHeader setIsSidebarOpen={setIsSidebarOpen} user={user} />
         {/* Page Content */}
-        <main className="flex-1 overflow-y-auto bg-[#e2e8f0] dark:bg-[#020618] p-6">
+        <main className="flex-1 overflow-y-auto bg-[#e2e8f0] dark:bg-[#020618] p-1 sm:p-2 md:p-3 lg:p-4 xl:p-6">
           <div className="font-inter text-foreground max-w-7xl mx-auto">
             {children}
           </div>
