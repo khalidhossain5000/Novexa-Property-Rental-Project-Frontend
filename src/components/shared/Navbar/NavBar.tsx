@@ -10,6 +10,7 @@ const NavBar = () => {
   const [sticky, setSticky] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+
   const pathname = usePathname();
 
   const navItems = [
