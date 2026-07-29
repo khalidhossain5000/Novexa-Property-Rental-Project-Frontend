@@ -1,5 +1,6 @@
 "use client";
 import { Home, Mail, Lock, Eye } from "lucide-react";
+import { IoEyeOffSharp } from "react-icons/io5";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -10,8 +11,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Link from "next/link";
+import { useState } from "react";
 
 const RegisterForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-background px-4 py-12">
       <div className="w-full max-w-md rounded-2xl border border-border bg-card p-8 shadow-xl dark:shadow-2xl dark:shadow-black/40">
@@ -90,15 +93,20 @@ const RegisterForm = () => {
               <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
               <Input
                 id="password"
-                type="password"
-                placeholder="••••••••"
+                type={showPassword ? "text" : "password"}
+                placeholder="***********"
                 className="border-border bg-background pl-10 pr-10 text-text-primary placeholder:text-slate-400 focus-visible:ring-primary/30 dark:placeholder:text-slate-500 dark:focus-visible:ring-primary/40"
               />
               <button
                 type="button"
-                className="cursor pointer absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300"
+                onClick={() => setShowPassword(!showPassword)}
+                className="cursor-pointer absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300"
               >
-                <Eye className="h-4 w-4" />
+                {showPassword ? (
+                  <IoEyeOffSharp className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
               </button>
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -121,9 +129,7 @@ const RegisterForm = () => {
               <SelectContent className="border-border bg-card text-text-primary">
                 <SelectItem value="TENANT">Tenant</SelectItem>
                 <SelectItem value="LANDLORD">Landlord</SelectItem>
-                <SelectItem value="ADMIN">
-               Admin
-                </SelectItem>
+                <SelectItem value="ADMIN">Admin</SelectItem>
               </SelectContent>
             </Select>
           </div>
