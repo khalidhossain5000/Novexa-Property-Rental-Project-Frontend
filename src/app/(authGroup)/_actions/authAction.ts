@@ -1,6 +1,7 @@
 "use server";
 
-import { registerSchema } from "@/zod/authSchema";
+import { loginSchema, registerSchema } from "@/zod/authSchema";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import z from "zod";
 
@@ -9,29 +10,61 @@ type TPrevState = {
   message: string;
 };
 
-
 //login action
 
-export const loginAction=async(prevState:TPrevState,formData:FormData)=>{
+export const loginAction = async (
+  prevState: TPrevState,
+  formData: FormData,
+) => {
+  const email = formData.get("email");
+  const password = formData.get("password");
+  const cookieStore = await cookies();
+  const payload = {
+    email,
+    password,
+  };
+  const validationResult = loginSchema.safeParse(payload);
 
-}
+  if (!validationResult?.success) {
+    const errors = z.flattenError(validationResult.error);
+    return {
+      success: false,
+      errors: errors.fieldErrors,
+    };
+  }
 
+  const res = await fetch(`${process.env.BACKEND_URL}/api/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
 
+  const result = await res.json();
 
+  const accessToken = result?.data.accessToken;
+  const refreshToken = result?.data.refreshToken;
 
+  if (result.success) {
+    cookieStore.set("accessToken", accessToken, {
+      httpOnly: true,
+      maxAge: 60 * 60 * 24,
+      sameSite: "lax",
+    });
 
+    cookieStore.set("refreshToken", refreshToken, {
+      httpOnly: true,
+      maxAge: 60 * 60 * 10,
+      sameSite: "lax",
+    });
 
-
-
-
-
-
-
-
+    redirect("/");
+  }
+  return result;
+};
 
 //user registration action
-
-
 
 export const registerAction = async (
   prevState: TPrevState,
@@ -42,7 +75,7 @@ export const registerAction = async (
   const email = formData.get("email");
   const password = formData.get("password");
   const role = formData.get("role");
-
+  const cookieStore = await cookies();
   const payload = {
     firstName,
     lastName,
@@ -51,19 +84,15 @@ export const registerAction = async (
     role,
   };
 
-const validationResult=registerSchema.safeParse(payload)
+  const validationResult = registerSchema.safeParse(payload);
 
-console.log(validationResult,'thisis validation console',validationResult?.error?.flatten().fieldErrors)
-
-
-
-if(!validationResult?.success){
-    const errors=z.flattenError(validationResult.error)
+  if (!validationResult?.success) {
+    const errors = z.flattenError(validationResult.error);
     return {
-        success:false,
-        errors:errors.fieldErrors
-    }
-}
+      success: false,
+      errors: errors.fieldErrors,
+    };
+  }
   const res = await fetch(`${process.env.BACKEND_URL}/api/auth/register`, {
     method: "POST",
     headers: {
@@ -72,11 +101,39 @@ if(!validationResult?.success){
     body: JSON.stringify(payload),
   });
 
-  const result = await res.json();
-if(result.success){
-    redirect("/")
-}
-  console.log(result, "this is payload inside auth action");
-//instant auto login after successfull registration will be done here
-  return result;
+  const registerResult = await res.json();
+  if (!registerResult.success) {
+    return registerResult;
+  }
+
+  //instant login after register
+  const loginRes = await fetch(`${process.env.BACKEND_URL}/api/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const loginResult = await loginRes.json();
+
+  const accessToken = loginResult?.data.accessToken;
+  const refreshToken = loginResult?.data.refreshToken;
+
+  if (loginResult.success) {
+    cookieStore.set("accessToken", accessToken, {
+      httpOnly: true,
+      maxAge: 60 * 60 * 24,
+      sameSite: "lax",
+    });
+
+    cookieStore.set("refreshToken", refreshToken, {
+      httpOnly: true,
+      maxAge: 60 * 60 * 10,
+      sameSite: "lax",
+    });
+
+    redirect("/");
+  }
+  return loginResult;
 };

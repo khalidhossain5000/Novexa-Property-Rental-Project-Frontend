@@ -1,14 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useActionState, useState } from "react";
 import { Home, Mail, Lock, Eye } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { IoEyeOffSharp } from "react-icons/io5";
 import Link from "next/link";
+import { loginAction } from "../../_actions/authAction";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [state,action,isPending]=useActionState(loginAction,false)
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-background px-4 py-12">
       <div className="w-full max-w-md rounded-2xl border border-border bg-card p-8 shadow-xl dark:shadow-2xl dark:shadow-black/40">
@@ -26,7 +28,7 @@ const LoginForm = () => {
         </div>
 
         {/* Form */}
-        <form className="space-y-5">
+        <form action={action} className="space-y-5">
           {/* Email */}
           <div className="space-y-2">
             <Label htmlFor="email" className="text-text-secondary">
@@ -37,10 +39,12 @@ const LoginForm = () => {
               <Input
                 id="email"
                 type="email"
+                name="email"
                 placeholder="you@example.com"
                 className="border-border bg-background pl-10 text-text-primary placeholder:text-slate-400 focus-visible:ring-primary/30 dark:placeholder:text-slate-500 dark:focus-visible:ring-primary/40"
               />
             </div>
+              {state.errors?.email && <p className="text-red-600 font-inter">{state.errors.email[0]}</p>}
           </div>
 
           {/* Password */}
@@ -54,6 +58,7 @@ const LoginForm = () => {
               <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
               <Input
                 id="password"
+                name="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="***********"
                 className="border-border bg-background pl-10 pr-10 text-text-primary placeholder:text-slate-400 focus-visible:ring-primary/30 dark:placeholder:text-slate-500 dark:focus-visible:ring-primary/40"
@@ -70,6 +75,7 @@ const LoginForm = () => {
                 )}
               </button>
             </div>
+  {state.errors?.password && <p className="text-red-600 font-inter">{state.errors.password[0]}</p>}
           </div>
 
           {/* Submit */}
@@ -77,7 +83,9 @@ const LoginForm = () => {
             type="submit"
             className="w-full rounded-lg bg-primary py-2.5 text-sm font-semibold text-white shadow-sm shadow-primary/20 transition-colors hover:bg-primary-hover dark:text-background dark:shadow-primary/10"
           >
-            Log in
+           {
+            isPending ? "signing in ......" : " Log in"
+           }
           </button>
         </form>
 
