@@ -18,8 +18,8 @@ const ListingActions = async({ property,propertyCategories }: IListingActionsPro
 
       <UpdatePropertyDialog property={property} propertyCategories={propertyCategories}/>
 
-      {/* <DeletePropertyDialog  propertyId={property.id}/>  */}
-      <DeletePropertyDialog  /> 
+      <DeletePropertyDialog  propertyId={property.id}/> 
+    
 
     </div>
   );

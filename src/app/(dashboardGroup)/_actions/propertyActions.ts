@@ -135,3 +135,64 @@ export const updatePropertyAction = async (propertyId:string, prevState: null, f
 
   return result;
 };
+
+
+//delete property
+
+export const deletePropertyAction=async(prevState:null,formData:FormData)=>{
+    const cookieStore = await cookies();
+
+  const accessToken = cookieStore.get("accessToken")?.value || null;
+
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "User not logged in",
+    };
+  }
+
+  const propertyId=formData.get("propertyId")
+    const res = await fetch(
+    `${process.env.BACKEND_URL}/api/landlord/properties/${propertyId}`,
+    {
+      method: "DELETE",
+      headers: {
+        Cookie: `accessToken=${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    
+    },
+  );
+  const result=await res.json()
+
+console.log(result,'delete result')
+  return result
+}
+
+
+//get rental request
+
+export const getRentalRequestForLandlord=async()=>{
+    const cookieStore = await cookies();
+
+  const accessToken = cookieStore.get("accessToken")?.value || null;
+
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "User not logged in",
+    };
+  }
+
+  const res = await fetch(
+    `${process.env.BACKEND_URL}/api/landlord/properties/requests`,
+    {
+      headers: {
+        Cookie: `accessToken=${accessToken}`,
+      },
+    },
+  );
+  const result = await res.json();
+console.log(result,'rental req all')
+  return result
+}
