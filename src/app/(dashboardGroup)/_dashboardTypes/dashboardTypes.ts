@@ -11,7 +11,7 @@ export interface ICategory {
 export interface ICategoryResponse {
   success: boolean;
   message: string;
-  data: ICategory[];
+  data?: ICategory[];
 }
 
 export interface IPropertyTypes{

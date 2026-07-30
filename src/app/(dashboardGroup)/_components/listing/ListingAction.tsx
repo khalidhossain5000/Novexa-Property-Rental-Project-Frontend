@@ -7,11 +7,12 @@ import UpdatePropertyDialog from "../DashboardDialog/UpdatePropertyDialog";
 
 interface IListingActionsProps {
   property: IPropertyTypes;
-    propertyCategories:ICategoryResponse
+    propertyCategories:ICategoryResponse;
+    rentalReqId?:string
   
 }
 
-const ListingActions = async({ property,propertyCategories }: IListingActionsProps) => {
+const ListingActions = async({ property,propertyCategories,rentalReqId }: IListingActionsProps) => {
 
   return (
     <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
