@@ -22,7 +22,9 @@ interface AddPropertyFormProps {
 
 const AddPropertyForm = ({ propertyCategories }: AddPropertyFormProps) => {
   const categories = propertyCategories.data;
+  const [thumbnailUrl, setThumbnailUrl] = useState("");
 
+  const [imageUploading, setImageUploading] = useState(false);
   return (
     <div className="flex min-h-screen items-start justify-center  px-4 py-10">
       <div className="w-full max-w-3xl space-y-6">
@@ -192,14 +194,25 @@ const AddPropertyForm = ({ propertyCategories }: AddPropertyFormProps) => {
             </div>
             <div>
               {/* Thumbnail Upload with Preview & Remove */}
-              <ImageUploadField />
+              <ImageUploadField
+                onUploadSuccess={(url) => {
+                  setThumbnailUrl(url);
+                }}
+                onUploadStateChange={(loading) => {
+                  setImageUploading(loading);
+                }}
+                onRemove={() => {
+                  setThumbnailUrl("");
+                }}
+              />
             </div>
             {/* Submit Button */}
             <Button
               type="submit"
+              disabled={imageUploading || !thumbnailUrl}
               className="w-full bg-primary font-semibold text-white shadow-sm transition-all hover:bg-primary-hover focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:text-background"
             >
-              Publish Property
+              {imageUploading ? "Uploading image..." : "Add Property"}
             </Button>
           </form>
         </div>
