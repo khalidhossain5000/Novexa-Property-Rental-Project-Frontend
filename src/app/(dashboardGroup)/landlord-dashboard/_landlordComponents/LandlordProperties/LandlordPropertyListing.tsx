@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import ListingActions from "@/app/(dashboardGroup)/_components/listing/ListingAction";
 import ListingMobileCard from "@/app/(dashboardGroup)/_components/listing/ListingMobileCard";
@@ -13,11 +13,17 @@ const LandlordPropertyListing = ({
   currentLandlordProperties,
 }: ILandlordPropertyProps) => {
   const landlordProperties = currentLandlordProperties.data;
+  const handleUpdate = (id: string) => {
+    console.log("update", id);
+  };
 
+  const handleDelete = (id: string) => {
+    console.log("delete", id);
+  };
   return (
     <div className="space-y-5">
       <div className="mb-8">
-        <h2 className="font-montserrat text-2xl font-bold text-foreground">
+        <h2 className="font-lora text-2xl font-bold text-foreground">
           Manage Properties
         </h2>
 
@@ -62,12 +68,7 @@ const LandlordPropertyListing = ({
                     {property.status}
                   </span>
                 }
-                actions={
-                  <ListingActions
-                    onUpdate={() => console.log("update", property.id)}
-                    onDelete={() => console.log("delete", property.id)}
-                  />
-                }
+                actions={<ListingActions property={property} />}
               />
             ))}
 
@@ -112,12 +113,7 @@ const LandlordPropertyListing = ({
               </>
             }
             description={property.description}
-            actions={
-              <ListingActions
-                onUpdate={() => console.log("update", property.id)}
-                onDelete={() => console.log("delete", property.id)}
-              />
-            }
+            actions={<ListingActions property={property} />}
           />
         ))}
       </div>
