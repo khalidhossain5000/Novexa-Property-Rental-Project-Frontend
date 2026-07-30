@@ -16,15 +16,7 @@ export const createProperty = async (prevState: null, formData: FormData) => {
     };
   }
 
-
-
- 
-
-
-
-
-
-    const title = formData.get("title") as string;
+  const title = formData.get("title") as string;
   const price = Number(formData.get("price"));
   const description = formData.get("description") as string;
   const location = formData.get("location") as string;
@@ -32,7 +24,7 @@ export const createProperty = async (prevState: null, formData: FormData) => {
   const amenities = formData.get("amenities") as string;
   const thumbnailImage = formData.get("thumbnailImage") as string;
 
-  const payload={
+  const payload = {
     title,
     price,
     description,
@@ -40,10 +32,9 @@ export const createProperty = async (prevState: null, formData: FormData) => {
     status: "AVAILABLE",
     categoryId,
     amenities,
-     thumbnailImage
-
-  }
- const validationResult = propertySchema.safeParse(payload);
+    thumbnailImage,
+  };
+  const validationResult = propertySchema.safeParse(payload);
 
   if (!validationResult?.success) {
     const errors = z.flattenError(validationResult.error);
@@ -69,3 +60,38 @@ export const createProperty = async (prevState: null, formData: FormData) => {
 
   return result;
 };
+
+
+
+
+
+//get current logged in landlord property
+
+export const getCurrentLandlordProperties=async()=>{
+   const cookieStore = await cookies();
+
+  const accessToken = cookieStore.get("accessToken")?.value || null;
+
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "User not logged in",
+    };
+  }
+
+
+  const res = await fetch(
+    `${process.env.BACKEND_URL}/api/landlord/properties/my-properties`,
+    {
+      headers: {
+        Cookie: `accessToken=${accessToken}`,
+      }
+    },
+  );
+const result=await res.json()
+
+console.log(result,'my propertyes')
+
+
+return result
+}

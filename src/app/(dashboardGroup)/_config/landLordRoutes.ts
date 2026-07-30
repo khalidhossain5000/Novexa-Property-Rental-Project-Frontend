@@ -1,9 +1,9 @@
 import {
   LayoutDashboard,
-  Users,
-  BookOpen,
-  BookOpenText,
+  MapPinHouse,
+  LandPlot 
 } from "lucide-react";
+import { FaWarehouse } from "react-icons/fa";
 
 export const landLordRoutes = [
   {
@@ -14,16 +14,16 @@ export const landLordRoutes = [
   {
     title: "Add Property",
     href: "/landlord-dashboard/add-property",
-    icon: Users,
+    icon: LandPlot ,
   },
   {
     title: "My properties",
-    href: "/landlord-dashboard/add-cateogry",
-    icon: BookOpen
+    href: "/landlord-dashboard/my-properties",
+    icon: MapPinHouse
   },
   {
     title: "Rental Request",
     href: "/landlord-dashboard/rental-request",
-    icon: BookOpenText,
+    icon: FaWarehouse,
   }
 ];
