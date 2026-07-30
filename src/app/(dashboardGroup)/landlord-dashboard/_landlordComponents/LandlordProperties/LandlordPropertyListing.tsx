@@ -13,13 +13,7 @@ const LandlordPropertyListing = ({
   currentLandlordProperties,
 }: ILandlordPropertyProps) => {
   const landlordProperties = currentLandlordProperties.data;
-  const handleUpdate = (id: string) => {
-    console.log("update", id);
-  };
 
-  const handleDelete = (id: string) => {
-    console.log("delete", id);
-  };
   return (
     <div className="space-y-5">
       <div className="mb-8">
