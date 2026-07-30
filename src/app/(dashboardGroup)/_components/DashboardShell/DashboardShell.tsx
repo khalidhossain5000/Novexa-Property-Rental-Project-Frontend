@@ -64,7 +64,7 @@ export function DashboardShell({
       )}
       {/*  Sidebar */}
       <aside
-        className={`fixed flex flex-col inset-y-0 left-0 z-50 w-64 transform border-r border-slate-200 dark:border-slate-700 bg-background transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
+        className={`fixed flex flex-col inset-y-0 left-0 z-50 w-64 lg:w-68 transform border-r border-slate-200 dark:border-slate-700 bg-background transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -147,7 +147,7 @@ export function DashboardShell({
         <DashboardHeader setIsSidebarOpen={setIsSidebarOpen} user={user} />
         {/* Page Content */}
         <main className="flex-1 overflow-y-auto bg-[#e2e8f0] dark:bg-[#020618] p-1 sm:p-2 md:p-3 lg:p-4 xl:p-6">
-          <div className="font-inter text-foreground max-w-7xl mx-auto">
+          <div className="font-inter text-foreground ">
             {children}
           </div>
         </main>
