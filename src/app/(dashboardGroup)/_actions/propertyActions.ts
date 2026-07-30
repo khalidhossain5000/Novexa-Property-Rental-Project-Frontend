@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
 import { propertySchema } from "@/zod/propertySchema";
@@ -56,7 +57,6 @@ export const createProperty = async (prevState: null, formData: FormData) => {
   );
   const result = await res.json();
 
-
   return result;
 };
 
@@ -89,7 +89,11 @@ export const getCurrentLandlordProperties = async () => {
 
 //update property
 
-export const updatePropertyAction = async (propertyId:string, prevState: null, formData: FormData) => {
+export const updatePropertyAction = async (
+  propertyId: string,
+  prevState: null,
+  formData: FormData,
+) => {
   const cookieStore = await cookies();
 
   const accessToken = cookieStore.get("accessToken")?.value || null;
@@ -105,7 +109,7 @@ export const updatePropertyAction = async (propertyId:string, prevState: null, f
   const price = Number(formData.get("price")) ?? "";
   const description = (formData.get("description") as string) ?? "";
   const location = (formData.get("location") as string) ?? "";
-  const categoryId = (formData.get("categoryId") as string)
+  const categoryId = formData.get("categoryId") as string;
   const amenities = (formData.get("amenities") as string) ?? "";
   const thumbnailImage = (formData.get("thumbnailImage") as string) ?? "";
 
@@ -136,11 +140,13 @@ export const updatePropertyAction = async (propertyId:string, prevState: null, f
   return result;
 };
 
-
 //delete property
 
-export const deletePropertyAction=async(prevState:null,formData:FormData)=>{
-    const cookieStore = await cookies();
+export const deletePropertyAction = async (
+  prevState: null,
+  formData: FormData,
+) => {
+  const cookieStore = await cookies();
 
   const accessToken = cookieStore.get("accessToken")?.value || null;
 
@@ -151,8 +157,8 @@ export const deletePropertyAction=async(prevState:null,formData:FormData)=>{
     };
   }
 
-  const propertyId=formData.get("propertyId")
-    const res = await fetch(
+  const propertyId = formData.get("propertyId");
+  const res = await fetch(
     `${process.env.BACKEND_URL}/api/landlord/properties/${propertyId}`,
     {
       method: "DELETE",
@@ -160,20 +166,18 @@ export const deletePropertyAction=async(prevState:null,formData:FormData)=>{
         Cookie: `accessToken=${accessToken}`,
         "Content-Type": "application/json",
       },
-    
     },
   );
-  const result=await res.json()
+  const result = await res.json();
 
-console.log(result,'delete result')
-  return result
-}
-
+  console.log(result, "delete result");
+  return result;
+};
 
 //get rental request
 
-export const getRentalRequestForLandlord=async()=>{
-    const cookieStore = await cookies();
+export const getRentalRequestForLandlord = async () => {
+  const cookieStore = await cookies();
 
   const accessToken = cookieStore.get("accessToken")?.value || null;
 
@@ -193,6 +197,43 @@ export const getRentalRequestForLandlord=async()=>{
     },
   );
   const result = await res.json();
-console.log(result,'rental req all')
-  return result
-}
+
+  return result;
+};
+
+//update rental req status
+
+export const updateRentalReqStatus = async (
+  rentalReqId: string,
+  prevState: any,
+  formData: FormData,
+) => {
+  const cookieStore = await cookies();
+
+  const accessToken = cookieStore.get("accessToken")?.value || null;
+
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "User not logged in",
+    };
+  }
+
+  const status = formData.get("status");
+
+  const res = await fetch(
+    `${process.env.BACKEND_URL}/api/landlord/properties/requests/${rentalReqId}`,
+    {
+      method: "PATCH",
+      headers: {
+        Cookie: `accessToken=${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(status),
+    },
+  );
+  const result = await res.json();
+  console.log(status, "this isupdated data and result", result);
+
+  return result;
+};
