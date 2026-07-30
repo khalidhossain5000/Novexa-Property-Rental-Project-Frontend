@@ -5,7 +5,7 @@ import LandlordRentalRequest from "../_landlordComponents/LandlordRentalRequest/
 const RentalRequestForLandlordPage = async () => {
   const rentalReqLandlord = await getRentalRequestForLandlord();
 
-  console.log(rentalReqLandlord, "rentalReqLandlord");
+
   return (
     <div>
       <div className="mb-8">

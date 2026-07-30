@@ -5,7 +5,7 @@ import { HousePlug } from "lucide-react";
 
 interface IListingTableRowProps {
   image?: string;
-  title: string;
+  title?: string;
   subtitle?: string;
   columns: React.ReactNode[];
   status?: React.ReactNode;
@@ -27,7 +27,7 @@ const ListingTableRow = ({
         <div className="flex items-center gap-3">
           <div className="relative h-12 w-12 overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-slate-800">
             {image ? (
-              <Image src={image} alt={title} fill className="object-cover" />
+              <Image src={image} alt={title || "image"} fill className="object-cover" />
             ) : (
               <div className="flex h-full w-full items-center justify-center text-slate-400">
                 <HousePlug className="h-5 w-5" />

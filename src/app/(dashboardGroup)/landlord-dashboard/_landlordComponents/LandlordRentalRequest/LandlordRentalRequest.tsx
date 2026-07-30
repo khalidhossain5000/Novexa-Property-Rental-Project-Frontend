@@ -3,6 +3,7 @@ import ListingMobileCard from "@/app/(dashboardGroup)/_components/listing/Listin
 import ListingTableRow from "@/app/(dashboardGroup)/_components/listing/ListingTableRow";
 import { IRentalReqResponse } from "@/app/(dashboardGroup)/_dashboardTypes/dashboardTypes";
 import React from "react";
+import RentalRequestActions from "./RentalReqActionBtn";
 interface ILandlordRentalRequestProps {
   rentalReqLandlord: IRentalReqResponse;
 }
@@ -17,6 +18,7 @@ const LandlordRentalRequest = ({
         <table className="w-full text-left text-sm font-inter">
           <thead className="border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-600 dark:border-slate-800 dark:bg-slate-800/50 dark:text-slate-300">
             <tr>
+              <th className="px-6 py-4">Property Image</th>
               <th className="px-6 py-4">Property Title</th>
 
               <th className="px-6 py-4">Total Price</th>
@@ -35,9 +37,10 @@ const LandlordRentalRequest = ({
               <ListingTableRow
                 key={rentalReq.id}
                 image={rentalReq.property.thumbnailImage}
-                title={rentalReq.property.title}
-                subtitle={rentalReq.totalAmount}
+            
                 columns={[
+                  rentalReq.property.title,
+                  rentalReq.totalAmount,
                   `$ ${rentalReq.tenant.firstName}`,
                   rentalReq.tenant.email,
                 ]}
@@ -52,6 +55,7 @@ const LandlordRentalRequest = ({
                     {rentalReq.status}
                   </span>
                 }
+                actions={<RentalRequestActions rentalReqId={rentalReq.id} />}
               />
             ))}
 
@@ -96,6 +100,7 @@ const LandlordRentalRequest = ({
               </>
             }
             description={rentalReq.created_At}
+            actions={<RentalRequestActions rentalReqId={rentalReq.id} />}
           />
         ))}
       </div>

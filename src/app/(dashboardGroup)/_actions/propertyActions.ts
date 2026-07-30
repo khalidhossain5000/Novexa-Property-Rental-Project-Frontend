@@ -229,7 +229,9 @@ export const updateRentalReqStatus = async (
         Cookie: `accessToken=${accessToken}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(status),
+      body: JSON.stringify({
+      status,
+    }),
     },
   );
   const result = await res.json();
