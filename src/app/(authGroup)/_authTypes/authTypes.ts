@@ -9,11 +9,8 @@ export enum UserStatus{
     BAN="BAN"
 }
 
-export interface IUser{
-    success:boolean;
-    message:string;
-    data:{
-        id:string;
+export interface IUserTypes{
+            id:string;
         firstName:string;
         lastName:string;
         email:string;
@@ -22,5 +19,10 @@ export interface IUser{
         status:UserStatus;
         created_At:string;
         updated_At:string;
-    }
+}
+
+export interface IUser{
+    success:boolean;
+    message:string;
+    data:IUserTypes
 }

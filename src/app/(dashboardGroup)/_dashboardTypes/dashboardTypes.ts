@@ -1,3 +1,6 @@
+import { IUserTypes } from "@/app/(authGroup)/_authTypes/authTypes";
+import { RentalRequestStatus } from "@/lib/types";
+
 export interface ICategory {
   id: string;
   name: string;
@@ -31,4 +34,23 @@ export interface ICurrentLandlordPropertiesResponse {
   success: boolean;
   message: string;
   data: IPropertyTypes[];
+}
+
+
+//landlord rental req related
+export interface IRentalRequest{
+  id:string;
+  status:RentalRequestStatus,
+  totalAmount:string;
+  propertyId:string;
+  tenantId:string;
+  created_At:string;
+  updated_At:string;
+  property:IPropertyTypes;
+  tenant:IUserTypes
+}
+export interface IRentalReqResponse{
+  success:boolean;
+  message:string;
+  data:IRentalRequest[]
 }
