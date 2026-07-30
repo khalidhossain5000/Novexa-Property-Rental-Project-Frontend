@@ -1,5 +1,3 @@
-import React from "react";
-
 interface IImageUploadResponse {
   success: boolean;
   data: {
@@ -27,8 +25,7 @@ export const imageUpload = async (image: File) => {
       message: "Failed To Upload image",
     };
 
-  const result: IImageUploadResponse =
-    await response.json();
+  const result: IImageUploadResponse = await response.json();
 
   if (!result.success)
     return {

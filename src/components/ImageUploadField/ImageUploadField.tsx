@@ -95,8 +95,8 @@ const ImageUploadField = ({
             src={thumbnailPreview}
             alt="Thumbnail preview"
             fill
-            className="object-cover"
-            sizes="(max-width: 640px) 100vw, 50vw"
+            className="object-cover "
+            sizes="(max-width: 640px) 90vw, 50vw"
           />
 
           <button

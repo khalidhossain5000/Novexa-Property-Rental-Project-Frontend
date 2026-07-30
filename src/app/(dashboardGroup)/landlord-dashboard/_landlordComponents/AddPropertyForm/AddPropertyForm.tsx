@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useActionState, useState } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,6 +16,8 @@ import {
 import { ICategoryResponse } from "@/app/(dashboardGroup)/_dashboardTypes/dashboardTypes";
 
 import ImageUploadField from "@/components/ImageUploadField/ImageUploadField";
+import { createProperty } from "@/app/(dashboardGroup)/_actions/propertyActions";
+
 interface AddPropertyFormProps {
   propertyCategories: ICategoryResponse;
 }
@@ -25,6 +27,9 @@ const AddPropertyForm = ({ propertyCategories }: AddPropertyFormProps) => {
   const [thumbnailUrl, setThumbnailUrl] = useState("");
 
   const [imageUploading, setImageUploading] = useState(false);
+
+  //form submit
+  const [state, action, isPending] = useActionState(createProperty, false);
   return (
     <div className="flex min-h-screen items-start justify-center  px-4 py-10">
       <div className="w-full max-w-3xl space-y-6">
@@ -40,7 +45,7 @@ const AddPropertyForm = ({ propertyCategories }: AddPropertyFormProps) => {
 
         {/* Form Card */}
         <div className="rounded-2xl border border-border bg-card p-4 shadow-sm transition-colors md:p-4 lg:p-6 xl:p-8">
-          <form className="space-y-6">
+          <form action={action} className="space-y-6">
             {/* Title & Price Row */}
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div className="space-y-2">
@@ -56,6 +61,11 @@ const AddPropertyForm = ({ propertyCategories }: AddPropertyFormProps) => {
                   placeholder="e.g. Affordable Bachelor Flat"
                   className="border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
                 />
+                {state.errors?.title && (
+                  <p className="text-red-600 font-lora">
+                    {state.errors.title[0]}
+                  </p>
+                )}
               </div>
               <div className="space-y-2">
                 <Label
@@ -72,6 +82,11 @@ const AddPropertyForm = ({ propertyCategories }: AddPropertyFormProps) => {
                   min="0"
                   className="border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
                 />
+                {state.errors?.price && (
+                  <p className="text-red-600 font-lora">
+                    {state.errors.price[0]}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -90,9 +105,14 @@ const AddPropertyForm = ({ propertyCategories }: AddPropertyFormProps) => {
                 placeholder="Describe the property, nearby facilities, and what makes it special."
                 className="resize-none border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
               />
+              {state.errors?.description && (
+                <p className="text-red-600 font-lora">
+                  {state.errors.description[0]}
+                </p>
+              )}
             </div>
 
-            {/* Location & Status Row */}
+            {/* Location & category Row */}
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label
@@ -107,73 +127,71 @@ const AddPropertyForm = ({ propertyCategories }: AddPropertyFormProps) => {
                   placeholder="e.g. Mohammadpur, Dhaka"
                   className="border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
                 />
+                {state.errors?.location && (
+                  <p className="text-red-600 font-lora">
+                    {state.errors.location[0]}
+                  </p>
+                )}
               </div>
-              <div className="space-y-2">
-                <Label
-                  htmlFor="status"
-                  className="text-sm font-medium text-text-secondary font-inter"
-                >
-                  Status
-                </Label>
-                <Select>
-                  <SelectTrigger
-                    id="status"
-                    className="border-border bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:ring-offset-1 w-full cursor-pointer"
-                  >
-                    <SelectValue placeholder="Select status" />
-                  </SelectTrigger>
-                  <SelectContent className="border-none  bg-surface text-text-primary">
-                    <SelectItem
-                      value="AVAILABLE"
-                      className="cursor-pointer hover:bg-slate-200 dark:bg-slate-600"
-                    >
-                      Available
-                    </SelectItem>
-                    <SelectItem
-                      value="PENDING"
-                      className="cursor-pointer hover:bg-slate-200 dark:bg-slate-600"
-                    >
-                      Pending
-                    </SelectItem>
-                    <SelectItem
-                      value="RENTED"
-                      className="cursor-pointer hover:bg-slate-200 dark:bg-slate-600"
-                    >
-                      Rented
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            {/* Category & amneites */}
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label
                   htmlFor="category"
-                  className="text-sm font-medium text-text-secondary amenities"
+                  className="text-sm font-medium text-text-secondary font-inter"
                 >
                   Category
                 </Label>
-                <Select>
-                  <SelectTrigger
-                    id="category"
-                    className="border-border bg-surface text-text-primary focus:ring-2 focus:ring-primary focus:ring-offset-1 w-full cursor-pointer lg:pr-12"
-                  >
-                    <SelectValue placeholder="Choose a category" />
-                  </SelectTrigger>
-                  <SelectContent className="border-none bg-surface text-text-primary">
-                    {categories.map((cat) => (
-                      <SelectItem
-                        key={cat.id}
-                        value={cat.name}
-                        className="cursor-pointer hover:bg-slate-200 dark:bg-slate-800"
-                      >
-                        {cat.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+
+                <select
+                  id="category"
+                  name="categoryId"
+                  defaultValue=""
+                  className="flex h-10 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  <option value="" disabled>
+                    Choose a category
+                  </option>
+
+                  {categories.map((cat) => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
+                </select>
+                {state.errors?.categoryId && (
+                  <p className="text-red-600 font-lora">
+                    {state.errors.categoryId[0]}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* image upload & amneites */}
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <div>
+                {/* Thumbnail Upload with Preview & Remove */}
+                <ImageUploadField
+                  onUploadSuccess={(url) => {
+                    setThumbnailUrl(url);
+                  }}
+                  onUploadStateChange={(loading) => {
+                    setImageUploading(loading);
+                  }}
+                  onRemove={() => {
+                    setThumbnailUrl("");
+                  }}
+                />
+
+                {/* to get thumbnail url */}
+                <input
+                  type="hidden"
+                  name="thumbnailImage"
+                  value={thumbnailUrl}
+                />
+                {state.errors?.thumbnailImage && (
+                  <p className="text-red-600 font-lora">
+                    {state.errors.thumbnailImage[0]}
+                  </p>
+                )}
               </div>
 
               {/* Amenities */}
@@ -190,29 +208,25 @@ const AddPropertyForm = ({ propertyCategories }: AddPropertyFormProps) => {
                   placeholder="e.g. WiFi, Security, Lift (comma separated)"
                   className="border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
                 />
+                {state.errors?.amenities && (
+                  <p className="text-red-600 font-lora">
+                    {state.errors.amenities[0]}
+                  </p>
+                )}
               </div>
             </div>
-            <div>
-              {/* Thumbnail Upload with Preview & Remove */}
-              <ImageUploadField
-                onUploadSuccess={(url) => {
-                  setThumbnailUrl(url);
-                }}
-                onUploadStateChange={(loading) => {
-                  setImageUploading(loading);
-                }}
-                onRemove={() => {
-                  setThumbnailUrl("");
-                }}
-              />
-            </div>
+
             {/* Submit Button */}
             <Button
               type="submit"
               disabled={imageUploading || !thumbnailUrl}
               className="w-full bg-primary font-semibold text-white shadow-sm transition-all hover:bg-primary-hover focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:text-background"
             >
-              {imageUploading ? "Uploading image..." : "Add Property"}
+              {imageUploading
+                ? "Uploading image..."
+                : isPending
+                  ? "Creating Property..."
+                  : "Add Property"}
             </Button>
           </form>
         </div>
