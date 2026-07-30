@@ -230,8 +230,8 @@ export const updateRentalReqStatus = async (
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-      status,
-    }),
+        status,
+      }),
     },
   );
   const result = await res.json();

@@ -1,8 +1,9 @@
 import {
   LayoutDashboard,
   Users,
-  BookOpen,
-  BookOpenText,
+  HouseWifi,
+  Warehouse,
+  ListSortDescending
 } from "lucide-react";
 
 export const adminDashboardRoutes = [
@@ -17,13 +18,17 @@ export const adminDashboardRoutes = [
     icon: Users,
   },
   {
-    title: "Add Category",
-    href: "/dashboard/add-cateogry",
-    icon: BookOpen
+    title: "Add Categories",
+    href: "/admin-dashboard/add-categories",
+    icon: ListSortDescending
+  }, {
+    title: "All Properties",
+    href: "/admin-dashboard/all-properties",
+    icon:HouseWifi
   },
   {
-    title: "Manage Bookings",
-    href: "/dashboard/manage-bookings",
-    icon: BookOpenText,
+    title: "All Rentals",
+    href: "/admin-dashboard/all-rentals",
+    icon:Warehouse
   }
 ];
