@@ -1,15 +1,20 @@
 import React from 'react';
 import LandlordPropertyListing from '../_landlordComponents/LandlordProperties/LandlordPropertyListing';
 import { getCurrentLandlordProperties } from '../../_actions/propertyActions';
+import { getPropertyCategories } from '../../_actions/getCategory';
 
-const LandlordAllProperties = async () => {
+const LandlordAllPropertiesPage = async () => {
     const currentLandlordProperties=await getCurrentLandlordProperties()
     
+  const propertyCategories =
+    await getPropertyCategories();
+
+
     return (
         <div>
-            <LandlordPropertyListing  currentLandlordProperties={currentLandlordProperties}/>
+            <LandlordPropertyListing  currentLandlordProperties={currentLandlordProperties} propertyCategories={propertyCategories}/>
         </div>
     );
 };
 
-export default LandlordAllProperties;
+export default LandlordAllPropertiesPage;

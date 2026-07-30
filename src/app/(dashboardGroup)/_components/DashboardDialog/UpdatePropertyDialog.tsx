@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -15,21 +15,33 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { Pencil } from "lucide-react";
 
-import { IPropertyTypes } from "../../_dashboardTypes/dashboardTypes";
+import {
+  ICategoryResponse,
+  IPropertyTypes,
+} from "../../_dashboardTypes/dashboardTypes";
 import ImageUploadField from "@/components/ImageUploadField/ImageUploadField";
-import { Button } from "@/components/ui/button";
+import { updatePropertyAction } from "../../_actions/propertyActions";
 
 interface IUpdatePropertyDialogProps {
   property: IPropertyTypes;
+  propertyCategories: ICategoryResponse;
 }
 
-const UpdatePropertyDialog = ({ property }: IUpdatePropertyDialogProps) => {
+const UpdatePropertyDialog = ({
+  property,
+  propertyCategories,
+}: IUpdatePropertyDialogProps) => {
   const [thumbnailUrl, setThumbnailUrl] = useState(property.thumbnailImage);
 
   const [imageUploading, setImageUploading] = useState(false);
+  const [state, action, isPending] = useActionState(
+    updatePropertyAction.bind(null, property.id),
+    false,
+  );
+ const categories = propertyCategories.data;
 
   return (
-    <Dialog >
+    <Dialog>
       <DialogTrigger>
         <div className="cursor-pointer inline-flex items-center justify-center gap-2 rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-200 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
           <Pencil className="h-4 w-4" />
@@ -42,7 +54,7 @@ const UpdatePropertyDialog = ({ property }: IUpdatePropertyDialogProps) => {
           <DialogTitle>Update Property</DialogTitle>
         </DialogHeader>
 
-        <form action="" className="space-y-5">
+        <form action={action} className="space-y-5">
           {/* Title */}
           <div className="space-y-2">
             <Label>Property Title</Label>
@@ -100,6 +112,31 @@ const UpdatePropertyDialog = ({ property }: IUpdatePropertyDialogProps) => {
                 className="border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
               />
             </div>
+            <div className="space-y-2">
+              <Label
+                htmlFor="category"
+                className="text-sm font-medium text-text-secondary font-inter"
+              >
+                Category
+              </Label>
+
+              <select
+                id="category"
+                name="categoryId"
+              defaultValue={property.categoryId}
+                className="flex h-10 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <option value="" disabled>
+                  Choose a category
+                </option>
+
+                {categories.map((cat) => (
+                  <option key={cat.id} value={cat.id} >
+                    {cat.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           {/* Image Upload */}
@@ -124,7 +161,11 @@ const UpdatePropertyDialog = ({ property }: IUpdatePropertyDialogProps) => {
             type="submit"
             className="cursor-pointer w-full rounded-xl bg-primary px-5 py-3 font-semibold text-white transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {imageUploading ? "Uploading image..." : "Update Property"}
+            {imageUploading
+              ? "Uploading image..."
+              : isPending
+                ? "Updating......"
+                : "Update Property"}
           </button>
         </form>
       </DialogContent>

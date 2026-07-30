@@ -1,18 +1,20 @@
-"use client";
+
 
 import ListingActions from "@/app/(dashboardGroup)/_components/listing/ListingAction";
 import ListingMobileCard from "@/app/(dashboardGroup)/_components/listing/ListingMobileCard";
 import ListingTableRow from "@/app/(dashboardGroup)/_components/listing/ListingTableRow";
-import { ICurrentLandlordPropertiesResponse } from "@/app/(dashboardGroup)/_dashboardTypes/dashboardTypes";
+import { ICategoryResponse, ICurrentLandlordPropertiesResponse } from "@/app/(dashboardGroup)/_dashboardTypes/dashboardTypes";
 
 interface ILandlordPropertyProps {
   currentLandlordProperties: ICurrentLandlordPropertiesResponse;
+  propertyCategories:ICategoryResponse
 }
 
 const LandlordPropertyListing = ({
   currentLandlordProperties,
+  propertyCategories
 }: ILandlordPropertyProps) => {
-  const landlordProperties = currentLandlordProperties.data;
+  const landlordProperties = currentLandlordProperties?.data;
 
   return (
     <div className="space-y-5">
@@ -62,7 +64,7 @@ const LandlordPropertyListing = ({
                     {property.status}
                   </span>
                 }
-                actions={<ListingActions property={property} />}
+                actions={<ListingActions property={property} propertyCategories={propertyCategories}/>}
               />
             ))}
 
@@ -107,7 +109,7 @@ const LandlordPropertyListing = ({
               </>
             }
             description={property.description}
-            actions={<ListingActions property={property} />}
+            actions={<ListingActions property={property} propertyCategories={propertyCategories}/>}
           />
         ))}
       </div>

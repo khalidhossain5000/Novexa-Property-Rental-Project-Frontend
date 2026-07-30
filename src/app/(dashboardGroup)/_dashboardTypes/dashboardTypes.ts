@@ -25,6 +25,7 @@ export interface IPropertyTypes{
   landLordId:string;
   created_At:string;
   updated_At:string;
+  category:ICategory;
 }
 export interface ICurrentLandlordPropertiesResponse {
   success: boolean;

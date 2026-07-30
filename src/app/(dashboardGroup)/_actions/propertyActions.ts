@@ -29,7 +29,6 @@ export const createProperty = async (prevState: null, formData: FormData) => {
     price,
     description,
     location,
-    status: "AVAILABLE",
     categoryId,
     amenities,
     thumbnailImage,
@@ -56,19 +55,15 @@ export const createProperty = async (prevState: null, formData: FormData) => {
     },
   );
   const result = await res.json();
-  console.log(payload, "this is data of proeprty", result);
+
 
   return result;
 };
 
-
-
-
-
 //get current logged in landlord property
 
-export const getCurrentLandlordProperties=async()=>{
-   const cookieStore = await cookies();
+export const getCurrentLandlordProperties = async () => {
+  const cookieStore = await cookies();
 
   const accessToken = cookieStore.get("accessToken")?.value || null;
 
@@ -79,19 +74,64 @@ export const getCurrentLandlordProperties=async()=>{
     };
   }
 
-
   const res = await fetch(
     `${process.env.BACKEND_URL}/api/landlord/properties/my-properties`,
     {
       headers: {
         Cookie: `accessToken=${accessToken}`,
-      }
+      },
     },
   );
-const result=await res.json()
+  const result = await res.json();
 
-console.log(result,'my propertyes')
+  return result;
+};
 
+//update property
 
-return result
-}
+export const updatePropertyAction = async (propertyId:string, prevState: null, formData: FormData) => {
+  const cookieStore = await cookies();
+
+  const accessToken = cookieStore.get("accessToken")?.value || null;
+
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "User not logged in",
+    };
+  }
+
+  const title = (formData.get("title") as string) ?? "";
+  const price = Number(formData.get("price")) ?? "";
+  const description = (formData.get("description") as string) ?? "";
+  const location = (formData.get("location") as string) ?? "";
+  const categoryId = (formData.get("categoryId") as string)
+  const amenities = (formData.get("amenities") as string) ?? "";
+  const thumbnailImage = (formData.get("thumbnailImage") as string) ?? "";
+
+  const payload = {
+    title,
+    price,
+    description,
+    location,
+    categoryId,
+    amenities,
+    thumbnailImage,
+  };
+
+  const res = await fetch(
+    `${process.env.BACKEND_URL}/api/landlord/properties/${propertyId}`,
+    {
+      method: "PUT",
+      headers: {
+        Cookie: `accessToken=${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    },
+  );
+  const result = await res.json();
+  console.log(payload, "this isupdated data and result", result);
+
+  return result;
+};
