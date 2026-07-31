@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { AlertCircle } from "lucide-react";
 
-export default function ErrorPage({ error, reset }) {
+export default function ErrorPage({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
       <div className="mx-auto flex min-h-screen max-w-5xl flex-col items-center justify-center px-6 py-24 text-center">
