@@ -9,7 +9,7 @@ interface IPaymentProps {
 const PaymentHistory = ({ paymentHistoryRes }: IPaymentProps) => {
   const paymentHistory = paymentHistoryRes.data;
 
-  console.log(paymentHistory,'payment hsitory')
+  console.log(paymentHistory, "payment hsitory");
   return (
     <div>
       {/* Desktop Table */}
@@ -34,7 +34,7 @@ const PaymentHistory = ({ paymentHistoryRes }: IPaymentProps) => {
               <ListingTableRow
                 key={payment.id}
                 title={payment.transactionId}
-                columns={[`${payment.paidAt}`,`$ ${payment.totalAmount}`]}
+                columns={[`${payment.paidAt}`, `$ ${payment.totalAmount}`]}
                 status={
                   <span
                     className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
@@ -46,9 +46,7 @@ const PaymentHistory = ({ paymentHistoryRes }: IPaymentProps) => {
                     {payment.status}
                   </span>
                 }
-                  actions={
-    <PaymentDetailsDialog payment={payment} />
-  }
+                actions={<PaymentDetailsDialog payment={payment} />}
               />
             ))}
 
@@ -91,9 +89,7 @@ const PaymentHistory = ({ paymentHistoryRes }: IPaymentProps) => {
               </>
             }
             description={payment.paidAt}
-              actions={
-    <PaymentDetailsDialog payment={payment} />
-  }
+            actions={<PaymentDetailsDialog payment={payment} />}
           />
         ))}
       </div>
