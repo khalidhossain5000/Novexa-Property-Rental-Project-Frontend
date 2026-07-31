@@ -43,6 +43,6 @@ export const getPorpertyDetails=async(id:string)=>{
   );
 
   const result=await res.json()
-console.log(result,'p details result here over')
+
   return result
 }

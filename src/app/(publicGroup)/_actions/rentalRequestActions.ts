@@ -36,3 +36,30 @@ export const sendRentalRequest = async (
 
   return result;
 };
+
+
+//get current tenant rental req
+
+export const getTenantRentalRequest=async()=>{
+   const cookieStore = await cookies();
+
+  const accessToken = cookieStore.get("accessToken")?.value || null;
+
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "User not logged in",
+    };
+  }
+
+    const res = await fetch(`${process.env.BACKEND_URL}/api/rentals`, {
+    headers: {
+      Cookie: `accessToken=${accessToken}`,
+      "Content-Type": "application/json",
+    }
+  });
+const result=await res.json()
+console.log(result,'rental my req all result')
+
+return result
+}
