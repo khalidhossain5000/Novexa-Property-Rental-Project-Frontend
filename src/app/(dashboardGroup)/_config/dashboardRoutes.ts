@@ -12,7 +12,7 @@ export const DashboardRoutes = [
   },
   {
     title: "My Rental Request",
-    href: "/dashboard/rental-request",
+    href: "/dashboard/my-rental-request",
     icon: HouseWifi
   },{
     title: "Payment History",
