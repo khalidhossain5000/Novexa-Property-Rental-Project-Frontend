@@ -4,6 +4,7 @@ import ListingTableRow from "../listing/ListingTableRow";
 import ListingMobileCard from "../listing/ListingMobileCard";
 import RentalRequestDetailsModal from "./RentalRequestDetailsDialog";
 import MakePaymnetBtn from "./MakePaymnetBtn";
+import GiveReviewBtn from "./GiveReviewBtn";
 interface MyRentalReqProps {
   myRentalReqRes: IRentalReqResponse;
 }
@@ -59,6 +60,10 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
                     {rentalReq.status === "APPROVED" && (
                       <MakePaymnetBtn rentalRequestId={rentalReq.id} />
                     )}
+
+                    {rentalReq.status === "ACTIVE" && (
+                      <GiveReviewBtn propertyId={rentalReq.property.id} />
+                    )}
                   </div>
                 }
               />
@@ -111,6 +116,10 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
 
                 {rentalReq.status === "APPROVED" && (
                   <MakePaymnetBtn rentalRequestId={rentalReq.id} />
+                )}
+
+                {rentalReq.status === "ACTIVE" && (
+                  <GiveReviewBtn propertyId={rentalReq.property.id} />
                 )}
               </div>
             }
