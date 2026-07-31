@@ -2,11 +2,14 @@ import React from "react";
 import { IPaymentResponse } from "../_dashboardTypes/dashboardTypes";
 import ListingMobileCard from "./listing/ListingMobileCard";
 import ListingTableRow from "./listing/ListingTableRow";
+import PaymentDetailsDialog from "./PaymentDetailsDialog";
 interface IPaymentProps {
   paymentHistoryRes: IPaymentResponse;
 }
 const PaymentHistory = ({ paymentHistoryRes }: IPaymentProps) => {
   const paymentHistory = paymentHistoryRes.data;
+
+  console.log(paymentHistory,'payment hsitory')
   return (
     <div>
       {/* Desktop Table */}
@@ -31,7 +34,7 @@ const PaymentHistory = ({ paymentHistoryRes }: IPaymentProps) => {
               <ListingTableRow
                 key={payment.id}
                 title={payment.transactionId}
-                columns={[`$ ${payment.totalAmount}`]}
+                columns={[`${payment.paidAt}`,`$ ${payment.totalAmount}`]}
                 status={
                   <span
                     className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
@@ -43,6 +46,9 @@ const PaymentHistory = ({ paymentHistoryRes }: IPaymentProps) => {
                     {payment.status}
                   </span>
                 }
+                  actions={
+    <PaymentDetailsDialog payment={payment} />
+  }
               />
             ))}
 
@@ -80,11 +86,14 @@ const PaymentHistory = ({ paymentHistoryRes }: IPaymentProps) => {
                       : "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300"
                   }`}
                 >
-                  {payment.status}
+                  {payment?.status}
                 </span>
               </>
             }
             description={payment.paidAt}
+              actions={
+    <PaymentDetailsDialog payment={payment} />
+  }
           />
         ))}
       </div>

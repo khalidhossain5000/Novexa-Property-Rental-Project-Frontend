@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
-import React, { useActionState, useEffect, useState } from "react";
+import React, { useActionState } from "react";
 import { createPayment } from "../../_actions/paymentActions";
 import {
   Dialog,
@@ -20,14 +19,8 @@ const MakePaymnetBtn = ({ rentalRequestId }: IPaymentProps) => {
     createPayment.bind(null, rentalRequestId),
     null,
   );
-  const router = useRouter();
-  const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    if (state) {
-      setOpen(true);
-    }
-  }, [state]);
+  const router = useRouter();
 
   const handlePayment = () => {
     if (state?.data?.paymentGatewayUrl) {
@@ -47,7 +40,7 @@ const MakePaymnetBtn = ({ rentalRequestId }: IPaymentProps) => {
         </button>
       </form>
 
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={!!state}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
@@ -55,36 +48,28 @@ const MakePaymnetBtn = ({ rentalRequestId }: IPaymentProps) => {
             </DialogTitle>
           </DialogHeader>
 
-          <div className="space-y-5">
-            {state?.success ? (
-              <>
-                <p className="text-sm text-muted-foreground">
-                  Your payment request has been created. Click below to continue
-                  payment.
-                </p>
+          {state?.success ? (
+            <div className="space-y-5">
+              <p>
+                Your payment request has been created successfully.
+              </p>
 
-                <button
-                  onClick={handlePayment}
-                  className="w-full rounded-xl bg-emerald-600 px-5 py-3 text-white font-semibold hover:bg-emerald-700"
-                >
-                  Click here to complete payment
-                </button>
-              </>
-            ) : (
-              <>
-                <p className="text-sm text-red-500">
-                  {state?.message || "Something went wrong"}
-                </p>
-
-                <button
-                  onClick={() => setOpen(false)}
-                  className="w-full rounded-xl border px-5 py-3"
-                >
-                  Close
-                </button>
-              </>
-            )}
-          </div>
+              <button
+                onClick={handlePayment}
+                className="w-full rounded-xl bg-emerald-600 px-5 py-3 text-white"
+              >
+                Click here to complete payment
+              </button>
+            </div>
+          ) : (
+            <div>
+              <p className="text-red-500">
+                {typeof state?.message === "string"
+                  ? state.message
+                  : "Something went wrong"}
+              </p>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </>

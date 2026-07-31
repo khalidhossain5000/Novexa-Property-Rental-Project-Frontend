@@ -92,7 +92,7 @@ export interface IPayment{
   paidAt:string;
   status:PaymentStatus
   rentalRequestId:string;
-  rentalRequest?:IRentalRequest
+  rentalRequest:IRentalRequest
 }
 export interface IPaymentResponse{
   success:boolean;

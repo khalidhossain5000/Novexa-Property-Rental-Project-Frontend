@@ -2,8 +2,8 @@ import { getPaymentHistory } from "../../_actions/paymentActions";
 import PaymentHistory from "../../_components/PaymentHistory";
 
 const MyPaymentHistory = async () => {
-    const paymentHistoryRes=await getPaymentHistory()
-  console.log(paymentHistoryRes,'thisis rental req res')
+  const paymentHistoryRes = await getPaymentHistory();
+  console.log(paymentHistoryRes, "thisis rental req res");
   return (
     <div>
       <div className="mb-8">
@@ -16,7 +16,7 @@ const MyPaymentHistory = async () => {
         </p>
       </div>
 
-      <PaymentHistory paymentHistoryRes={paymentHistoryRes}  />
+      <PaymentHistory paymentHistoryRes={paymentHistoryRes} />
     </div>
   );
 };

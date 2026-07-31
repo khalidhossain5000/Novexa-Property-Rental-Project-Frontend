@@ -24,12 +24,16 @@ export function DashboardShell({
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const userRole = user?.data.role;
+  const userRole = user?.data?.role;
 
-  if(userRole) return {
-    success:false,
-    message:"User role not found something went role"
+  if (!userRole) {
+    return (
+      <div className="p-6 text-center text-red-500">
+        <p>User role not found. Please login again or contact support.</p>
+      </div>
+    );
   }
+
   let dashboardRoutes = [];
   if (userRole === Role.ADMIN) {
     dashboardRoutes = adminDashboardRoutes;
@@ -151,9 +155,7 @@ export function DashboardShell({
         <DashboardHeader setIsSidebarOpen={setIsSidebarOpen} user={user} />
         {/* Page Content */}
         <main className="flex-1 overflow-y-auto bg-[#e2e8f0] dark:bg-[#020618] p-1 sm:p-2 md:p-3 lg:p-4 xl:p-6">
-          <div className="font-inter text-foreground ">
-            {children}
-          </div>
+          <div className="font-inter text-foreground ">{children}</div>
         </main>
       </div>
     </div>

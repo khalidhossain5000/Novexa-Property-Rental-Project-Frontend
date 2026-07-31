@@ -13,7 +13,7 @@ export const createPayment = async (rentalRequestId: string) => {
       message: "User not logged in",
     };
   }
-  console.log(rentalRequestId, "rentalRequestId from create payment");
+
   const res = await fetch(`${process.env.BACKEND_URL}/api/payments/create`, {
     method: "POST",
     headers: {
@@ -25,7 +25,6 @@ export const createPayment = async (rentalRequestId: string) => {
 
   const result = await res.json();
 
-  console.log(result, "this is result payment");
 
   return result;
 };
@@ -54,8 +53,6 @@ export const getPaymentHistory = async () => {
   });
 
   const result = await res.json();
-
-  console.log(result, "this is result payment");
 
   return result;
 };
