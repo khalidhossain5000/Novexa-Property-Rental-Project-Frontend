@@ -1,8 +1,7 @@
 import {
   LayoutDashboard,
-  Users,
-  BookOpen,
-  BookOpenText,
+  Banknote,
+  HouseWifi
 } from "lucide-react";
 
 export const DashboardRoutes = [
@@ -12,18 +11,12 @@ export const DashboardRoutes = [
     icon: LayoutDashboard,
   },
   {
-    title: "Manage Users",
-    href: "/admin-dashboard/manage-users",
-    icon: Users,
-  },
-  {
-    title: "Add Category",
-    href: "/dashboard/add-cateogry",
-    icon: BookOpen
-  },
-  {
-    title: "Manage Bookings",
-    href: "/dashboard/manage-bookings",
-    icon: BookOpenText,
+    title: "My Rental Request",
+    href: "/dashboard/rental-request",
+    icon: HouseWifi
+  },{
+    title: "Payment History",
+    href: "/dashboard/payment-history",
+    icon:Banknote
   }
 ];
