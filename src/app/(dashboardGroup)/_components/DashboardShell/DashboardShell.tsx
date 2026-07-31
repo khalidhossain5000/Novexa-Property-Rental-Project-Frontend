@@ -26,6 +26,10 @@ export function DashboardShell({
   const router = useRouter();
   const userRole = user?.data.role;
 
+  if(userRole) return {
+    success:false,
+    message:"User role not found something went role"
+  }
   let dashboardRoutes = [];
   if (userRole === Role.ADMIN) {
     dashboardRoutes = adminDashboardRoutes;

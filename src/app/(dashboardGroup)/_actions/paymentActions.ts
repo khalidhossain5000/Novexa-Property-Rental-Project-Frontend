@@ -29,3 +29,33 @@ export const createPayment = async (rentalRequestId: string) => {
 
   return result;
 };
+
+
+//get payment history
+
+
+export const getPaymentHistory = async () => {
+  const cookieStore = await cookies();
+
+  const accessToken = cookieStore.get("accessToken")?.value || null;
+
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "User not logged in",
+    };
+  }
+
+  const res = await fetch(`${process.env.BACKEND_URL}/api/payments`, {
+    headers: {
+      Cookie: `accessToken=${accessToken}`,
+      "Content-Type": "application/json",
+    }
+  });
+
+  const result = await res.json();
+
+  console.log(result, "this is result payment");
+
+  return result;
+};

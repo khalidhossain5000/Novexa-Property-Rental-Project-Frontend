@@ -1,5 +1,9 @@
+import { getPaymentHistory } from "../../_actions/paymentActions";
+import PaymentHistory from "../../_components/PaymentHistory";
+
 const MyPaymentHistory = async () => {
-  // console.log(myRentalReqRes,'thisis rental req res')
+    const paymentHistoryRes=await getPaymentHistory()
+  console.log(paymentHistoryRes,'thisis rental req res')
   return (
     <div>
       <div className="mb-8">
@@ -11,6 +15,8 @@ const MyPaymentHistory = async () => {
           Review all Payment history that you made.
         </p>
       </div>
+
+      <PaymentHistory paymentHistoryRes={paymentHistoryRes}  />
     </div>
   );
 };
