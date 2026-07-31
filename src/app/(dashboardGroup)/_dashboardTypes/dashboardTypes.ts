@@ -1,4 +1,4 @@
-import { IUserTypes } from "@/app/(authGroup)/_authTypes/authTypes";
+import {  IUserTypes } from "@/app/(authGroup)/_authTypes/authTypes";
 import { RentalRequestStatus } from "@/lib/types";
 
 export interface ICategory {
@@ -54,3 +54,14 @@ export interface IRentalReqResponse{
   message:string;
   data:IRentalRequest[]
 }
+
+
+//admin all users type
+
+export interface IUserResponse{
+success:boolean;
+message:string;
+data:IUserTypes[]
+}
+
+
