@@ -20,7 +20,7 @@ const MakePaymnetBtn = ({ rentalRequestId }: IPaymentProps) => {
     createPayment.bind(null, rentalRequestId),
     null,
   );
-const router=useRouter()
+  const router = useRouter();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -29,10 +29,9 @@ const router=useRouter()
     }
   }, [state]);
 
-
   const handlePayment = () => {
     if (state?.data?.paymentGatewayUrl) {
-      router.push(state.data.paymentGatewayUrl)
+      router.push(state.data.paymentGatewayUrl);
     }
   };
 
