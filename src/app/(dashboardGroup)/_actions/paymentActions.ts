@@ -20,7 +20,7 @@ export const createPayment = async (rentalRequestId: string) => {
       Cookie: `accessToken=${accessToken}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(rentalRequestId),
+    body: JSON.stringify({rentalRequestId}),
   });
 
   const result = await res.json();

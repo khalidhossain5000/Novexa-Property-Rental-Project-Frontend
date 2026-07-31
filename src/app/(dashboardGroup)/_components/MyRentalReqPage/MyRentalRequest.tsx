@@ -3,6 +3,7 @@ import { IRentalReqResponse } from "../../_dashboardTypes/dashboardTypes";
 import ListingTableRow from "../listing/ListingTableRow";
 import ListingMobileCard from "../listing/ListingMobileCard";
 import RentalRequestDetailsModal from "./RentalRequestDetailsDialog";
+import MakePaymnetBtn from "./MakePaymnetBtn";
 interface MyRentalReqProps {
   myRentalReqRes: IRentalReqResponse;
 }
@@ -51,7 +52,15 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
                     {rentalReq.status}
                   </span>
                 }
-                actions={<RentalRequestDetailsModal rentalReq={rentalReq} />}
+                actions={
+                  <div className="flex items-center gap-2">
+                    <RentalRequestDetailsModal rentalReq={rentalReq} />
+
+                    {rentalReq.status === "APPROVED" && (
+                      <MakePaymnetBtn rentalRequestId={rentalReq.id} />
+                    )}
+                  </div>
+                }
               />
             ))}
 
@@ -96,7 +105,15 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
               </>
             }
             description={rentalReq.created_At}
-            actions={<RentalRequestDetailsModal rentalReq={rentalReq} />}
+            actions={
+              <div className="flex items-center gap-2">
+                <RentalRequestDetailsModal rentalReq={rentalReq} />
+
+                {rentalReq.status === "APPROVED" && (
+                  <MakePaymnetBtn rentalRequestId={rentalReq.id} />
+                )}
+              </div>
+            }
           />
         ))}
       </div>
