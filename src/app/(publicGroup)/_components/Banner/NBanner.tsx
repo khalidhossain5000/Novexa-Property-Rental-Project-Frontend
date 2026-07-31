@@ -132,11 +132,12 @@ const NBanner = () => {
         <div className="relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-lg">
           <div className="relative overflow-hidden rounded-4xl border-4 border-white shadow-[0_30px_60px_-20px_rgba(23,20,10,0.35)] dark:border-neutral-800 dark:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">
             <Image
-              src="/banner/static-banner.jpg"
+              src="/banner/banner.jpg"
               width={300}
               height={150}
               alt="Bright modern living room in a rental apartment"
               className="h-105 w-full object-cover sm:h-125"
+              unoptimized
             />
           </div>
 
