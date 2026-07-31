@@ -29,3 +29,40 @@ export const getAllUsers = async () => {
 
   return result;
 };
+
+
+//update users action ban or unbang
+
+
+export const updateUserStatus=async(userId:string,prevState:null,formData:FormData)=>{
+      const cookieStore = await cookies();
+
+  const accessToken = cookieStore.get("accessToken")?.value || null;
+
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "User not logged in",
+    };
+  }
+
+  const status = formData.get("status");
+   const res = await fetch(
+    `${process.env.BACKEND_URL}/api/admin/users/${userId}`,
+    {
+      method: "PATCH",
+      headers: {
+        Cookie: `accessToken=${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        status
+      }),
+    },
+  );
+
+  const result=await res.json()
+
+console.log(result,'status upate result is here hey')
+  return result
+}

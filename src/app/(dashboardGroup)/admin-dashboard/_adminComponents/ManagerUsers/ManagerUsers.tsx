@@ -2,6 +2,7 @@ import ListingMobileCard from "@/app/(dashboardGroup)/_components/listing/Listin
 import ListingTableRow from "@/app/(dashboardGroup)/_components/listing/ListingTableRow";
 import { IUserResponse } from "@/app/(dashboardGroup)/_dashboardTypes/dashboardTypes";
 import React from "react";
+import UserStatusActionBtn from "./UserStatusUpdateBtn";
 
 interface IManageUsersProps {
   userRes: IUserResponse;
@@ -33,8 +34,8 @@ const ManagerUsers = ({ userRes }: IManageUsersProps) => {
               <ListingTableRow
                 key={user.id}
                 image={user.profilePhoto}
-                title={user.firstName + user.lastName}
-                columns={[`$ ${user.email}`, user.role]}
+         
+                columns={[`${user.firstName + user.lastName}`,`${user.email}`, user.role]}
                 status={
                   <span
                     className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
@@ -46,6 +47,7 @@ const ManagerUsers = ({ userRes }: IManageUsersProps) => {
                     {user.status}
                   </span>
                 }
+                actions={<UserStatusActionBtn user={user} />}
               />
             ))}
 
@@ -89,6 +91,7 @@ const ManagerUsers = ({ userRes }: IManageUsersProps) => {
                 </span>
               </>
             }
+            actions={<UserStatusActionBtn user={user} />}
           />
         ))}
       </div>

@@ -10,7 +10,7 @@ interface ILandlordRentalRequestProps {
 const LandlordRentalRequest = ({
   rentalReqLandlord,
 }: ILandlordRentalRequestProps) => {
-  const rentalReqData = rentalReqLandlord.data;
+  const rentalReqData = rentalReqLandlord?.data || [];
   return (
     <div>
       {/* Desktop Table */}
