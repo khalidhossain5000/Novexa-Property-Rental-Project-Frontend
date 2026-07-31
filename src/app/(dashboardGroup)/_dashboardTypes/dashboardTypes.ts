@@ -2,10 +2,10 @@ import {  IUserTypes } from "@/app/(authGroup)/_authTypes/authTypes";
 import { RentalRequestStatus } from "@/lib/types";
 
 export interface ICategory {
-  id: string;
-  name: string;
-  created_At: string;
-  updated_At: string;
+  id?: string;
+  name?: string;
+  created_At?: string;
+  updated_At?: string;
 }
 
 export interface ICategoryResponse {
@@ -30,6 +30,7 @@ export interface IPropertyTypes{
   updated_At:string;
   category:ICategory;
   rentalRequest?:IRentalRequest[]
+  user?:IUserTypes[]
 }
 export interface ICurrentLandlordPropertiesResponse {
   success: boolean;

@@ -2,8 +2,8 @@ import React from "react";
 import { getAllPropertiesForAdmin } from "../../_actions/adminActions";
 import AllPropertiesAdmin from "../_adminComponents/AllPropertiesAdmin/AllPropertiesAdmin";
 
-const AdminAllPropertiesPage = async() => {
-const allAdminPropertiesRes=await getAllPropertiesForAdmin()
+const AdminAllPropertiesPage = async () => {
+  const allAdminPropertiesRes = await getAllPropertiesForAdmin();
   return (
     <div>
       <div className="mb-8">
@@ -16,9 +16,7 @@ const allAdminPropertiesRes=await getAllPropertiesForAdmin()
         </p>
       </div>
 
-
-<AllPropertiesAdmin allAdminPropertiesRes={allAdminPropertiesRes}  />
-      
+      <AllPropertiesAdmin allAdminPropertiesRes={allAdminPropertiesRes} />
     </div>
   );
 };
