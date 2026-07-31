@@ -5,6 +5,12 @@ import { getNewAccessToken } from "./service/refreshToken";
 import { JwtPayload } from "jsonwebtoken";
 
 const authRoutes = ["/login", "/register"];
+
+const publicRoutes=["/","/all-properties","/all-properties/:id","/about"]
+
+
+
+
 export async function proxy(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
 
@@ -69,15 +75,32 @@ export async function proxy(req: NextRequest) {
     }
 
 
+    const isPublicRoute = publicRoutes.some((route) => pathname === route || pathname.startsWith(route + "/"));
+        const isAuthRoute = authRoutes.some((route) => pathname === route || pathname.startsWith(route + "/"));
 
 
+        // Authenticated Pages Protection 
+    if(!accessToken && !isPublicRoute && !isAuthRoute){
+        const loginUrl = new URL('/login', req.url)
+
+        loginUrl.searchParams.set("redirectTo", pathname)
+
+        return NextResponse.redirect(loginUrl);
+    }
+    // Authorization : Role based access control
+    if(pathname.startsWith("/dashboard") && userRole !== "TENANT"){
+        return NextResponse.redirect(new URL('/forbidden', req.url));
+    }else if(pathname.startsWith("/admin-dashboard") && userRole !== "ADMIN"){
+        return NextResponse.redirect(new URL('/forbidden', req.url));
+    }else if(pathname.startsWith("/landlord-dashboard") && userRole !== "LANDLORD"){
+        return NextResponse.redirect(new URL('/forbidden', req.url));
+    }
   return NextResponse.next();
 }
 
 export const config = {
   matcher: [
-    // '/dashboard/:path*',
-    // '/admin-dashboard/:path*',
+   
     "/((?!api|_next/static|favicon.ico|_next/image|.*\\.png$).*)",
   ],
 };
