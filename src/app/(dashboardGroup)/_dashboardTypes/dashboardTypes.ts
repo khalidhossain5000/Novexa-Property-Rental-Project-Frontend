@@ -29,6 +29,7 @@ export interface IPropertyTypes{
   created_At:string;
   updated_At:string;
   category:ICategory;
+  rentalRequest?:IRentalRequest[]
 }
 export interface ICurrentLandlordPropertiesResponse {
   success: boolean;
@@ -64,4 +65,13 @@ message:string;
 data:IUserTypes[]
 }
 
+
+//admin all properties get res types
+
+
+export interface IAdminPropertiesResponse{
+success:boolean;
+message:string;
+data:IPropertyTypes[]
+}
 
