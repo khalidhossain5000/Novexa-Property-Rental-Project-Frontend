@@ -59,7 +59,7 @@ export const getTenantRentalRequest=async()=>{
     }
   });
 const result=await res.json()
-console.log(result,'rental my req all result')
+
 
 return result
 }
