@@ -1,17 +1,9 @@
-import ListingMobileCard from "@/app/(dashboardGroup)/_components/listing/ListingMobileCard";
-import ListingTableRow from "@/app/(dashboardGroup)/_components/listing/ListingTableRow";
-import { IUserResponse } from "@/app/(dashboardGroup)/_dashboardTypes/dashboardTypes";
-import React from "react";
-import UserStatusActionBtn from "./UserStatusUpdateBtn";
+import React from 'react';
 
-interface IManageUsersProps {
-  userRes: IUserResponse;
-}
-const ManagerUsers = ({ userRes }: IManageUsersProps) => {
-  const usersData = userRes.data;
-  return (
-    <div>
-      {/* Desktop Table */}
+const AllPropertiesAdmin = () => {
+    return (
+        <div>
+                {/* Desktop Table */}
       <div className="hidden overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900 md:block">
         <table className="w-full text-left text-sm font-inter">
           <thead className="border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-600 dark:border-slate-800 dark:bg-slate-800/50 dark:text-slate-300">
@@ -95,10 +87,8 @@ const ManagerUsers = ({ userRes }: IManageUsersProps) => {
           />
         ))}
       </div>
-
-      
-    </div>
-  );
+        </div>
+    );
 };
 
-export default ManagerUsers;
+export default AllPropertiesAdmin;

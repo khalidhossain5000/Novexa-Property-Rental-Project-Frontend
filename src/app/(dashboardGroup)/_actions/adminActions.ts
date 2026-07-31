@@ -63,6 +63,71 @@ export const updateUserStatus=async(userId:string,prevState:null,formData:FormDa
 
   const result=await res.json()
 
-console.log(result,'status upate result is here hey')
+
+  return result
+}
+
+//get all properties
+
+export const getAllPropertiesForAdmin=async()=>{
+        const cookieStore = await cookies();
+
+  const accessToken = cookieStore.get("accessToken")?.value || null;
+
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "User not logged in",
+    };
+  }
+     const res = await fetch(
+    `${process.env.BACKEND_URL}/api/admin/properties`,
+    {
+      headers: {
+        Cookie: `accessToken=${accessToken}`,
+        "Content-Type": "application/json",
+      }
+    
+    }
+  );
+
+  const result=await res.json()
+
+  console.log(result,'admin all proeprty')
+
+  return result
+}
+
+
+
+
+//all rental req for admin
+
+export const getAllRentalReqForAdmin=async()=>{
+        const cookieStore = await cookies();
+
+  const accessToken = cookieStore.get("accessToken")?.value || null;
+
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "User not logged in",
+    };
+  }
+     const res = await fetch(
+    `${process.env.BACKEND_URL}/api/admin/rentals`,
+    {
+      headers: {
+        Cookie: `accessToken=${accessToken}`,
+        "Content-Type": "application/json",
+      }
+    
+    }
+  );
+
+  const result=await res.json()
+
+  console.log(result,'admin all rental req')
+
   return result
 }
