@@ -8,7 +8,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { Button } from "@/components/ui/button";
 import { Eye } from "lucide-react";
 import Image from "next/image";
 import { IRentalRequest } from "../../_dashboardTypes/dashboardTypes";
