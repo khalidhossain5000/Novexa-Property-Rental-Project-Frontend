@@ -16,7 +16,7 @@ export const getNewAccessToken = async () => {
   }
 
   const res = await fetch(
-    `${process.env.BACKEND_API_URL}/api/auth/refresh-token`,
+    `${process.env.BACKEND_URL}/api/auth/refresh-token`,
     {
       method: "POST",
       headers: {
@@ -27,7 +27,7 @@ export const getNewAccessToken = async () => {
   );
 
   const result = await res.json();
-
+console.log(result,'refresh token new access token result')
   return result;
 };
 
@@ -35,7 +35,7 @@ export const isAccessTokenExist = async () => {
   const cookieStore = await cookies();
   let accessToken = cookieStore.get("accessToken")?.value || null;
   const refreshToken = cookieStore.get("refreshToken")?.value || null;
-
+console.log(refreshToken,'from is access exist')
   if (!accessToken && !refreshToken) {
     throw new Error("User Not Logged In!");
   }
@@ -55,7 +55,7 @@ export const isAccessTokenExist = async () => {
     const result = await getNewAccessToken();
 
     if (result.success) {
-      const newAccessToken = result.data.accessToken;
+      const newAccessToken = result.data;
 
       cookieStore.set("accessToken", newAccessToken, {
         httpOnly: true,
