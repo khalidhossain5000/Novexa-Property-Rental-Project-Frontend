@@ -1,15 +1,16 @@
-import React from 'react';
-import { IRentalReqResponse } from '../../_dashboardTypes/dashboardTypes';
-import ListingTableRow from '../listing/ListingTableRow';
-import ListingMobileCard from '../listing/ListingMobileCard';
-interface MyRentalReqProps{
-    myRentalReqRes:IRentalReqResponse
+import React from "react";
+import { IRentalReqResponse } from "../../_dashboardTypes/dashboardTypes";
+import ListingTableRow from "../listing/ListingTableRow";
+import ListingMobileCard from "../listing/ListingMobileCard";
+import RentalRequestDetailsModal from "./RentalRequestDetailsDialog";
+interface MyRentalReqProps {
+  myRentalReqRes: IRentalReqResponse;
 }
-const MyRentalRequest = ({myRentalReqRes}:MyRentalReqProps) => {
-    const myRentalReq=myRentalReqRes.data
-    return (
-        <div>
-             {/* Desktop Table */}
+const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
+  const myRentalReq = myRentalReqRes.data;
+  return (
+    <div>
+      {/* Desktop Table */}
       <div className="hidden overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900 md:block">
         <table className="w-full text-left text-sm font-inter">
           <thead className="border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-600 dark:border-slate-800 dark:bg-slate-800/50 dark:text-slate-300">
@@ -33,7 +34,6 @@ const MyRentalRequest = ({myRentalReqRes}:MyRentalReqProps) => {
               <ListingTableRow
                 key={rentalReq.id}
                 image={rentalReq.property.thumbnailImage}
-            
                 columns={[
                   rentalReq.property.title,
                   rentalReq.totalAmount,
@@ -51,7 +51,7 @@ const MyRentalRequest = ({myRentalReqRes}:MyRentalReqProps) => {
                     {rentalReq.status}
                   </span>
                 }
-       
+                actions={<RentalRequestDetailsModal rentalReq={rentalReq} />}
               />
             ))}
 
@@ -96,12 +96,12 @@ const MyRentalRequest = ({myRentalReqRes}:MyRentalReqProps) => {
               </>
             }
             description={rentalReq.created_At}
-       
+            actions={<RentalRequestDetailsModal rentalReq={rentalReq} />}
           />
         ))}
       </div>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default MyRentalRequest;
