@@ -31,3 +31,18 @@ export const getAllProperties = async ({ query }: ISearchProps) => {
 
   return result;
 };
+
+
+
+
+//get property details
+
+export const getPorpertyDetails=async(id:string)=>{
+  const res = await fetch(
+    `${process.env.BACKEND_URL}/api/properties/${id}`,
+  );
+
+  const result=await res.json()
+console.log(result,'p details result here over')
+  return result
+}
