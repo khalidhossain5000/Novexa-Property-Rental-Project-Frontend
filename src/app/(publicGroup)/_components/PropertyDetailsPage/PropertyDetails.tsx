@@ -3,20 +3,35 @@ import { IPropertyDetailsRes } from "@/lib/types";
 import {
   ArrowLeft,
   BookMarked,
+  Calendar,
   ChevronRight,
+  Coins,
   Hash,
   HouseWifiIcon,
-  Star,
+  Mail,
+  MapPin,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useActionState } from "react";
 import PropertyStatCard from "./PropertyStatCard";
 import { sendRentalRequest } from "@/app/(publicGroup)/_actions/rentalRequestActions";
+
 interface IPropertyDetailsProps {
   propertyDetailsRes: IPropertyDetailsRes;
   currentUserId: string;
 }
+
+// 
+const formatDate = (date: string) => {
+  return new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+};
+
 const PropertyDetails = ({
   propertyDetailsRes,
   currentUserId,
@@ -31,37 +46,40 @@ const PropertyDetails = ({
   );
 
   const myRentalRequestStatus = myRentalRequest?.status;
- 
+
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0d1117]">
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-10">
+    <div className="relative min-h-screen overflow-hidden bg-slate-50 dark:bg-[#0d1117]">
+      {/* Ambient page glow */}
+      <div className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-teal-500/10 blur-[120px] dark:bg-teal-500/20" />
+      <div className="pointer-events-none absolute top-1/2 -right-32 h-96 w-96 rounded-full bg-teal-500/10 blur-[120px] dark:bg-teal-500/20" />
+
+      <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-10">
         {/* Breadcrumb */}
-        <nav className="mb-8 flex items-center gap-1.5 text-xs text-slate-400 dark:text-slate-500">
+        <nav className="mb-8 flex min-w-0 items-center gap-1.5 text-xs text-slate-400 dark:text-slate-500">
           <Link
             href="/"
-            className="hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
+            className="shrink-0 transition-colors hover:text-teal-600 dark:hover:text-teal-400"
           >
             Catalog
           </Link>
-          <ChevronRight size={12} />
+          <ChevronRight size={12} className="shrink-0" />
           <Link
             href="/all-properties"
-            className="hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
+            className="shrink-0 transition-colors hover:text-teal-600 dark:hover:text-teal-400"
           >
             {details.category.name || "Not Found"}
           </Link>
-          <ChevronRight size={12} />
-          <span className="text-teal-600 dark:text-teal-400 font-medium line-clamp-1 max-w-45">
+          <ChevronRight size={12} className="shrink-0" />
+          <span className="line-clamp-1 max-w-45 font-medium text-teal-600 dark:text-teal-400">
             {details.title}
           </span>
         </nav>
 
         {/* ── Hero Grid ── */}
         <div className="grid gap-10 lg:grid-cols-[360px_1fr] xl:gap-16">
-          {/* Left — Book Cover */}
+          {/* Left — Property Image */}
           <div className="flex justify-center lg:justify-start">
             <div className="relative w-full max-w-85">
-              {/* Glow behind image */}
               <div className="absolute -inset-4 rounded-3xl bg-teal-500/10 blur-2xl dark:bg-teal-500/20" />
               <div className="relative overflow-hidden rounded-3xl border border-slate-200/60 bg-white shadow-2xl shadow-slate-300/40 dark:border-slate-700/40 dark:bg-slate-800 dark:shadow-black/60">
                 {details.thumbnailImage ? (
@@ -70,6 +88,7 @@ const PropertyDetails = ({
                       src={details.thumbnailImage}
                       alt={details.title || "property details"}
                       fill
+                      sizes="(max-width: 1024px) 90vw, 340px"
                       className="object-cover"
                       priority
                     />
@@ -110,15 +129,19 @@ const PropertyDetails = ({
               {details.title || "Untitled"}
             </h1>
 
-            {/* Author */}
-            <p className="mb-1 text-sm text-slate-500 dark:text-slate-400">
-              by{" "}
-              <span className="font-semibold text-teal-600 dark:text-teal-400">
-                {details?.user?.firstName || "Unknown Author"}
-              </span>
+            {/* Location */}
+            <p className="mb-1 flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400">
+              <MapPin size={14} className="text-teal-600 dark:text-teal-400" />
+              {details.location || "Location not specified"}
             </p>
 
-            {/* Star rating */}
+            {/* Price */}
+            <p className="mb-4 text-2xl font-bold text-teal-600 dark:text-teal-400">
+              ৳{Number(details.price).toLocaleString("en-US")}
+              <span className="ml-1 text-sm font-normal text-slate-400">
+                /month
+              </span>
+            </p>
 
             {/* Divider */}
             <div className="mb-6 h-px bg-slate-200 dark:bg-slate-700/60" />
@@ -134,9 +157,20 @@ const PropertyDetails = ({
             </div>
 
             {/* Stat cards */}
-            <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
               <PropertyStatCard label="Status" value={details.status} />
-              <PropertyStatCard label="Added On" value={details.created_At} />
+              <PropertyStatCard
+                label="Price"
+                value={`৳${Number(details.price).toLocaleString("en-US")}`}
+              />
+              <PropertyStatCard
+                label="Location"
+                value={details.location || "—"}
+              />
+              <PropertyStatCard
+                label="Added On"
+                value={formatDate(details.created_At)}
+              />
               <PropertyStatCard
                 label="Category"
                 value={details.category.name || "—"}
@@ -149,7 +183,7 @@ const PropertyDetails = ({
                 <button
                   type="submit"
                   disabled={isPending || myRentalRequestStatus === "PENDING"}
-                  className="inline-flex items-center gap-2 rounded-2xl bg-teal-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-500/25 transition hover:bg-teal-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  className="inline-flex cursor-pointer items-center gap-2 rounded-2xl bg-teal-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-500/25 transition hover:bg-teal-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <BookMarked size={16} />
                   {isPending
@@ -167,7 +201,7 @@ const PropertyDetails = ({
           </div>
         </div>
 
-        {/*  Description Section  */}
+        {/* Description Section */}
         {details.description && (
           <div className="mt-14 rounded-3xl border border-slate-200 bg-white p-8 dark:border-slate-700/60 dark:bg-slate-800/40">
             <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-teal-600 dark:text-teal-400">
@@ -179,7 +213,45 @@ const PropertyDetails = ({
           </div>
         )}
 
-        {/*  Back button */}
+        {/* Landlord Section */}
+        {details.user && (
+          <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-8 dark:border-slate-700/60 dark:bg-slate-800/40">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-teal-600 dark:text-teal-400">
+              Listed By
+            </h2>
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-slate-800">
+                {details.user.profilePhoto ? (
+                  <Image
+                    src={details.user.profilePhoto}
+                    alt={details.user.firstName || "Landlord"}
+                    fill
+                    sizes="56px"
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-slate-400">
+                    {details.user.firstName?.[0] || "L"}
+                  </div>
+                )}
+              </div>
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-slate-950 dark:text-white">
+                  {details.user.firstName} {details.user.lastName}
+                </p>
+                <p className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+                  <Mail size={12} />
+                  <span className="truncate">{details.user.email}</span>
+                </p>
+              </div>
+              <span className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-teal-200 bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-700 dark:border-teal-800/60 dark:bg-teal-950/50 dark:text-teal-300">
+                {details.user.role}
+              </span>
+            </div>
+          </div>
+        )}
+
+        {/* Back button */}
         <div className="mt-10">
           <Link
             href={"/all-properties"}

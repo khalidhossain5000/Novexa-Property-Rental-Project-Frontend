@@ -1,6 +1,6 @@
 import React from 'react';
 import { getPorpertyDetails } from '../../_actions/getAllProperty';
-import PropertyDetails from '@/components/PropertyDetailsPage/PropertyDetails';
+import PropertyDetails from '@/app/(publicGroup)/_components/PropertyDetailsPage/PropertyDetails';
 import { getMe } from '@/service/getMe';
 interface IParamsProps{
      params: Promise<{ id: string }> 
