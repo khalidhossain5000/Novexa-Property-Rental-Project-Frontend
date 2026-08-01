@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
@@ -6,7 +7,14 @@ import { Button } from "@/components/ui/button";
 
 const ThemeToggle = () => {
   const { setTheme, resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted && resolvedTheme === "dark";
 
   return (
     <Button
@@ -20,9 +28,7 @@ const ThemeToggle = () => {
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: "spring", stiffness: 200, damping: 15 }}
-        className={`absolute inset-0 rounded-full ${
-          isDark ? "bg-primary" : "bg-primary-hover"
-        }`}
+        className="absolute inset-0 rounded-full bg-secondary"
       />
 
       <motion.div

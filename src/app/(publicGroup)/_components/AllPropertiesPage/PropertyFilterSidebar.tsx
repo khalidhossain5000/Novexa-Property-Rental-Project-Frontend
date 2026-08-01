@@ -19,11 +19,8 @@ const PropertyFilterSidebar = ({ categories }: PropertyFilterSidebarProps) => {
   const [searchTerm, setSearchTerm] = useState(
     searchParams.get("searchTerm") || "",
   );
-
   const [minPrice, setMinPrice] = useState(searchParams.get("minPrice") || "");
-
   const [maxPrice, setMaxPrice] = useState(searchParams.get("maxPrice") || "");
-
   const [type, setType] = useState(searchParams.get("type") || "");
 
   const updateQuery = (key: string, value: string) => {
@@ -49,22 +46,21 @@ const PropertyFilterSidebar = ({ categories }: PropertyFilterSidebarProps) => {
     setMinPrice("");
     setMaxPrice("");
     setType("");
-
     router.replace(pathname);
   };
 
   return (
-    <aside className="w-full space-y-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900 lg:w-80">
+    <div className="w-full space-y-6">
       {/* Search */}
       <div>
-        <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+        <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-text-muted">
           Search
         </label>
 
         <div className="relative">
           <Search
             size={16}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted"
           />
 
           <input
@@ -74,14 +70,14 @@ const PropertyFilterSidebar = ({ categories }: PropertyFilterSidebarProps) => {
               updateQuery("searchTerm", e.target.value);
             }}
             placeholder="Search property..."
-            className="w-full rounded-xl border border-slate-200 bg-slate-50 py-2.5 pl-9 pr-3 text-sm outline-none focus:border-primary dark:border-slate-700 dark:bg-slate-800"
+            className="w-full rounded-xl border border-border bg-background py-2.5 pl-9 pr-3 text-sm text-text-primary outline-none transition-colors focus:border-primary"
           />
         </div>
       </div>
 
       {/* Price Range */}
       <div>
-        <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+        <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-text-muted">
           Price Range
         </label>
 
@@ -91,11 +87,10 @@ const PropertyFilterSidebar = ({ categories }: PropertyFilterSidebarProps) => {
             value={minPrice}
             onChange={(e) => {
               setMinPrice(e.target.value);
-
               updateQuery("minPrice", e.target.value);
             }}
             placeholder="Min"
-            className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm outline-none dark:border-slate-700 dark:bg-slate-800"
+            className="rounded-xl border border-border bg-background px-3 py-2 text-sm text-text-primary outline-none transition-colors focus:border-primary"
           />
 
           <input
@@ -103,18 +98,17 @@ const PropertyFilterSidebar = ({ categories }: PropertyFilterSidebarProps) => {
             value={maxPrice}
             onChange={(e) => {
               setMaxPrice(e.target.value);
-
               updateQuery("maxPrice", e.target.value);
             }}
             placeholder="Max"
-            className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm outline-none dark:border-slate-700 dark:bg-slate-800"
+            className="rounded-xl border border-border bg-background px-3 py-2 text-sm text-text-primary outline-none transition-colors focus:border-primary"
           />
         </div>
       </div>
 
       {/* Category */}
       <div>
-        <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+        <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-text-muted">
           Property Type
         </label>
 
@@ -122,10 +116,9 @@ const PropertyFilterSidebar = ({ categories }: PropertyFilterSidebarProps) => {
           value={type}
           onChange={(e) => {
             setType(e.target.value);
-
             updateQuery("type", e.target.value);
           }}
-          className="h-10 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 text-sm outline-none dark:border-slate-700 dark:bg-slate-800"
+          className="h-10 w-full rounded-xl border border-border bg-background px-3 text-sm text-text-primary outline-none transition-colors focus:border-primary"
         >
           <option value="">All Types</option>
 
@@ -139,19 +132,21 @@ const PropertyFilterSidebar = ({ categories }: PropertyFilterSidebarProps) => {
 
       {/* Active filters */}
       {(searchTerm || minPrice || maxPrice || type) && (
-        <div className="flex items-center justify-between rounded-xl bg-slate-100 px-3 py-2 dark:bg-slate-800">
-          <span className="text-xs text-red-600">Filters applied</span>
+        <div className="flex items-center justify-between rounded-xl bg-error/10 px-3 py-2">
+          <span className="text-xs font-medium text-error">
+            Filters applied
+          </span>
 
           <button
             onClick={clearFilter}
-            className="flex items-center gap-1 text-xs font-semibold text-red-500"
+            className="flex items-center gap-1 text-xs font-semibold text-error hover:text-error/80"
           >
             <X size={14} />
             Clear
           </button>
         </div>
       )}
-    </aside>
+    </div>
   );
 };
 
