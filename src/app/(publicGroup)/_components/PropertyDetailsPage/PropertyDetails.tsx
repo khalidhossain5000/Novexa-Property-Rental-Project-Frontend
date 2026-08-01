@@ -75,7 +75,7 @@ const PropertyDetails = ({
           </span>
         </nav>
 
-        {/* ── Hero Grid ── */}
+
         <div className="grid gap-10 lg:grid-cols-[360px_1fr] xl:gap-16">
           {/* Left — Property Image */}
           <div className="flex justify-center lg:justify-start">
@@ -102,7 +102,7 @@ const PropertyDetails = ({
             </div>
           </div>
 
-          {/* Right — Details */}
+       
           <div className="flex flex-col justify-center">
             {/* Tags row */}
             <div className="mb-4 flex flex-wrap items-center gap-2">
