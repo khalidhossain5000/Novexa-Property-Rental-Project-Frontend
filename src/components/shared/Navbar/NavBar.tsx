@@ -11,28 +11,9 @@ import { IUser } from "@/app/(authGroup)/_authTypes/authTypes";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import MobileNavbar from "./MobileNavbar";
 import { logout } from "@/service/logOut";
-
-export const navLinks = [
-  {
-    id: 1,
-    name: "Home",
-    path: "/",
-  },
-  {
-    id: 2,
-    name: "All Properties",
-    path: "/all-properties",
-  },
+import { navLinks } from "./NavLinks";
 
 
-  {
-    id: 5,
-    name: "Contact",
-    path: "/contact",
-     private: true,
-  }
-
-];
 
 const isActiveRoute = (pathname: string, path: string): boolean => {
   if (path === "/") return pathname === "/";
@@ -67,10 +48,10 @@ const NavBar = ({ user }: NavBarProps) => {
             {/* LOGO */}
             <Link href="/">
               <h1 className="text-3xl font-extrabold font-montserrat">
-                <span className="text-gray-900 dark:text-text-primary">
+                <span className="text-primary">
                   Rent
                 </span>
-                <span className="text-teal-600 dark:text-primary">Nest</span>
+                <span className="text-secondary">Nest</span>
               </h1>
             </Link>
           </div>
