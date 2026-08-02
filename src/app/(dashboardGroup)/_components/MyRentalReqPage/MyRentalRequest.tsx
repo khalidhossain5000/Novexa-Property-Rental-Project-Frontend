@@ -11,6 +11,8 @@ interface MyRentalReqProps {
 }
 const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
   const myRentalReq = myRentalReqRes.data;
+
+ 
   return (
     <div>
       {/* Desktop Table */}
@@ -122,13 +124,13 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
                 <RentalRequestDetailsModal rentalReq={rentalReq} />
 
                 {rentalReq.status === "APPROVED" && (
-                    <Link
-                        href={`/dashboard/requests/${rentalReq?.id}/pay`}
-                        className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700 active:scale-95 font-inter"
-                      >
-                        <CreditCard size={16} />
-                        Proceed to Payment
-                      </Link>
+                  <Link
+                    href={`/dashboard/requests/${rentalReq?.id}/pay`}
+                    className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700 active:scale-95 font-inter"
+                  >
+                    <CreditCard size={16} />
+                    Proceed to Payment
+                  </Link>
                 )}
 
                 {rentalReq.status === "ACTIVE" && (

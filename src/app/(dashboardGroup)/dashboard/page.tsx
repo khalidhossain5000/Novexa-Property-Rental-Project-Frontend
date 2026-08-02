@@ -1,9 +1,13 @@
 import React from 'react';
+import { getTenantDashboardStats } from '../_actions/dashboardStats';
 
-const DashboardHomePage = () => {
+const DashboardHomePage = async() => {
+    const tenantStatsRes=await getTenantDashboardStats()
+
+    console.log(tenantStatsRes,'this is the eres')
     return (
         <div>
-            <h2 className="text-primary text-6xl text-center font-lora py-22">Dashboard Home </h2>
+            <h2 className="text-primary text-6xl text-center font-lora py-22">Tenant Dashboard Home </h2>
         </div>
     );
 };
