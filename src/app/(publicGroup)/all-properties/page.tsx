@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { getAllProperties } from "../_actions/getAllProperty";
 import AllProperties from "@/app/(publicGroup)/_components/AllPropertiesPage/AllProperties";
-import { getPropertyCategories } from "@/app/(dashboardGroup)/_actions/getCategory";
+import { getPropertyCategories } from "@/app/(dashboardGroup)/_actions/categoryActions";
 import PropertiesSkeleton from "../_components/AllPropertiesPage/PropertiesSkeleton";
 
 const AllPropertiesPublicPage = async ({
@@ -16,13 +16,12 @@ const AllPropertiesPublicPage = async ({
 
   return (
     <div>
-            <Suspense fallback={<PropertiesSkeleton />}>
-      <AllProperties
-        allPropertiesRes={allPropertiesRes}
-        allCategories={allCategories}
-        query={query}
-      />
-
+      <Suspense fallback={<PropertiesSkeleton />}>
+        <AllProperties
+          allPropertiesRes={allPropertiesRes}
+          allCategories={allCategories}
+          query={query}
+        />
       </Suspense>
     </div>
   );

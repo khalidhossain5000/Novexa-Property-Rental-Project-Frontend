@@ -7,13 +7,13 @@ const ManageUsersPage = async () => {
 
   console.log(userRes, "this is user res");
   return (
-    <div>
-      <div className="mb-8">
-        <h2 className="font-lora text-2xl font-bold text-foreground">
+    <div className="p-4">
+      <div className="mb-8 ">
+        <h2 className="font-lora text-2xl font-bold text-foreground text-center md:text-left">
           Manage Users
         </h2>
 
-        <p className="mt-1 font-inter text-sm text-foreground/60">
+        <p className="mt-1 font-inter text-sm text-foreground/60 text-center md:text-left">
           Review all Users, update status.
         </p>
       </div>

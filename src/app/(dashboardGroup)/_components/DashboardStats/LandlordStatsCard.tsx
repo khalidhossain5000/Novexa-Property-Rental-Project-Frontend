@@ -93,7 +93,7 @@ const LandlordStatsCard = ({ stats }: LandlordStatsCardProps) => {
                 <h2 className="mt-3 text-3xl font-bold font-montserrat">
                   {item.key === "totalEarn" ? (
                     <>
-                      ৳
+                      $
                       <CountUp
                         end={value}
                         separator=","

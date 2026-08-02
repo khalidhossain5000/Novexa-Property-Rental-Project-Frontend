@@ -1,15 +1,15 @@
-import React from 'react';
-import AddPropertyForm from '../_landlordComponents/AddPropertyForm/AddPropertyForm';
-import { getPropertyCategories } from '../../_actions/getCategory';
+import React from "react";
+import AddPropertyForm from "../_landlordComponents/AddPropertyForm/AddPropertyForm";
+import { getPropertyCategories } from "../../_actions/categoryActions";
 
-const AddProperty = async() => {
-    const propertyCategories=await getPropertyCategories()
-  
-    return (
-        <div>
-            <AddPropertyForm propertyCategories={propertyCategories}/>
-        </div>
-    );
+const AddProperty = async () => {
+  const propertyCategories = await getPropertyCategories();
+
+  return (
+    <div>
+      <AddPropertyForm propertyCategories={propertyCategories} />
+    </div>
+  );
 };
 
 export default AddProperty;

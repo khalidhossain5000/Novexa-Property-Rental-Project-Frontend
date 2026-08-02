@@ -7,7 +7,7 @@ const AdminDashboardHome = async() => {
     const getAdminStatsRes=await getAdminDashboardStats()
 
     return (
-        <div>
+        <div className="p-4 lg:p-9">
                <AdminStatsCard stats={getAdminStatsRes.data} />
 
         </div>
