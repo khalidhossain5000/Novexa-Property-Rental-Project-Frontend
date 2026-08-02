@@ -8,11 +8,11 @@ const AdminAllRentalRequestPage = async () => {
     <div>
       <div className="mb-8">
         <h2 className="font-lora text-2xl font-bold text-foreground">
-          Manage Users
+          All Rental Request
         </h2>
 
         <p className="mt-1 font-inter text-sm text-foreground/60">
-          Review all Users, update status.
+          Explore all Rental Request.
         </p>
       </div>
 
