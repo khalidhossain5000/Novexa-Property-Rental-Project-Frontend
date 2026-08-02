@@ -3,16 +3,22 @@
 import { ICategory } from "@/app/(dashboardGroup)/_dashboardTypes/dashboardTypes";
 import { Search, X } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 
 interface PropertyFilterSidebarProps {
   categories: ICategory[];
+  onPendingChange?: (pending: boolean) => void;
 }
 
-const PropertyFilterSidebar = ({ categories }: PropertyFilterSidebarProps) => {
+const PropertyFilterSidebar = ({
+  categories,
+  onPendingChange,
+}: PropertyFilterSidebarProps) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
+
+  const [isPending, startTransition] = useTransition();
 
   const debouncedReference = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -22,6 +28,10 @@ const PropertyFilterSidebar = ({ categories }: PropertyFilterSidebarProps) => {
   const [minPrice, setMinPrice] = useState(searchParams.get("minPrice") || "");
   const [maxPrice, setMaxPrice] = useState(searchParams.get("maxPrice") || "");
   const [type, setType] = useState(searchParams.get("type") || "");
+
+  useEffect(() => {
+    onPendingChange?.(isPending);
+  }, [isPending, onPendingChange]);
 
   const updateQuery = (key: string, value: string) => {
     if (debouncedReference.current) {
@@ -37,7 +47,9 @@ const PropertyFilterSidebar = ({ categories }: PropertyFilterSidebarProps) => {
         params.delete(key);
       }
 
-      router.replace(`${pathname}?${params.toString()}`);
+      startTransition(() => {
+        router.replace(`${pathname}?${params.toString()}`);
+      });
     }, 500);
   };
 
@@ -46,7 +58,10 @@ const PropertyFilterSidebar = ({ categories }: PropertyFilterSidebarProps) => {
     setMinPrice("");
     setMaxPrice("");
     setType("");
-    router.replace(pathname);
+
+    startTransition(() => {
+      router.replace(pathname);
+    });
   };
 
   return (

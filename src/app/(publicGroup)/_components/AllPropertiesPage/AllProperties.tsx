@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import React, { useState } from "react";
 import PropertyFilterSidebar from "./PropertyFilterSidebar";
+import PropertiesSkeleton from "./PropertiesSkeleton";
 import Image from "next/image";
 import Link from "next/link";
 import PrimaryBtn from "@/components/shared/Button/PrimaryBtn";
@@ -31,12 +32,12 @@ interface IPropertiesProps {
 
 const AllProperties = ({
   allPropertiesRes,
-  allCategories,
-  query,
+  allCategories
 }: IPropertiesProps) => {
   const allProperties = allPropertiesRes.data;
   const categories = allCategories.data as ICategory[];
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isFiltering, setIsFiltering] = useState(false);
 
   return (
     <section className="relative min-h-screen bg-background overflow-hidden">
@@ -69,7 +70,10 @@ const AllProperties = ({
             <X size={16} />
           </button>
         </div>
-        <PropertyFilterSidebar categories={categories} />
+        <PropertyFilterSidebar
+          categories={categories}
+          onPendingChange={setIsFiltering}
+        />
       </div>
 
       <div className="relative mx-auto container px-6 md:px-8 lg:px-13 xl:px-16 py-12">
@@ -91,7 +95,10 @@ const AllProperties = ({
           {/* Desktop Sidebar */}
           <aside className="hidden w-64 shrink-0 lg:block">
             <div className="sticky top-6 rounded-2xl border border-border bg-card p-5 shadow-sm">
-              <PropertyFilterSidebar categories={categories} />
+              <PropertyFilterSidebar
+                categories={categories}
+                onPendingChange={setIsFiltering}
+              />
             </div>
           </aside>
 
@@ -114,8 +121,10 @@ const AllProperties = ({
               </button>
             </div>
 
-            {/* Grid */}
-            {allProperties.length === 0 ? (
+            {/* Grid — only this part swaps to skeleton */}
+            {isFiltering ? (
+              <PropertiesSkeleton />
+            ) : allProperties.length === 0 ? (
               <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-card py-20 text-center">
                 <HouseIcon className="mb-4 h-10 w-10 text-text-muted" />
                 <p className="text-sm font-semibold text-text-primary">
@@ -124,9 +133,7 @@ const AllProperties = ({
                 <p className="mt-1 text-xs text-text-muted">
                   Try a broader search or different category.
                 </p>
-                <button className="mt-4 rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-accent hover:bg-primary-hover">
-                  Clear filters
-                </button>
+               
               </div>
             ) : (
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
