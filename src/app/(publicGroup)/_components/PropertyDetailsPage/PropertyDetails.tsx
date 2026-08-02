@@ -3,9 +3,7 @@ import { IPropertyDetailsRes } from "@/lib/types";
 import {
   ArrowLeft,
   BookMarked,
-  Calendar,
   ChevronRight,
-  Coins,
   CreditCard,
   Hash,
   HouseWifiIcon,
@@ -14,9 +12,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useActionState } from "react";
 import PropertyStatCard from "./PropertyStatCard";
-import { sendRentalRequest } from "@/app/(publicGroup)/_actions/rentalRequestActions";
 import RentRequestDialog from "./RentConfirmDialog";
 import PrimaryBtn from "@/components/shared/Button/PrimaryBtn";
 
@@ -180,7 +176,7 @@ const PropertyDetails = ({
             <div className="flex flex-wrap items-center gap-3">
               {myRentalRequestStatus === "APPROVED" ? (
                 <Link
-                  href={`/payment/${details.id}`} // adjust to your actual payment route
+                  href={`/payment/${details.id}`} 
                   className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700 active:scale-95"
                 >
                   <CreditCard size={16} />

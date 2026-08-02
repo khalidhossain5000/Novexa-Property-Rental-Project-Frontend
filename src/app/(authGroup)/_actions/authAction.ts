@@ -4,7 +4,7 @@ import { loginSchema, registerSchema } from "@/zod/authSchema";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import z from "zod";
-
+import jwt, { JwtPayload } from "jsonwebtoken";
 type TPrevState = {
   success: boolean;
   message: string;
@@ -13,6 +13,7 @@ type TPrevState = {
 //login action
 
 export const loginAction = async (
+  redirectTo: string,
   prevState: TPrevState,
   formData: FormData,
 ) => {
@@ -58,8 +59,26 @@ export const loginAction = async (
       maxAge: 60 * 60 * 10,
       sameSite: "lax",
     });
+    const decodedToken = jwt.decode(result.data.accessToken) as JwtPayload;
 
-    redirect("/");
+    if (
+      redirectTo &&
+      typeof redirectTo === "string" &&
+      redirectTo.startsWith("/") &&
+      !redirectTo.startsWith("//")
+    ) {
+      redirect(redirectTo);
+    }
+
+    const uerRole = decodedToken.role;
+
+    if (uerRole === "Tenant") {
+      redirect("/dashboard");
+    } else if (uerRole === "ADMIN") {
+      redirect("/admin-dashboard");
+    } else if (uerRole === "LANDLORD") {
+      redirect("/landlord-dashboard");
+    }
   }
   return result;
 };

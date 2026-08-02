@@ -7,10 +7,13 @@ import { Label } from "@/components/ui/label";
 import { IoEyeOffSharp } from "react-icons/io5";
 import Link from "next/link";
 import { loginAction } from "../../_actions/authAction";
+import { useSearchParams } from "next/navigation";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [state, action, isPending] = useActionState(loginAction, false);
+      const searchParams = useSearchParams();
+    const redirectTo = searchParams.get("redirectTo") ?? ""
+  const [state, action, isPending] = useActionState(loginAction.bind(null,redirectTo), false);
   const errorMessage = state?.message;
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-background px-4 py-12">
