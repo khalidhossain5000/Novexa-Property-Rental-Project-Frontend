@@ -3,15 +3,15 @@ import { IPaymentResponse } from "../../_dashboardTypes/dashboardTypes";
 import ListingMobileCard from "../listing/ListingMobileCard";
 import ListingTableRow from "../listing/ListingTableRow";
 import PaymentDetailsDialog from "./PaymentDetailsDialog";
+import { Badge } from "@/components/ui/badge";
 interface IPaymentProps {
   paymentHistoryRes: IPaymentResponse;
 }
 const PaymentHistory = ({ paymentHistoryRes }: IPaymentProps) => {
   const paymentHistory = paymentHistoryRes.data;
 
-  console.log(paymentHistory, "payment hsitory");
   return (
-    <div>
+    <div className="pt-6">
       {/* Desktop Table */}
       <div className="hidden overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900 md:block">
         <table className="w-full text-left text-sm font-inter">
@@ -34,17 +34,27 @@ const PaymentHistory = ({ paymentHistoryRes }: IPaymentProps) => {
               <ListingTableRow
                 key={payment.id}
                 title={payment.transactionId}
-                columns={[`${payment.paidAt}`, `$ ${payment.totalAmount}`]}
+                columns={[`$ ${payment.totalAmount}`, `${payment.paidAt}`]}
                 status={
-                  <span
-                    className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
-                      payment.status === "COMPLETED"
-                        ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300"
-                        : "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300"
-                    }`}
-                  >
-                    {payment.status}
-                  </span>
+                  <>
+                    {payment.status === "PENDING" && (
+                      <Badge className="bg-[#f7f794] text-text-primary dark:text-black">
+                        Pending
+                      </Badge>
+                    )}
+
+                    {payment.status === "FAILED" && (
+                      <Badge className="bg-rose-600  text-white dark:text-black">
+                        Failed
+                      </Badge>
+                    )}
+
+                    {payment.status === "COMPLETED" && (
+                      <Badge className="bg-slate-800 text-primary dark:text-black">
+                        Completed
+                      </Badge>
+                    )}
+                  </>
                 }
                 actions={<PaymentDetailsDialog payment={payment} />}
               />
@@ -77,15 +87,23 @@ const PaymentHistory = ({ paymentHistoryRes }: IPaymentProps) => {
                   $ {payment.totalAmount}
                 </span>
 
-                <span
-                  className={`rounded-full px-2.5 py-1 ${
-                    payment.status === "COMPLETED"
-                      ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300"
-                      : "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300"
-                  }`}
-                >
-                  {payment?.status}
-                </span>
+                {payment.status === "PENDING" && (
+                  <Badge className="bg-[#f7f794] text-text-primary dark:text-black">
+                    Pending
+                  </Badge>
+                )}
+
+                {payment.status === "FAILED" && (
+                  <Badge className="bg-rose-600  text-white dark:text-black">
+                    Failed
+                  </Badge>
+                )}
+
+                {payment.status === "COMPLETED" && (
+                  <Badge className="bg-slate-800 text-primary dark:text-black">
+                    Completed
+                  </Badge>
+                )}
               </>
             }
             description={payment.paidAt}

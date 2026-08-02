@@ -107,7 +107,7 @@ export function DashboardShell({
                 className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-inter font-medium transition-colors ${
                   isActive
                     ? "bg-primary/10 text-primary"
-                    : "text-foreground/70 hover:text-foreground hover:bg-muted/50"
+                    : "text-foreground/70 hover:text-primary hover:bg-text-text-primary"
                 }`}
               >
                 <Icon

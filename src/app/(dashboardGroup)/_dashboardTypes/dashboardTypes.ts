@@ -40,6 +40,25 @@ export interface ICurrentLandlordPropertiesResponse {
 
 
 //landlord rental req related
+
+export interface IPropertyTypesRentReq{
+
+  id:string;
+  title:string;
+  description:string;
+  location:string;
+  price:string;
+  amenities:string;
+  thumbnailImage:string;
+  status:"AVAILABLE" | "BOOKED"
+  categoryId:string;
+  landLordId:string;
+  created_At:string;
+  updated_At:string;
+  category:ICategory;
+  rentalRequest?:IRentalRequest[]
+  user?:IUserTypes
+}
 export interface IRentalRequest{
   id:string;
   status:RentalRequestStatus,
@@ -48,8 +67,9 @@ export interface IRentalRequest{
   tenantId:string;
   created_At:string;
   updated_At:string;
-  property:IPropertyTypes;
-  tenant:IUserTypes
+  property:IPropertyTypesRentReq;
+  tenant:IUserTypes;
+  
 }
 export interface IRentalReqResponse{
   success:boolean;

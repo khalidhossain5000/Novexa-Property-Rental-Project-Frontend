@@ -3,9 +3,8 @@ import PaymentHistory from "../../_components/PaymentPage/PaymentHistory";
 
 const MyPaymentHistory = async () => {
   const paymentHistoryRes = await getPaymentHistory();
-  console.log(paymentHistoryRes, "thisis rental req res");
   return (
-    <div>
+    <div className="px-4 lg:px-12">
       <div className="mb-8">
         <h2 className="font-lora text-2xl font-bold text-foreground">
           My Payment History

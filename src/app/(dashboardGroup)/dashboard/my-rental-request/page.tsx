@@ -5,7 +5,7 @@ import MyRentalRequest from "../../_components/MyRentalReqPage/MyRentalRequest";
 const MyRentalRequestPage = async () => {
   const myRentalReqRes = await getTenantRentalRequest();
 
-  console.log(myRentalReqRes, "thisis rental req res");
+ 
   return (
     <div>
       <div className="mb-8">

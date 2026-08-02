@@ -21,16 +21,15 @@ const GiveReviewBtn = ({ propertyId }: GiveReviewBtnProps) => {
   const [state, action, isPending] = useActionState(makeReview, null);
   const [rating, setRating] = useState(0);
 
-  console.log(state, "from revie w ehloo");
   return (
     <Dialog>
       <DialogTrigger>
-        <div className="rounded-2xl bg-[#17140A] px-6 py-1.5 text-sm font-inter text-[#FFC72C] transition-colors duration-300 hover:bg-[#2b2517] active:scale-[1.5] dark:bg-[#FFC72C] dark:text-[#17140A] dark:hover:bg-[#e6b526] cursor-pointer">
+        <div className="flex items-center gap-2 cursor-pointer bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 px-3 py-2 rounded-sm shadow-sm font-inter hover:scale-105 hover:bg-emerald-300 transition duration-400">
           Give Review
         </div>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-md bg-primary border-none">
+      <DialogContent className="sm:max-w-md bg-primary dark:bg-background border-none">
         <DialogHeader>
           <DialogTitle className="font-lora text-center">
             Give Your Review
@@ -100,13 +99,15 @@ const GiveReviewBtn = ({ propertyId }: GiveReviewBtnProps) => {
             <p className="text-sm text-red-500 font-lora">{state.message}</p>
           )}
 
-          <Button
-            type="submit"
-            disabled={isPending}
-            className="w-full bg-secondary px-4 py-3 rounded-xl shadow-sm cursor-pointer text-white"
-          >
-            {isPending ? "Submitting..." : "Submit Review"}
-          </Button>
+          <div className="mx-auto text-center">
+            <Button
+              type="submit"
+              disabled={isPending}
+              className="cursor-pointer bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 px-3 py-2 rounded-sm shadow-sm font-inter hover:scale-105 hover:bg-emerald-300 transition duration-400 text-center mx-auto"
+            >
+              {isPending ? "Submitting..." : "Submit Review"}
+            </Button>
+          </div>
         </form>
       </DialogContent>
     </Dialog>

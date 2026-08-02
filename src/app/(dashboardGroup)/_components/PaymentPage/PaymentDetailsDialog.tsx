@@ -10,6 +10,7 @@ import {
 import { Eye } from "lucide-react";
 import Image from "next/image";
 import { IPayment } from "../../_dashboardTypes/dashboardTypes";
+import { Badge } from "@/components/ui/badge";
 
 interface IPaymentDetailsDialogProps {
   payment: IPayment;
@@ -21,25 +22,27 @@ const PaymentDetailsDialog = ({ payment }: IPaymentDetailsDialogProps) => {
   return (
     <Dialog>
       <DialogTrigger>
-        <button className="inline-flex items-center gap-1 rounded-lg bg-teal-100 px-3 py-1.5 text-xs font-semibold text-teal-700 transition hover:bg-teal-200 dark:bg-teal-900/30 dark:text-teal-300">
+        <button className="flex items-center gap-2 cursor-pointer bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 px-3 py-2 rounded-sm shadow-sm font-inter hover:scale-105 hover:bg-emerald-300 transition duration-400">
           <Eye size={14} />
           Show Details
         </button>
       </DialogTrigger>
 
-      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-2xl">
+      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-2xl bg-card border-none">
         <DialogHeader>
-          <DialogTitle>Payment Details</DialogTitle>
+          <DialogTitle className="text-xl font-bold font-lora">
+            Payment Details
+          </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-6">
+        <div className="space-y-6 rounded-xl  dark:shadow-xl dark:shadow-primary/20 shadow-sm">
           {/* Payment Information */}
           <section>
             <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
               Payment Information
             </h3>
 
-            <div className="grid grid-cols-1 gap-4 rounded-xl border p-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 rounded-xl  p-4 sm:grid-cols-2">
               <div>
                 <p className="text-xs text-slate-500">Transaction ID</p>
                 <p className="break-all text-sm font-medium">
@@ -60,15 +63,23 @@ const PaymentDetailsDialog = ({ payment }: IPaymentDetailsDialogProps) => {
               <div>
                 <p className="text-xs text-slate-500">Payment Status</p>
 
-                <span
-                  className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
-                    payment.status === "COMPLETED"
-                      ? "bg-emerald-100 text-emerald-700"
-                      : "bg-yellow-100 text-yellow-700"
-                  }`}
-                >
-                  {payment.status}
-                </span>
+                {payment.status === "PENDING" && (
+                  <Badge className="bg-[#f7f794] text-text-primary dark:text-black">
+                    Pending
+                  </Badge>
+                )}
+
+                {payment.status === "FAILED" && (
+                  <Badge className="bg-rose-600  text-white dark:text-black">
+                    Failed
+                  </Badge>
+                )}
+
+                {payment.status === "COMPLETED" && (
+                  <Badge className="bg-slate-800 dark:text-slate-100 text-primary dark:text-black">
+                    Completed
+                  </Badge>
+                )}
               </div>
 
               <div>
@@ -88,7 +99,7 @@ const PaymentDetailsDialog = ({ payment }: IPaymentDetailsDialogProps) => {
               Property Information
             </h3>
 
-            <div className="rounded-xl border p-4">
+            <div className="rounded-xl  p-4">
               <div className="mb-4 flex gap-4">
                 <div className="relative h-20 w-20 overflow-hidden rounded-lg">
                   <Image
@@ -134,12 +145,12 @@ const PaymentDetailsDialog = ({ payment }: IPaymentDetailsDialogProps) => {
 
           {/* Rental Request Information */}
 
-          <section>
+          <section className="rounded-xl  dark:shadow-xl dark:shadow-primary/20 shadow-sm font-lora">
             <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
               Rental Request
             </h3>
 
-            <div className="rounded-xl border p-4 text-sm">
+            <div className="rounded-xl  p-4 text-sm">
               <div className="flex justify-between">
                 <span className="text-slate-500">Request Status</span>
 

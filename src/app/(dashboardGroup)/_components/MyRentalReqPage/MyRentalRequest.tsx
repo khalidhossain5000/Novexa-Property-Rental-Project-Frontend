@@ -6,13 +6,13 @@ import RentalRequestDetailsModal from "./RentalRequestDetailsDialog";
 import GiveReviewBtn from "./GiveReviewBtn";
 import Link from "next/link";
 import { CreditCard } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 interface MyRentalReqProps {
   myRentalReqRes: IRentalReqResponse;
 }
 const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
   const myRentalReq = myRentalReqRes.data;
 
- 
   return (
     <div>
       {/* Desktop Table */}
@@ -20,17 +20,17 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
         <table className="w-full text-left text-sm font-inter">
           <thead className="border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-600 dark:border-slate-800 dark:bg-slate-800/50 dark:text-slate-300">
             <tr>
-              <th className="px-6 py-4">Property Image</th>
-              <th className="px-6 py-4">Property Title</th>
+              <th className="px-6 py-4 font-lora">Image</th>
+              <th className="px-6 py-4 font-lora">Property Title</th>
 
-              <th className="px-6 py-4">Total Price</th>
+              <th className="px-6 py-4 font-lora">Total Price</th>
 
-              <th className="px-6 py-4">Tenant Name</th>
-              <th className="px-6 py-4">Tenant email</th>
+              <th className="px-6 py-4 font-lora">Landlord Name</th>
+              <th className="px-6 py-4 font-lora">Request Send On</th>
 
-              <th className="px-6 py-4">Status</th>
+              <th className="px-6 py-4 font-lora">Status</th>
 
-              <th className="px-6 py-4 text-right">Actions</th>
+              <th className="px-6 py-4 font-lora ">Actions</th>
             </tr>
           </thead>
 
@@ -42,19 +42,39 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
                 columns={[
                   rentalReq.property.title,
                   rentalReq.totalAmount,
-                  `$ ${rentalReq.tenant.firstName}`,
-                  rentalReq.tenant.email,
+                  `$ ${rentalReq.property.user?.firstName}`,
+                  `${rentalReq.created_At.split("T")[0]}`,
                 ]}
                 status={
-                  <span
-                    className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
-                      rentalReq.status === "ACTIVE"
-                        ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300"
-                        : "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300"
-                    }`}
-                  >
-                    {rentalReq.status}
-                  </span>
+                  <>
+                    {rentalReq.status === "PENDING" && (
+                      <Badge className="bg-[#f7f794] text-text-primary dark:text-black">
+                        Pending
+                      </Badge>
+                    )}
+                    {rentalReq.status === "APPROVED" && (
+                      <Badge className="bg-blue-600 text-white dark:text-black">
+                        Approved
+                      </Badge>
+                    )}
+                    {rentalReq.status === "REJECTED" && (
+                      <Badge className="bg-red-600  text-white dark:text-black">
+                        Rejected
+                      </Badge>
+                    )}
+
+                    {rentalReq.status === "ACTIVE" && (
+                      <Badge className="bg-emerald-500 text-text-primary dark:text-black">
+                        Active
+                      </Badge>
+                    )}
+
+                    {rentalReq.status === "COMPLETED" && (
+                      <Badge className="bg-slate-600 text-text-primary dark:text-black">
+                        Completed
+                      </Badge>
+                    )}
+                  </>
                 }
                 actions={
                   <div className="flex items-center gap-2">
@@ -63,7 +83,7 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
                     {rentalReq.status === "APPROVED" && (
                       <Link
                         href={`/dashboard/requests/${rentalReq?.id}/pay`}
-                        className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700 active:scale-95 font-inter"
+                        className="flex items-center gap-2 cursor-pointer bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 px-3 py-2 rounded-sm shadow-sm font-inter hover:scale-105 hover:bg-emerald-300 transition duration-400"
                       >
                         <CreditCard size={16} />
                         Proceed to Payment
@@ -73,6 +93,7 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
                     {rentalReq.status === "ACTIVE" && (
                       <GiveReviewBtn propertyId={rentalReq.property.id} />
                     )}
+                    {}
                   </div>
                 }
               />
@@ -107,15 +128,33 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
                   $ Tenant Name: {rentalReq.tenant.firstName}
                 </span>
 
-                <span
-                  className={`rounded-full px-2.5 py-1 ${
-                    rentalReq.status === "ACTIVE"
-                      ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300"
-                      : "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300"
-                  }`}
-                >
-                  {rentalReq.status}
-                </span>
+                {rentalReq.status === "PENDING" && (
+                  <Badge className="bg-[#f7f794] text-text-primary dark:text-black">
+                    Pending
+                  </Badge>
+                )}
+                {rentalReq.status === "APPROVED" && (
+                  <Badge className="bg-blue-600 text-white dark:text-black">
+                    Approved
+                  </Badge>
+                )}
+                {rentalReq.status === "REJECTED" && (
+                  <Badge className="bg-red-600  text-white dark:text-black">
+                    Rejected
+                  </Badge>
+                )}
+
+                {rentalReq.status === "ACTIVE" && (
+                  <Badge className="bg-emerald-500 text-text-primary dark:text-black">
+                    Active
+                  </Badge>
+                )}
+
+                {rentalReq.status === "COMPLETED" && (
+                  <Badge className="bg-slate-600 text-text-primary dark:text-black">
+                    Completed
+                  </Badge>
+                )}
               </>
             }
             description={rentalReq.created_At}
@@ -126,7 +165,7 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
                 {rentalReq.status === "APPROVED" && (
                   <Link
                     href={`/dashboard/requests/${rentalReq?.id}/pay`}
-                    className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700 active:scale-95 font-inter"
+                    className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700 active:scale-95 font-inter font-lora"
                   >
                     <CreditCard size={16} />
                     Proceed to Payment
