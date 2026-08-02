@@ -71,6 +71,7 @@ const AllProperties = ({
           </button>
         </div>
         <PropertyFilterSidebar
+           onFilterApply={() => setSidebarOpen(false)}
           categories={categories}
           onPendingChange={setIsFiltering}
         />
@@ -121,7 +122,6 @@ const AllProperties = ({
               </button>
             </div>
 
-            {/* Grid — only this part swaps to skeleton */}
             {isFiltering ? (
               <PropertiesSkeleton />
             ) : allProperties.length === 0 ? (

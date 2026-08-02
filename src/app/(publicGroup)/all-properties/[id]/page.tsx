@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { getPorpertyDetails } from '../../_actions/getAllProperty';
 import PropertyDetails from '@/app/(publicGroup)/_components/PropertyDetailsPage/PropertyDetails';
 import { getMe } from '@/service/getMe';
+import DetailsSkeleton from '../../_components/PropertyDetailsPage/DetailsSkeleton';
 interface IParamsProps{
      params: Promise<{ id: string }> 
 }
@@ -12,7 +13,10 @@ const PropertyDetailsPage = async ({ params }:IParamsProps) => {
     const currentUserId=currentUser?.data?.id
     return (
         <div>
+            <Suspense fallback={<DetailsSkeleton/>}>   
             <PropertyDetails propertyDetailsRes={propertyDetailsRes}  currentUserId={currentUserId}/>
+
+            </Suspense>
         </div>
     );
 };

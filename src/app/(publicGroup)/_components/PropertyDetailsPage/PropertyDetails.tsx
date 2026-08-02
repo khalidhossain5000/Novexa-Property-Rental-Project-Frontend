@@ -18,6 +18,7 @@ import React, { useActionState } from "react";
 import PropertyStatCard from "./PropertyStatCard";
 import { sendRentalRequest } from "@/app/(publicGroup)/_actions/rentalRequestActions";
 import RentRequestDialog from "./RentConfirmDialog";
+import PrimaryBtn from "@/components/shared/Button/PrimaryBtn";
 
 interface IPropertyDetailsProps {
   propertyDetailsRes: IPropertyDetailsRes;
@@ -175,7 +176,7 @@ const PropertyDetails = ({
             </div>
 
             {/* Action buttons */}
-            {/* Action buttons */}
+
             <div className="flex flex-wrap items-center gap-3">
               {myRentalRequestStatus === "APPROVED" ? (
                 <Link
@@ -203,7 +204,7 @@ const PropertyDetails = ({
                   <BookMarked size={16} />
                   Request Rejected
                 </button>
-              ) : (
+              ) : currentUserId ? (
                 <RentRequestDialog
                   propertyId={details.id}
                   price={details.price}
@@ -212,6 +213,10 @@ const PropertyDetails = ({
                   thumbnailImage={details.thumbnailImage}
                   triggerLabel="Send Rent Request"
                 />
+              ) : (
+                <Link href="/login">
+                  <PrimaryBtn>Login to Rent This Property</PrimaryBtn>
+                </Link>
               )}
             </div>
           </div>

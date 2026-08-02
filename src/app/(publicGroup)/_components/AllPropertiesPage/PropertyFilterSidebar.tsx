@@ -8,11 +8,13 @@ import { useEffect, useRef, useState, useTransition } from "react";
 interface PropertyFilterSidebarProps {
   categories: ICategory[];
   onPendingChange?: (pending: boolean) => void;
+  onFilterApply?: () => void;
 }
 
 const PropertyFilterSidebar = ({
   categories,
   onPendingChange,
+   onFilterApply
 }: PropertyFilterSidebarProps) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -49,7 +51,8 @@ const PropertyFilterSidebar = ({
 
       startTransition(() => {
         router.replace(`${pathname}?${params.toString()}`);
-      });
+      })
+       onFilterApply?.();
     }, 500);
   };
 
