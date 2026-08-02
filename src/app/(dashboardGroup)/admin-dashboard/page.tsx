@@ -1,9 +1,15 @@
 import React from 'react';
+import { getAdminDashboardStats } from '../_actions/dashboardStats';
+import AdminStatsCard from '../_components/DashboardStats/AdminStatsCard';
 
-const AdminDashboardHome = () => {
+const AdminDashboardHome = async() => {
+
+    const getAdminStatsRes=await getAdminDashboardStats()
+
     return (
         <div>
-            <h2 className='text-center text-4xl font-bold p-12 text-primary font-lora'>Admin Dashboard Home </h2>
+               <AdminStatsCard stats={getAdminStatsRes.data} />
+
         </div>
     );
 };

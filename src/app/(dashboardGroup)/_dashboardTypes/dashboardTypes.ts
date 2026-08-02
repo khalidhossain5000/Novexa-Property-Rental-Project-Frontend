@@ -114,3 +114,34 @@ export interface ITenanstStatsRes{
   data:ITenantStats
 }
 
+
+//landlord stats
+
+export interface ILandlordStats{
+  totalRentReq:number;
+  totalActiveRent:number;
+  totalEarn:string;
+  totalPropertiesAdded:number;
+}
+
+
+export interface ILandlordStatsRes{
+  success:true;
+  message:string;
+  data:ILandlordStats
+}
+
+//admin
+export interface IAdminStats{
+  totalUsersCount:number;
+  totalPropertiesCount:number;
+  totalRentalRequestCount:number;
+  activePropertyCount:number;
+}
+
+
+export interface IAdminStatsResponse{
+  success:true;
+  message:string;
+  data:IAdminStats
+}

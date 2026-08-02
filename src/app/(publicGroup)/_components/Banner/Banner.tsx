@@ -35,7 +35,7 @@ const features = [
   },
 ];
 // container px-6 md:px-8 lg:px-13 xl:px-16  --->
-const NBanner = () => {
+const Banner = () => {
   return (
     <section className="relative overflow-hidden bg-[#FFFCF3] py-20 dark:bg-neutral-950 sm:py-24 lg:py-28">
       {/* glows */}
@@ -232,4 +232,4 @@ const NBanner = () => {
   );
 };
 
-export default NBanner;
+export default Banner;

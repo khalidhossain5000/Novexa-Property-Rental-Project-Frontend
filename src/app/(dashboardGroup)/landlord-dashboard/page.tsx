@@ -1,11 +1,16 @@
-import React from 'react';
+import React from "react";
+import { getLandlordDashboardStats } from "../_actions/dashboardStats";
+import LandlordStatsCard from "../_components/DashboardStats/LandlordStatsCard";
 
-const LandlordDashboardHome = () => {
-    return (
-        <div>
-            <h2 className="text-center text-4xl font-lora font-bold">Welcome to landlord dashboard </h2>
-        </div>
-    );
+const LandlordDashboardHome = async () => {
+  const getLandlordStatsRes = await getLandlordDashboardStats();
+
+
+  return (
+    <div className="max-w-7xl mx-auto">
+      <LandlordStatsCard stats={getLandlordStatsRes.data} />
+    </div>
+  );
 };
 
 export default LandlordDashboardHome;
