@@ -79,6 +79,9 @@ export const loginAction = async (
     } else if (uerRole === "LANDLORD") {
       redirect("/landlord-dashboard");
     }
+    else{
+      redirect("/")
+    }
   }
   return result;
 };

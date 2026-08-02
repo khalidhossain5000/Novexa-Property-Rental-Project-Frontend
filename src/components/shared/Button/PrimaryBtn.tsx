@@ -1,25 +1,27 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 
-interface PrimaryBtnProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface PrimaryBtnProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   icon?: ReactNode;
+  disabled?: boolean ;
 }
 
 const PrimaryBtn = ({
   children,
   icon,
   className,
+  disabled,
   type = "button",
   ...props
 }: PrimaryBtnProps) => {
   return (
     <button
       type={type}
+      disabled={!!disabled}
       className={twMerge(
         "group inline-flex items-center gap-2 rounded-full bg-[#17140A] px-6 py-3.5 text-sm font-semibold text-[#FFC72C] transition-colors duration-300 hover:bg-[#2b2517] active:scale-[0.98] dark:bg-[#FFC72C] dark:text-[#17140A] dark:hover:bg-[#e6b526] cursor-pointer",
-        className
+        className,
       )}
       {...props}
     >

@@ -95,9 +95,9 @@ const LoginForm = () => {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full rounded-lg bg-primary py-2.5 text-sm font-semibold text-white shadow-sm shadow-primary/20 transition-colors hover:bg-primary-hover dark:text-background dark:shadow-primary/10"
+            className="w-full rounded-lg bg-primary py-2.5 text-sm font-semibold text-white shadow-sm shadow-primary/20 transition-colors hover:bg-primary-hover dark:text-background dark:shadow-primary/10 cursor-pointer"
           >
-            {isPending ? "signing in ......" : " Log in"}
+            {isPending ? "Login in ......" : " Log in"}
           </button>
         </form>
 

@@ -3,8 +3,9 @@ import { IRentalReqResponse } from "../../_dashboardTypes/dashboardTypes";
 import ListingTableRow from "../listing/ListingTableRow";
 import ListingMobileCard from "../listing/ListingMobileCard";
 import RentalRequestDetailsModal from "./RentalRequestDetailsDialog";
-import MakePaymnetBtn from "./MakePaymnetBtn";
 import GiveReviewBtn from "./GiveReviewBtn";
+import Link from "next/link";
+import { CreditCard } from "lucide-react";
 interface MyRentalReqProps {
   myRentalReqRes: IRentalReqResponse;
 }
@@ -58,7 +59,13 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
                     <RentalRequestDetailsModal rentalReq={rentalReq} />
 
                     {rentalReq.status === "APPROVED" && (
-                      <MakePaymnetBtn rentalRequestId={rentalReq.id} />
+                      <Link
+                        href={`/dashboard/requests/${rentalReq?.id}/pay`}
+                        className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700 active:scale-95 font-inter"
+                      >
+                        <CreditCard size={16} />
+                        Proceed to Payment
+                      </Link>
                     )}
 
                     {rentalReq.status === "ACTIVE" && (
@@ -115,7 +122,13 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
                 <RentalRequestDetailsModal rentalReq={rentalReq} />
 
                 {rentalReq.status === "APPROVED" && (
-                  <MakePaymnetBtn rentalRequestId={rentalReq.id} />
+                    <Link
+                        href={`/dashboard/requests/${rentalReq?.id}/pay`}
+                        className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700 active:scale-95 font-inter"
+                      >
+                        <CreditCard size={16} />
+                        Proceed to Payment
+                      </Link>
                 )}
 
                 {rentalReq.status === "ACTIVE" && (

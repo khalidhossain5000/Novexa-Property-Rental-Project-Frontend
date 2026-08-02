@@ -1,7 +1,7 @@
 import React from "react";
-import { IPaymentResponse } from "../_dashboardTypes/dashboardTypes";
-import ListingMobileCard from "./listing/ListingMobileCard";
-import ListingTableRow from "./listing/ListingTableRow";
+import { IPaymentResponse } from "../../_dashboardTypes/dashboardTypes";
+import ListingMobileCard from "../listing/ListingMobileCard";
+import ListingTableRow from "../listing/ListingTableRow";
 import PaymentDetailsDialog from "./PaymentDetailsDialog";
 interface IPaymentProps {
   paymentHistoryRes: IPaymentResponse;

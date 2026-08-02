@@ -1,5 +1,5 @@
 import { getPaymentHistory } from "../../_actions/paymentActions";
-import PaymentHistory from "../../_components/PaymentHistory";
+import PaymentHistory from "../../_components/PaymentPage/PaymentHistory";
 
 const MyPaymentHistory = async () => {
   const paymentHistoryRes = await getPaymentHistory();

@@ -8,7 +8,6 @@ import { Menu, LogOut } from "lucide-react";
 import { toast } from "sonner";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import { IUser } from "@/app/(authGroup)/_authTypes/authTypes";
-import PrimaryButton from "@/components/ui/PrimaryButton";
 import MobileNavbar from "./MobileNavbar";
 import { logout } from "@/service/logOut";
 import { navLinks } from "./NavLinks";
@@ -29,7 +28,7 @@ const NavBar = ({ user }: NavBarProps) => {
   const userInfo = user?.data;
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-console.log(user,'this is the user')
+
   const filteredNavLinks = user
     ? navLinks
     : navLinks.filter((link) => !link.private);
@@ -128,7 +127,7 @@ console.log(user,'this is the user')
                  
                   <PrimaryBtn>Register</PrimaryBtn>
                 </Link>
-                <Link href="/auth/login">
+                <Link href="/login">
                  
 
                   <SecondaryBtn>Login</SecondaryBtn>

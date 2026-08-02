@@ -43,6 +43,8 @@ const PropertyDetails = ({
 
   const myRentalRequestStatus = myRentalRequest?.status;
 
+
+  console.log(details,'proeprty details')
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-50 dark:bg-[#0d1117]">
       {/* Ambient page glow */}
@@ -54,19 +56,19 @@ const PropertyDetails = ({
         <nav className="mb-8 flex min-w-0 items-center gap-1.5 text-xs text-slate-400 dark:text-slate-500">
           <Link
             href="/"
-            className="shrink-0 transition-colors hover:text-teal-600 dark:hover:text-teal-400"
+            className="shrink-0 transition-colors hover:text-teal-600 dark:hover:text-teal-400 font-inter"
           >
             Catalog
           </Link>
           <ChevronRight size={12} className="shrink-0" />
           <Link
             href="/all-properties"
-            className="shrink-0 transition-colors hover:text-teal-600 dark:hover:text-teal-400"
+            className="shrink-0 transition-colors hover:text-teal-600 dark:hover:text-teal-400 font-inter"
           >
             {details.category.name || "Not Found"}
           </Link>
           <ChevronRight size={12} className="shrink-0" />
-          <span className="line-clamp-1 max-w-45 font-medium text-teal-600 dark:text-teal-400">
+          <span className="line-clamp-1 max-w-45 font-medium text-teal-600 dark:text-teal-400 font-lora">
             {details.title}
           </span>
         </nav>
@@ -98,39 +100,39 @@ const PropertyDetails = ({
           </div>
 
           <div className="flex flex-col justify-center">
-            {/* Tags row */}
+            {/* category row */}
             <div className="mb-4 flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-teal-200 bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-700 dark:border-teal-800/60 dark:bg-teal-950/50 dark:text-teal-300">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-teal-200 bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-700 dark:border-teal-800/60 dark:bg-teal-950/50 dark:text-teal-300 font-inter">
                 <Hash size={10} />
                 {details.category.name || "not-found"}
               </span>
               <span
-                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
+                className={`font-inter inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
                   details.status === "AVAILABLE"
                     ? "border border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-400"
                     : "border border-rose-200 bg-rose-50 text-rose-700 dark:border-rose-800/60 dark:bg-rose-950/40 dark:text-rose-400"
                 }`}
               >
                 <span
-                  className={`h-1.5 w-1.5 rounded-full ${details.status === "AVAILABLE" ? "bg-emerald-500" : "bg-rose-500"}`}
+                  className={`font-inter h-1.5 w-1.5 rounded-full ${details.status === "AVAILABLE" ? "bg-emerald-500" : "bg-rose-500"}`}
                 />
                 {details.status === "AVAILABLE" ? "Available" : "Booked"}
               </span>
             </div>
 
             {/* Title */}
-            <h1 className="mb-2 text-3xl font-extrabold leading-tight text-slate-950 dark:text-white sm:text-4xl xl:text-5xl">
+            <h1 className="mb-2 text-3xl font-extrabold leading-tight text-slate-950 dark:text-white sm:text-4xl xl:text-5xl font-lora">
               {details.title || "Untitled"}
             </h1>
 
             {/* Location */}
-            <p className="mb-1 flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400">
+            <p className="mb-1 flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400 font-inter">
               <MapPin size={14} className="text-teal-600 dark:text-teal-400" />
               {details.location || "Location not specified"}
             </p>
 
             {/* Price */}
-            <p className="mb-4 text-2xl font-bold text-teal-600 dark:text-teal-400">
+            <p className="mb-4 text-2xl font-bold text-teal-600 dark:text-teal-400 font-inter">
               ${Number(details.price).toLocaleString("en-US")}
               <span className="ml-1 text-sm font-normal text-slate-400">
                 /month
@@ -142,16 +144,16 @@ const PropertyDetails = ({
 
             {/* Amenities */}
             <div className="mb-6">
-              <h2 className="mb-2 text-xs font-semibold uppercase tracking-widest text-teal-600 dark:text-teal-400">
+              <h2 className="mb-2 text-xs font-semibold uppercase tracking-widest text-teal-600 dark:text-teal-400 font-inter">
                 Amenities
               </h2>
-              <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+              <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400 font-inter">
                 {details.amenities || "No description available."}
               </p>
             </div>
 
             {/* Stat cards */}
-            <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+            <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5 font-inter">
               <PropertyStatCard label="Status" value={details.status} />
               <PropertyStatCard
                 label="Price"
@@ -176,8 +178,8 @@ const PropertyDetails = ({
             <div className="flex flex-wrap items-center gap-3">
               {myRentalRequestStatus === "APPROVED" ? (
                 <Link
-                  href={`/payment/${details.id}`} 
-                  className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700 active:scale-95"
+                  href={`/dashboard/requests/${myRentalRequest?.id}/pay`} 
+                  className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700 active:scale-95 font-inter"
                 >
                   <CreditCard size={16} />
                   Proceed to Payment
@@ -186,7 +188,7 @@ const PropertyDetails = ({
                 <button
                   type="button"
                   disabled
-                  className="inline-flex cursor-not-allowed items-center gap-2 rounded-2xl bg-teal-600 px-6 py-3 text-sm font-semibold text-white opacity-50"
+                  className="inline-flex cursor-not-allowed items-center gap-2 rounded-2xl bg-primary px-6 py-3 text-sm font-semibold text-text-primary opacity-60 font-inter"
                 >
                   <BookMarked size={16} />
                   Request Sent — Waiting for Approval
@@ -195,7 +197,7 @@ const PropertyDetails = ({
                 <button
                   type="button"
                   disabled
-                  className="inline-flex cursor-not-allowed items-center gap-2 rounded-2xl bg-rose-600 px-6 py-3 text-sm font-semibold text-white opacity-50"
+                  className="inline-flex cursor-not-allowed items-center gap-2 rounded-2xl bg-rose-500 px-6 py-3 text-sm font-semibold text-text-primary opacity-90 inter font-inter"
                 >
                   <BookMarked size={16} />
                   Request Rejected
