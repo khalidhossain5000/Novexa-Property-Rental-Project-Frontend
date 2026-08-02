@@ -6,6 +6,7 @@ import {
   Calendar,
   ChevronRight,
   Coins,
+  CreditCard,
   Hash,
   HouseWifiIcon,
   Mail,
@@ -16,13 +17,14 @@ import Link from "next/link";
 import React, { useActionState } from "react";
 import PropertyStatCard from "./PropertyStatCard";
 import { sendRentalRequest } from "@/app/(publicGroup)/_actions/rentalRequestActions";
+import RentRequestDialog from "./RentConfirmDialog";
 
 interface IPropertyDetailsProps {
   propertyDetailsRes: IPropertyDetailsRes;
   currentUserId: string;
 }
 
-// 
+//
 const formatDate = (date: string) => {
   return new Date(date).toLocaleDateString("en-US", {
     year: "numeric",
@@ -37,10 +39,7 @@ const PropertyDetails = ({
   currentUserId,
 }: IPropertyDetailsProps) => {
   const details = propertyDetailsRes.data;
-  const [state, action, isPending] = useActionState(
-    sendRentalRequest.bind(null, details.price, details.id),
-    null,
-  );
+
   const myRentalRequest = details.rentalRequest?.find(
     (req) => req.tenantId === currentUserId,
   );
@@ -75,7 +74,6 @@ const PropertyDetails = ({
           </span>
         </nav>
 
-
         <div className="grid gap-10 lg:grid-cols-[360px_1fr] xl:gap-16">
           {/* Left — Property Image */}
           <div className="flex justify-center lg:justify-start">
@@ -102,7 +100,6 @@ const PropertyDetails = ({
             </div>
           </div>
 
-       
           <div className="flex flex-col justify-center">
             {/* Tags row */}
             <div className="mb-4 flex flex-wrap items-center gap-2">
@@ -137,7 +134,7 @@ const PropertyDetails = ({
 
             {/* Price */}
             <p className="mb-4 text-2xl font-bold text-teal-600 dark:text-teal-400">
-              ৳{Number(details.price).toLocaleString("en-US")}
+              ${Number(details.price).toLocaleString("en-US")}
               <span className="ml-1 text-sm font-normal text-slate-400">
                 /month
               </span>
@@ -161,7 +158,7 @@ const PropertyDetails = ({
               <PropertyStatCard label="Status" value={details.status} />
               <PropertyStatCard
                 label="Price"
-                value={`৳${Number(details.price).toLocaleString("en-US")}`}
+                value={`$${Number(details.price).toLocaleString("en-US")}`}
               />
               <PropertyStatCard
                 label="Location"
@@ -178,25 +175,44 @@ const PropertyDetails = ({
             </div>
 
             {/* Action buttons */}
+            {/* Action buttons */}
             <div className="flex flex-wrap items-center gap-3">
-              <form action={action}>
+              {myRentalRequestStatus === "APPROVED" ? (
+                <Link
+                  href={`/payment/${details.id}`} // adjust to your actual payment route
+                  className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700 active:scale-95"
+                >
+                  <CreditCard size={16} />
+                  Proceed to Payment
+                </Link>
+              ) : myRentalRequestStatus === "PENDING" ? (
                 <button
-                  type="submit"
-                  disabled={isPending || myRentalRequestStatus === "PENDING"}
-                  className="inline-flex cursor-pointer items-center gap-2 rounded-2xl bg-teal-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-500/25 transition hover:bg-teal-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
+                  type="button"
+                  disabled
+                  className="inline-flex cursor-not-allowed items-center gap-2 rounded-2xl bg-teal-600 px-6 py-3 text-sm font-semibold text-white opacity-50"
                 >
                   <BookMarked size={16} />
-                  {isPending
-                    ? "Sending..."
-                    : myRentalRequestStatus === "PENDING"
-                      ? "Request Sended Wait For Admin Approval"
-                      : myRentalRequestStatus === "APPROVED"
-                        ? "Accepted"
-                        : myRentalRequestStatus === "REJECTED"
-                          ? "Rejected"
-                          : "Send Rent Request"}
+                  Request Sent — Waiting for Approval
                 </button>
-              </form>
+              ) : myRentalRequestStatus === "REJECTED" ? (
+                <button
+                  type="button"
+                  disabled
+                  className="inline-flex cursor-not-allowed items-center gap-2 rounded-2xl bg-rose-600 px-6 py-3 text-sm font-semibold text-white opacity-50"
+                >
+                  <BookMarked size={16} />
+                  Request Rejected
+                </button>
+              ) : (
+                <RentRequestDialog
+                  propertyId={details.id}
+                  price={details.price}
+                  title={details.title}
+                  location={details.location}
+                  thumbnailImage={details.thumbnailImage}
+                  triggerLabel="Send Rent Request"
+                />
+              )}
             </div>
           </div>
         </div>

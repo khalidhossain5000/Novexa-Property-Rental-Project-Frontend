@@ -12,6 +12,8 @@ import PrimaryButton from "@/components/ui/PrimaryButton";
 import MobileNavbar from "./MobileNavbar";
 import { logout } from "@/service/logOut";
 import { navLinks } from "./NavLinks";
+import PrimaryBtn from "../Button/PrimaryBtn";
+import SecondaryBtn from "../Button/SecondaryBtn";
 
 
 
@@ -21,13 +23,13 @@ const isActiveRoute = (pathname: string, path: string): boolean => {
 };
 
 interface NavBarProps {
-  user: IUser;
+  user: IUser | null;
 }
 const NavBar = ({ user }: NavBarProps) => {
-  const userInfo = user.data;
+  const userInfo = user?.data;
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-
+console.log(user,'this is the user')
   const filteredNavLinks = user
     ? navLinks
     : navLinks.filter((link) => !link.private);
@@ -41,7 +43,7 @@ const NavBar = ({ user }: NavBarProps) => {
   };
   return (
     <header className="sticky top-0 w-full border-b dark:border-b-0 dark:shadow-2xl shadow-sm border-gray-200 bg-white dark:bg-background z-999999">
-      <nav className="max-w-7xl mx-auto px-4 lg:px-8">
+      <nav className="container px-6 md:px-8 lg:px-13 xl:px-16 mx-auto ">
         <div className="h-20 flex items-center justify-between">
           {/* LEFT SIDE */}
           <div className="flex items-center gap-10">
@@ -97,17 +99,17 @@ const NavBar = ({ user }: NavBarProps) => {
                   href="/dashboard"
                   className="flex items-center hover:opacity-80 transition-opacity duration-200"
                 >
-                  {userInfo.profilePhoto ? (
+                  {userInfo?.profilePhoto ? (
                     <Image
-                      src={userInfo.profilePhoto}
-                      alt={userInfo.firstName || "User"}
+                      src={userInfo?.profilePhoto}
+                      alt={userInfo?.firstName || "User"}
                       width={40}
                       height={40}
                       className="w-12 h-12 rounded-full object-cover border-2 border-teal-600 hover:border-teal-700 transition-colors duration-200"
                     />
                   ) : (
                     <div className="w-12 h-12 rounded-full bg-teal-600 text-white flex items-center justify-center font-semibold text-lg">
-                      {userInfo.firstName?.charAt(0).toUpperCase() || "U"}
+                      {userInfo?.firstName?.charAt(0).toUpperCase() || "U"}
                     </div>
                   )}
                 </Link>
@@ -123,14 +125,13 @@ const NavBar = ({ user }: NavBarProps) => {
             ) : (
               <div className="hidden md:flex items-center gap-4 font-inter">
                 <Link href="/auth/register">
-                  <PrimaryButton className="rounded-md px-4 lg:px-6 py-2 ">
-                    Register
-                  </PrimaryButton>
+                 
+                  <PrimaryBtn>Register</PrimaryBtn>
                 </Link>
                 <Link href="/auth/login">
-                  <PrimaryButton className="rounded-md px-4 lg:px-6 py-2">
-                    Login
-                  </PrimaryButton>
+                 
+
+                  <SecondaryBtn>Login</SecondaryBtn>
                 </Link>
               </div>
             )}

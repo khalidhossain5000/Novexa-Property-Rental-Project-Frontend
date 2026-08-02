@@ -72,7 +72,7 @@ const AllProperties = ({
         <PropertyFilterSidebar categories={categories} />
       </div>
 
-      <div className="relative mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="relative mx-auto container px-6 md:px-8 lg:px-13 xl:px-16 py-12">
         {/* Header */}
         <div className="mb-8">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-secondary/30 bg-secondary/10 px-3 py-1 text-xs font-semibold text-secondary">

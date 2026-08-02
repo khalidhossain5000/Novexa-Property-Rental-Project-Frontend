@@ -24,7 +24,13 @@ export const getAllProperties = async ({ query }: ISearchProps) => {
   }
 
   const res = await fetch(
-    `${process.env.BACKEND_URL}/api/properties?${params.toString()}`,
+    `${process.env.BACKEND_URL}/api/properties?${params.toString()}`,{
+      cache:"force-cache",
+      next:{
+        revalidate: 60*60*12,
+        tags:["all-properties"]
+      }
+    }
   );
 
   const result = await res.json();
@@ -40,6 +46,13 @@ export const getAllProperties = async ({ query }: ISearchProps) => {
 export const getPorpertyDetails=async(id:string)=>{
   const res = await fetch(
     `${process.env.BACKEND_URL}/api/properties/${id}`,
+    {
+      cache:"force-cache",
+      next:{
+        revalidate: 60*60*12,
+        tags:["property-details"]
+      }
+    }
   );
 
   const result=await res.json()

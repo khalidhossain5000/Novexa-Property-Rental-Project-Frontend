@@ -34,7 +34,7 @@ const features = [
     desc: "We're always around",
   },
 ];
-
+// container px-6 md:px-8 lg:px-13 xl:px-16  --->
 const NBanner = () => {
   return (
     <section className="relative overflow-hidden bg-[#FFFCF3] py-20 dark:bg-neutral-950 sm:py-24 lg:py-28">
@@ -49,7 +49,7 @@ const NBanner = () => {
         className="pointer-events-none absolute -left-32 bottom-0 h-95 w-95 rounded-full bg-[#FFC72C]/10 blur-3xl dark:bg-[#FFC72C]/5"
       />
 
-      <div className="relative mx-auto flex max-w-7xl flex-col items-center gap-14 px-6 lg:flex-row lg:justify-between lg:gap-10 lg:px-10">
+      <div className="relative mx-auto flex container px-6 md:px-8 lg:px-13 xl:px-16 flex-col items-center gap-14  lg:flex-row lg:justify-between lg:gap-10">
         {/* LEFT */}
         <div className="w-full flex-1">
           {/* badge */}
@@ -85,7 +85,7 @@ const NBanner = () => {
             without the hassle.
           </h1>
 
-          <p className="mt-6 text-center text-base leading-relaxed text-[#3D3626] dark:text-neutral-400 sm:text-lg lg:text-left">
+          <p className="mt-6 text-center text-base leading-relaxed text-[#3D3626] dark:text-neutral-400 sm:text-lg lg:text-left max-w-2xl">
             Thousands of verified apartments and houses, direct from owners.
             Message, tour, and sign — all without paying a broker a single taka.
           </p>

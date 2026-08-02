@@ -18,7 +18,7 @@ const SecondaryBtn = ({
     <button
       type={type}
       className={twMerge(
-        "group inline-flex cursor-pointer items-center gap-2 rounded-full border-2 border-[#17140A]/15 px-6 py-3.5 text-sm font-semibold text-[#17140A] transition-all duration-300 hover:border-[#17140A]/30 hover:bg-white hover:shadow-sm active:scale-[0.98] dark:border-white/15 dark:text-white dark:hover:bg-white/5 dark:hover:border-white/30",
+        "group inline-flex cursor-pointer items-center gap-2 rounded-full border-2 border-[#17140A]/15 px-6 py-2 md:py-3.5 text-sm font-semibold text-[#17140A] transition-all duration-600  hover:shadow-sm active:scale-105 dark:border-white/15 dark:text-white hover:bg-secondary/10 hover:border-secondary/40",
         className
       )}
       {...props}
