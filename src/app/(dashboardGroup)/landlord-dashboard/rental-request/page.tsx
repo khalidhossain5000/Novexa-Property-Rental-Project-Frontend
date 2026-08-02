@@ -8,12 +8,12 @@ const RentalRequestForLandlordPage = async () => {
 
   return (
     <div>
-      <div className="mb-8">
-        <h2 className="font-lora text-2xl font-bold text-foreground">
+      <div className="mb-8 p-3 lg:px-6">
+        <h2 className="font-lora text-2xl font-bold text-foreground text-center md:text-left">
           Manage Rental Request
         </h2>
 
-        <p className="mt-1 font-inter text-sm text-foreground/60">
+        <p className="mt-1 font-inter text-sm text-foreground/60 text-center md:text-left">
           Review all Rental Request
         </p>
       </div>

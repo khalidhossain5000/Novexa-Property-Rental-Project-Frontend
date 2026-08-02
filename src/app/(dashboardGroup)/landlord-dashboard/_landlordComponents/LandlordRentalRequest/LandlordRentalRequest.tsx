@@ -4,6 +4,7 @@ import ListingTableRow from "@/app/(dashboardGroup)/_components/listing/ListingT
 import { IRentalReqResponse } from "@/app/(dashboardGroup)/_dashboardTypes/dashboardTypes";
 import React from "react";
 import RentalRequestActions from "./RentalReqActionBtn";
+import { Badge } from "@/components/ui/badge";
 interface ILandlordRentalRequestProps {
   rentalReqLandlord: IRentalReqResponse;
 }
@@ -12,7 +13,7 @@ const LandlordRentalRequest = ({
 }: ILandlordRentalRequestProps) => {
   const rentalReqData = rentalReqLandlord?.data || [];
   return (
-    <div>
+    <div className="p-3">
       {/* Desktop Table */}
       <div className="hidden overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900 md:block">
         <table className="w-full text-left text-sm font-inter">
@@ -41,19 +42,39 @@ const LandlordRentalRequest = ({
                 columns={[
                   rentalReq.property.title,
                   rentalReq.totalAmount,
-                  `$ ${rentalReq.tenant.firstName}`,
+                  ` ${rentalReq.tenant.firstName}`,
                   rentalReq.tenant.email,
                 ]}
                 status={
-                  <span
-                    className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
-                      rentalReq.status === "ACTIVE"
-                        ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300"
-                        : "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300"
-                    }`}
-                  >
-                    {rentalReq.status}
-                  </span>
+                 <>
+                {rentalReq.status === "PENDING" && (
+                  <Badge className="bg-[#f7f794] text-text-primary dark:text-black">
+                    Pending
+                  </Badge>
+                )}
+                {rentalReq.status === "APPROVED" && (
+                  <Badge className="bg-blue-600 text-white dark:text-black">
+                    Approved
+                  </Badge>
+                )}
+                {rentalReq.status === "REJECTED" && (
+                  <Badge className="bg-red-600  text-white dark:text-black">
+                    Rejected
+                  </Badge>
+                )}
+
+                {rentalReq.status === "ACTIVE" && (
+                  <Badge className="bg-emerald-500 text-text-primary dark:text-black">
+                    Active
+                  </Badge>
+                )}
+
+                {rentalReq.status === "COMPLETED" && (
+                  <Badge className="bg-slate-600 text-text-primary dark:text-black">
+                    Completed
+                  </Badge>
+                )}
+</>
                 }
                 actions={<RentalRequestActions rentalReqId={rentalReq.id} />}
               />
@@ -88,18 +109,38 @@ const LandlordRentalRequest = ({
                   $ Tenant Name: {rentalReq.tenant.firstName}
                 </span>
 
-                <span
-                  className={`rounded-full px-2.5 py-1 ${
-                    rentalReq.status === "ACTIVE"
-                      ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300"
-                      : "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300"
-                  }`}
-                >
-                  {rentalReq.status}
-                </span>
+                
+                {rentalReq.status === "PENDING" && (
+                  <Badge className="bg-[#f7f794] text-text-primary dark:text-black">
+                    Pending
+                  </Badge>
+                )}
+                {rentalReq.status === "APPROVED" && (
+                  <Badge className="bg-blue-600 text-white dark:text-black">
+                    Approved
+                  </Badge>
+                )}
+                {rentalReq.status === "REJECTED" && (
+                  <Badge className="bg-red-600  text-white dark:text-black">
+                    Rejected
+                  </Badge>
+                )}
+
+                {rentalReq.status === "ACTIVE" && (
+                  <Badge className="bg-emerald-500 text-text-primary dark:text-black">
+                    Active
+                  </Badge>
+                )}
+
+                {rentalReq.status === "COMPLETED" && (
+                  <Badge className="bg-slate-600 text-text-primary dark:text-black">
+                    Completed
+                  </Badge>
+                )}
+
               </>
             }
-            description={rentalReq.created_At}
+            description={rentalReq.created_At.split("T")[0]}
             actions={<RentalRequestActions rentalReqId={rentalReq.id} />}
           />
         ))}

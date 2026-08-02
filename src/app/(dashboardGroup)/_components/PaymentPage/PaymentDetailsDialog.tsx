@@ -22,10 +22,10 @@ const PaymentDetailsDialog = ({ payment }: IPaymentDetailsDialogProps) => {
   return (
     <Dialog>
       <DialogTrigger>
-        <button className="flex items-center gap-2 cursor-pointer bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 px-3 py-2 rounded-sm shadow-sm font-inter hover:scale-105 hover:bg-emerald-300 transition duration-400">
+        <div className="flex items-center justify-center gap-2 cursor-pointer bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 px-3 py-2 rounded-sm shadow-sm font-inter hover:scale-105 hover:bg-emerald-300 transition duration-400">
           <Eye size={14} />
           Show Details
-        </button>
+        </div>
       </DialogTrigger>
 
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-2xl bg-card border-none">
@@ -76,7 +76,7 @@ const PaymentDetailsDialog = ({ payment }: IPaymentDetailsDialogProps) => {
                 )}
 
                 {payment.status === "COMPLETED" && (
-                  <Badge className="bg-slate-800 dark:text-slate-100 text-primary dark:text-black">
+                  <Badge className="bg-slate-800 dark:text-slate-100 text-primary ">
                     Completed
                   </Badge>
                 )}
@@ -86,7 +86,7 @@ const PaymentDetailsDialog = ({ payment }: IPaymentDetailsDialogProps) => {
                 <p className="text-xs text-slate-500">Paid At</p>
 
                 <p className="text-sm">
-                  {new Date(payment.paidAt).toLocaleString()}
+                  {`${payment.paidAt.split("T")[0]}`}
                 </p>
               </div>
             </div>

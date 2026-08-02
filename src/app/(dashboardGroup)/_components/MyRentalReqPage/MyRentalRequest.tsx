@@ -58,7 +58,7 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
                       </Badge>
                     )}
                     {rentalReq.status === "REJECTED" && (
-                      <Badge className="bg-red-600  text-white dark:text-black">
+                      <Badge className="bg-rose-600  text-white dark:text-black">
                         Rejected
                       </Badge>
                     )}
@@ -115,7 +115,7 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
 
       {/* Mobile Card */}
 
-      <div className="grid grid-cols-1 gap-4 md:hidden">
+      <div className="grid grid-cols-1 gap-4 md:hidden px-2 pt-4">
         {myRentalReq.map((rentalReq) => (
           <ListingMobileCard
             key={rentalReq.id}
@@ -127,6 +127,8 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
                 <span className="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
                   $ Tenant Name: {rentalReq.tenant.firstName}
                 </span>
+
+             
 
                 {rentalReq.status === "PENDING" && (
                   <Badge className="bg-[#f7f794] text-text-primary dark:text-black">
@@ -155,17 +157,20 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
                     Completed
                   </Badge>
                 )}
+
+                   <span className="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                  Request On: {`${rentalReq.created_At.split("T")[0]}`}
+                </span>
               </>
             }
-            description={rentalReq.created_At}
             actions={
-              <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center w-full gap-2">
                 <RentalRequestDetailsModal rentalReq={rentalReq} />
 
                 {rentalReq.status === "APPROVED" && (
                   <Link
                     href={`/dashboard/requests/${rentalReq?.id}/pay`}
-                    className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700 active:scale-95 font-inter font-lora"
+                    className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700 active:scale-95 font-lora"
                   >
                     <CreditCard size={16} />
                     Proceed to Payment

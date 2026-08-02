@@ -1,11 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { HousePlug } from "lucide-react";
 
 interface IListingMobileCardProps {
   image?: string;
-  title: string;
+  title?: string;
   subtitle?: string;
   badges?: React.ReactNode;
   description?: string;
@@ -21,34 +20,31 @@ const ListingMobileCard = ({
   actions,
 }: IListingMobileCardProps) => {
   return (
-    <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+    <div className="overflow-hidden rounded-xl bg-background ">
       <div className="flex items-start gap-4 p-4">
         {/* Image */}
-        <div className="relative h-20 w-16 shrink-0 overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-slate-800">
-          {image ? (
-            <Image src={image} alt={title} fill className="object-cover" />
-          ) : (
-            <div className="flex h-full w-full items-center justify-center text-slate-400">
-              <HousePlug className="h-5 w-5" />
-            </div>
-          )}
-        </div>
+
+        {image && (
+          <div className="relative h-16 w-16 md:h-20 md:w-16 shrink-0 overflow-hidden rounded-full md:rounded-3xl border border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-slate-800">
+            <Image src={image} alt={title || "Image"} fill className="object-cover" />
+          </div>
+        )}
 
         {/* Content */}
         <div className="flex-1">
-          <h3 className="font-semibold text-foreground">{title}</h3>
+          <h3 className="font-semibold text-foreground font-lora">{title}</h3>
 
-          {subtitle && <p className="text-xs text-foreground/60">{subtitle}</p>}
+          {subtitle && <p className="text-xs text-foreground/60 font-inter">{subtitle}</p>}
 
           {/* Dynamic badges */}
           {badges && (
-            <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
+            <div className="mt-2 flex flex-wrap items-center gap-2 text-xs font-inter">
               {badges}
             </div>
           )}
 
           {description && (
-            <p className="mt-3 line-clamp-3 text-sm leading-6 text-foreground/70">
+            <p className="mt-3 line-clamp-3 text-sm leading-6 text-foreground/70 font-lora">
               {description}
             </p>
           )}
@@ -57,7 +53,7 @@ const ListingMobileCard = ({
 
       {/* Dynamic Actions */}
       {actions && (
-        <div className="flex flex-col gap-3 border-t border-slate-100 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950/60 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 border-t border-slate-100 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950/60 sm:flex-row sm:items-center sm:justify-center">
           {actions}
         </div>
       )}

@@ -5,12 +5,12 @@ import React, { useActionState, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 
 import { ICategoryResponse } from "@/app/(dashboardGroup)/_dashboardTypes/dashboardTypes";
 
 import ImageUploadField from "@/components/ImageUploadField/ImageUploadField";
 import { createProperty } from "@/app/(dashboardGroup)/_actions/propertyActions";
+import PrimaryBtn from "@/components/shared/Button/PrimaryBtn";
 
 interface AddPropertyFormProps {
   propertyCategories: ICategoryResponse;
@@ -53,7 +53,7 @@ const AddPropertyForm = ({ propertyCategories }: AddPropertyFormProps) => {
                   id="title"
                   name="title"
                   placeholder="e.g. Affordable Bachelor Flat"
-                  className="border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
+                  className="border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-1 p-3"
                 />
                 {state.errors?.title && (
                   <p className="text-red-600 font-lora">
@@ -74,7 +74,7 @@ const AddPropertyForm = ({ propertyCategories }: AddPropertyFormProps) => {
                   name="price"
                   placeholder="22000.90"
                   min="0"
-                  className="border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
+                  className="border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-1 p-3"
                 />
                 {state.errors?.price && (
                   <p className="text-red-600 font-lora">
@@ -119,7 +119,7 @@ const AddPropertyForm = ({ propertyCategories }: AddPropertyFormProps) => {
                   id="location"
                   name="location"
                   placeholder="e.g. Mohammadpur, Dhaka"
-                  className="border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
+                  className="border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 p-3"
                 />
                 {state.errors?.location && (
                   <p className="text-red-600 font-lora">
@@ -139,13 +139,13 @@ const AddPropertyForm = ({ propertyCategories }: AddPropertyFormProps) => {
                   id="category"
                   name="categoryId"
                   defaultValue=""
-                  className="flex h-10 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="flex h-10 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 "
                 >
                   <option value="" disabled>
                     Choose a category
                   </option>
 
-                  {categories.map((cat) => (
+                  {categories?.map((cat) => (
                     <option key={cat.id} value={cat.id}>
                       {cat.name}
                     </option>
@@ -200,7 +200,7 @@ const AddPropertyForm = ({ propertyCategories }: AddPropertyFormProps) => {
                   id="amenities"
                   name="amenities"
                   placeholder="e.g. WiFi, Security, Lift (comma separated)"
-                  className="border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
+                  className="border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-1 p-3 focus-visible:ring-primary focus-visible:ring-offset-1"
                 />
                 {state.errors?.amenities && (
                   <p className="text-red-600 font-lora">
@@ -211,17 +211,18 @@ const AddPropertyForm = ({ propertyCategories }: AddPropertyFormProps) => {
             </div>
 
             {/* Submit Button */}
-            <Button
+            <PrimaryBtn
               type="submit"
               disabled={imageUploading || !thumbnailUrl}
-              className="w-full bg-primary font-semibold text-white shadow-sm transition-all hover:bg-primary-hover focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:text-background"
+              className="w-full text-center justify-center"
             >
               {imageUploading
                 ? "Uploading image..."
                 : isPending
                   ? "Creating Property..."
                   : "Add Property"}
-            </Button>
+            </PrimaryBtn>
+            
           </form>
         </div>
       </div>

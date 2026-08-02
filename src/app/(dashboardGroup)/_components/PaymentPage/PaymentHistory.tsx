@@ -76,16 +76,23 @@ const PaymentHistory = ({ paymentHistoryRes }: IPaymentProps) => {
 
       {/* Mobile Card */}
 
-      <div className="grid grid-cols-1 gap-4 md:hidden">
+      <div className="grid grid-cols-1 gap-4 md:hidden pt-6">
         {paymentHistory.map((payment) => (
           <ListingMobileCard
             key={payment.id}
-            title={payment.transactionId}
+          
             badges={
               <>
+              <h4 className="text-text-muted text-sm font-inter text-center">{payment.transactionId}</h4>
                 <span className="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
                   $ {payment.totalAmount}
+                </span> 
+                
+                <span className="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                 PaidAt: {`${payment.paidAt.split("T")[0]}`}
                 </span>
+
+                
 
                 {payment.status === "PENDING" && (
                   <Badge className="bg-[#f7f794] text-text-primary dark:text-black">
@@ -100,13 +107,13 @@ const PaymentHistory = ({ paymentHistoryRes }: IPaymentProps) => {
                 )}
 
                 {payment.status === "COMPLETED" && (
-                  <Badge className="bg-slate-800 text-primary dark:text-black">
+                  <Badge className="bg-slate-800 text-primary dark:text-slate-100">
                     Completed
                   </Badge>
                 )}
               </>
             }
-            description={payment.paidAt}
+            
             actions={<PaymentDetailsDialog payment={payment} />}
           />
         ))}

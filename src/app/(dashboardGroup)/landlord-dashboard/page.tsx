@@ -7,7 +7,7 @@ const LandlordDashboardHome = async () => {
 
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="p-4 lg:px-12 ">
       <LandlordStatsCard stats={getLandlordStatsRes.data} />
     </div>
   );

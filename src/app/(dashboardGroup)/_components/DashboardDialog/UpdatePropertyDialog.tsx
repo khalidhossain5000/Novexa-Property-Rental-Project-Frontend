@@ -43,13 +43,13 @@ const UpdatePropertyDialog = ({
   return (
     <Dialog>
       <DialogTrigger>
-        <div className="cursor-pointer inline-flex items-center justify-center gap-2 rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-200 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
+        <div className="flex items-center justify-center gap-2 cursor-pointer bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 px-3 py-2 rounded-sm shadow-sm font-inter hover:scale-105 hover:bg-emerald-300 transition duration-400 w-full ">
           <Pencil className="h-4 w-4" />
           Update
         </div>
       </DialogTrigger>
 
-      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-2xl bg-background border-transparent shadow-sm">
+      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-2xl bg-background border-transparent shadow-sm font-inter">
         <DialogHeader>
           <DialogTitle>Update Property</DialogTitle>
         </DialogHeader>
@@ -57,7 +57,7 @@ const UpdatePropertyDialog = ({
         <form action={action} className="space-y-5">
           {/* Title */}
           <div className="space-y-2">
-            <Label>Property Title</Label>
+            <Label className="font-inter">Property Title</Label>
 
             <Input
               name="title"
@@ -130,7 +130,7 @@ const UpdatePropertyDialog = ({
                   Choose a category
                 </option>
 
-                {categories.map((cat) => (
+                {categories?.map((cat) => (
                   <option key={cat.id} value={cat.id} >
                     {cat.name}
                   </option>

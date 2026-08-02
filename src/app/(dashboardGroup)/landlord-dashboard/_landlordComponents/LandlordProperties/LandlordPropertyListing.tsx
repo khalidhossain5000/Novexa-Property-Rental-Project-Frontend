@@ -1,29 +1,31 @@
-
-
 import ListingActions from "@/app/(dashboardGroup)/_components/listing/ListingAction";
 import ListingMobileCard from "@/app/(dashboardGroup)/_components/listing/ListingMobileCard";
 import ListingTableRow from "@/app/(dashboardGroup)/_components/listing/ListingTableRow";
-import { ICategoryResponse, ICurrentLandlordPropertiesResponse } from "@/app/(dashboardGroup)/_dashboardTypes/dashboardTypes";
+import {
+  ICategoryResponse,
+  ICurrentLandlordPropertiesResponse,
+} from "@/app/(dashboardGroup)/_dashboardTypes/dashboardTypes";
+import { Badge } from "@/components/ui/badge";
 
 interface ILandlordPropertyProps {
   currentLandlordProperties: ICurrentLandlordPropertiesResponse;
-  propertyCategories:ICategoryResponse
+  propertyCategories: ICategoryResponse;
 }
 
 const LandlordPropertyListing = ({
   currentLandlordProperties,
-  propertyCategories
+  propertyCategories,
 }: ILandlordPropertyProps) => {
   const landlordProperties = currentLandlordProperties?.data;
 
   return (
     <div className="space-y-5">
-      <div className="mb-8">
-        <h2 className="font-lora text-2xl font-bold text-foreground">
+      <div className="mb-8 p-3">
+        <h2 className="font-lora text-2xl font-bold text-foreground text-center md:text-left">
           Manage Properties
         </h2>
 
-        <p className="mt-1 font-inter text-sm text-foreground/60">
+        <p className="mt-1 font-inter text-sm text-foreground/60 text-center md:text-left">
           Review all properties, update details, or remove listings.
         </p>
       </div>
@@ -54,17 +56,26 @@ const LandlordPropertyListing = ({
                 subtitle={property.location}
                 columns={[`$ ${property.price}`, property.location]}
                 status={
-                  <span
-                    className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
-                      property.status === "AVAILABLE"
-                        ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300"
-                        : "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300"
-                    }`}
-                  >
-                    {property.status}
-                  </span>
+                  <>
+                    {property.status === "BOOKED" && (
+                      <Badge className="bg-rose-600  text-white dark:text-black">
+                        Booked
+                      </Badge>
+                    )}
+
+                    {property.status === "AVAILABLE" && (
+                      <Badge className="bg-emerald-500 text-text-primary dark:text-black">
+                        Available
+                      </Badge>
+                    )}
+                  </>
                 }
-                actions={<ListingActions property={property} propertyCategories={propertyCategories}/>}
+                actions={
+                  <ListingActions
+                    property={property}
+                    propertyCategories={propertyCategories}
+                  />
+                }
               />
             ))}
 
@@ -109,7 +120,12 @@ const LandlordPropertyListing = ({
               </>
             }
             description={property.description}
-            actions={<ListingActions property={property} propertyCategories={propertyCategories}/>}
+            actions={
+              <ListingActions
+                property={property}
+                propertyCategories={propertyCategories}
+              />
+            }
           />
         ))}
       </div>

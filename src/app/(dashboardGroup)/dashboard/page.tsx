@@ -6,7 +6,7 @@ const DashboardHomePage = async () => {
   const tenantStatsRes = await getTenantDashboardStats();
 
   return (
-    <div className="py-6">
+    <div className="py-6 p-4">
       <TenantStatsCard stats={tenantStatsRes?.data} />
     </div>
   );
