@@ -4,9 +4,8 @@ import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 export const sendRentalRequest = async (
-  prevState:unknown ,
   totalAmount: string,
-  propertyId: string,
+  propertyId: string
 ) => {
   const cookieStore = await cookies();
 
@@ -37,9 +36,11 @@ export const sendRentalRequest = async (
   
   if (result.success) {
 
+
     revalidateTag("property-details", {
-      expire: 0,
+      expire:0 ,
     });
+
   }
   return result;
 };

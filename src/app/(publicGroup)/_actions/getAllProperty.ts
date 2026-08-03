@@ -8,7 +8,6 @@ interface ISearchProps {
 export const getAllProperties = async ({ query }: ISearchProps={}) => {
   const params = new URLSearchParams();
 
-  console.log(params, "this is the params");
 
   if (query && query.searchTerm) {
     params.set("searchTerm", query.searchTerm as string);
