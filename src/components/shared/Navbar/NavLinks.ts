@@ -18,10 +18,9 @@ export const navLinks = [
 
 
   {
-    id: 5,
+    id: 4,
     name: "Contact",
     path: "/contact",
-    private: true,
   }
 
 ];

@@ -20,7 +20,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Location",
-    value: "Dhaka, Bangladesh",
+    value: "Brooklyn, NY 11201",
   },
   {
     icon: Clock,
@@ -117,7 +117,7 @@ const ContactUs = () => {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mx-auto gridcontainer px-6 md:px-8 lg:px-13 xl:px-16 gap-10 pb-20 lg:grid-cols-2"
+        className="mx-auto grid max-w-6xl px-6 md:px-8 lg:px-13 xl:px-16 gap-10 pb-20 lg:grid-cols-2"
       >
         <div>
           <h2 className="font-lora text-3xl font-bold text-text-primary">
@@ -152,7 +152,10 @@ const ContactUs = () => {
             placeholder="Your Message"
             className="w-full rounded-lg border border-border bg-background px-4 py-3 text-text-primary outline-none focus:border-primary"
           />
-          <PrimaryBtn> Send Messag</PrimaryBtn>
+
+          <div className="text-center ">
+            <PrimaryBtn className="justify-center"> Send Message</PrimaryBtn>
+          </div>
         </form>
       </motion.section>
 
