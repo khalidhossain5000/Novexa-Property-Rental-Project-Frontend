@@ -117,8 +117,3 @@ Base path: `/api/admin`
 | Admin | `/dashboard/admin/*` |
 
 Enforced via Next.js `middleware.ts`, which decodes the JWT and checks the `role` claim before granting access. Unauthorized users are redirected to `/auth/login`.
-
-## Known Issues / Follow-ups
-
-- `GET /api/admin/admin/stats` — duplicate `/admin` segment from route mounting; confirm intended path is `/api/admin/stats` and fix in `admin.route.ts` if needed.
-- `GET /api/payments/:id` — currently has no `auth` middleware; confirm whether it should be restricted to the payment owner.
