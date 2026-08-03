@@ -53,7 +53,7 @@ const Faq = () => {
           className="mb-12"
         />
 
-        <Accordion type="single" collapsible className="space-y-4">
+        <Accordion className="space-y-4">
           {faqData.map((faq) => (
             <AccordionItem
               key={faq.id}
@@ -69,6 +69,7 @@ const Faq = () => {
                   hover:no-underline
                   hover:text-primary
                   transition-colors
+                  cursor-pointer
                 "
               >
                 {faq.question}
