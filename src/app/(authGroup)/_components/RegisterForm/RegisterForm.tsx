@@ -186,7 +186,11 @@ const RegisterForm = () => {
           </div>
           {/* hiddne field to get role in action */}
           <Input name="role" type="hidden" value={role} />
-
+          {!state.success && (
+            <p className="py-2 text-center font-lora text-rose-600">
+              {state.message}{" "}
+            </p>
+          )}
           {/* Submit */}
           <button
             type="submit"

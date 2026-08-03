@@ -1,8 +1,10 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 export const sendRentalRequest = async (
+  prevState:unknown ,
   totalAmount: string,
   propertyId: string,
 ) => {
@@ -32,7 +34,13 @@ export const sendRentalRequest = async (
   });
 
   const result = await res.json();
+  
+  if (result.success) {
 
+    revalidateTag("property-details", {
+      expire: 0,
+    });
+  }
   return result;
 };
 

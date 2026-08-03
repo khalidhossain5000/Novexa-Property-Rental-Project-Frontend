@@ -43,8 +43,6 @@ const PropertyDetails = ({
 
   const myRentalRequestStatus = myRentalRequest?.status;
 
-
-  console.log(details,'proeprty details')
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-50 dark:bg-[#0d1117]">
       {/* Ambient page glow */}

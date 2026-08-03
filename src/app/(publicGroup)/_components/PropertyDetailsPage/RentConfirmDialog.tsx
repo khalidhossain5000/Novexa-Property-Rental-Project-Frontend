@@ -35,14 +35,17 @@ const RentRequestDialog = ({
 }: IRentRequestDialogProps) => {
   const [open, setOpen] = useState(false);
   const [state, action, isPending] = useActionState(
-    sendRentalRequest.bind(null, price, propertyId),
-    null,
+    sendRentalRequest.bind(null, price, propertyId),null
   );
 
   // close dialog automatically once request succeeds
   useEffect(() => {
     if (state?.success) {
+      toast.success("Request Send Wait for approval")
       setOpen(false);
+    }
+    if(!state.success){
+      toast.error(state?.message || "Already request send wait for approval")
     }
   }, [state]);
 
@@ -52,11 +55,12 @@ const RentRequestDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
+      
       <Button
         type="button"
         disabled={triggerDisabled}
         onClick={() => setOpen(true)}
-        className="inline-flex cursor-pointer items-center gap-2 rounded-2xl bg-teal-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-500/25 transition hover:bg-teal-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
+        className="inline-flex cursor-pointer items-center gap-2 rounded-2xl bg-teal-600 px-6 py-3 lg:py-4 text-sm font-semibold text-white shadow-lg shadow-teal-500/25 transition hover:bg-teal-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
       >
         <BookMarked size={16} />
         {triggerLabel}

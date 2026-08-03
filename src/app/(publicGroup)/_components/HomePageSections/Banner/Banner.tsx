@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
-import bannerImg from "./banner.jpg"
+import bannerImg from "./banner.jpg";
 import {
   ShieldCheck,
   BadgePercent,
@@ -105,11 +105,8 @@ const Banner = () => {
                 Browse listings
               </PrimaryBtn>
             </Link>
-<Link href="/contact">
-            <SecondaryBtn icon={<FaKey size={14} />}>
-              Contact Us
-            </SecondaryBtn>
-
+            <Link href="/contact">
+              <SecondaryBtn icon={<FaKey size={14} />}>Contact Us</SecondaryBtn>
             </Link>
           </div>
 

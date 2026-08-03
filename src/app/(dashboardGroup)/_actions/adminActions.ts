@@ -100,7 +100,7 @@ export const getAllPropertiesForAdmin = async () => {
 
   const result = await res.json();
 
-  console.log(result, "admin all proeprty");
+ 
 
   return result;
 };
