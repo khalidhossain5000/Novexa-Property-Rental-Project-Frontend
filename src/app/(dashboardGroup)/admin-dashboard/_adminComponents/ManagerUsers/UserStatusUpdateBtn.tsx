@@ -27,7 +27,8 @@ const UserStatusActionBtn = ({ user }: IUserStatusActionProps) => {
 
       <button
         type="submit"
-        disabled={isPending}
+        disabled={isPending || user.role==="ADMIN"}
+
         className={`inline-flex items-center justify-center rounded-lg px-3 py-2 text-xs font-semibold transition disabled:cursor-not-allowed disabled:opacity-50 ${
           user.status === "ACTIVE"
             ? "border border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100 dark:border-rose-900/50 dark:bg-rose-900/20 dark:text-rose-300 dark:hover:bg-rose-900/40"

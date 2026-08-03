@@ -13,7 +13,7 @@ interface IListingActionsProps {
 }
 
 const ListingActions = async({ property,propertyCategories,rentalReqId }: IListingActionsProps) => {
-
+console.log(property,'this is property in delete diagog ')
   return (
     <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
 

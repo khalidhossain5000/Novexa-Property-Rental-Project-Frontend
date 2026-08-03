@@ -36,7 +36,7 @@ const DeletePropertyDialog = ({ propertyId }: DeletePropertyDialogProps) => {
       router.refresh();
     }
   }, [state, router]);
-
+console.log(state,'delte state is here')
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       {/* Delete Button */}
