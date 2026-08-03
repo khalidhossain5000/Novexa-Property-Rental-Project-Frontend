@@ -5,7 +5,7 @@
 interface ISearchProps {
   query?: { [key: string]: string | undefined };
 }
-export const getAllProperties = async ({ query }: ISearchProps) => {
+export const getAllProperties = async ({ query }: ISearchProps={}) => {
   const params = new URLSearchParams();
 
   console.log(params, "this is the params");

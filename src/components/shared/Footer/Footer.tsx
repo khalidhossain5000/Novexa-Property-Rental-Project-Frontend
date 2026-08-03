@@ -35,7 +35,7 @@ const Footer = () => {
               ].map((Icon, index) => (
                 <div
                   key={index}
-                  className="w-11 h-11 flex items-center justify-center rounded-full bg-[#00796f] text-card dark:text-white cursor-pointer transition-all duration-300 hover:bg-primary-hover hover:scale-110 shadow-md hover:shadow-lg"
+                  className="w-11 h-11 flex items-center justify-center rounded-full bg-[#00796f] text-card dark:text-white cursor-pointer transition-all duration-300 hover:bg-primary-hover dark:bg-[#00796f90] hover:scale-110 shadow-md hover:shadow-lg"
                 >
                   <Icon size={20} />
                 </div>

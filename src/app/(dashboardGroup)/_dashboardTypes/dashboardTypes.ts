@@ -30,7 +30,7 @@ export interface IPropertyTypes{
   updated_At:string;
   category:ICategory;
   rentalRequest?:IRentalRequest[]
-  user?:IUserTypes[]
+  user?:IUserTypes
 }
 export interface ICurrentLandlordPropertiesResponse {
   success: boolean;
