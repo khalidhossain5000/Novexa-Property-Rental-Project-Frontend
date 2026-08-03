@@ -105,10 +105,12 @@ const Banner = () => {
                 Browse listings
               </PrimaryBtn>
             </Link>
-
+<Link href="/contact">
             <SecondaryBtn icon={<FaKey size={14} />}>
-              List your property
+              Contact Us
             </SecondaryBtn>
+
+            </Link>
           </div>
 
           {/* FEATURES */}

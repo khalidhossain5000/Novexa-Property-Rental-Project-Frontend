@@ -154,7 +154,7 @@ const ContactUs = () => {
           />
 
           <div className="text-center ">
-            <PrimaryBtn className="justify-center"> Send Message</PrimaryBtn>
+            <PrimaryBtn type="submit" className="justify-center"> Send Message</PrimaryBtn>
           </div>
         </form>
       </motion.section>
