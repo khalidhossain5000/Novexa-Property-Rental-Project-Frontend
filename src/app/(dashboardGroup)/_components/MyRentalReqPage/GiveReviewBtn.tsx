@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useActionState, useState } from "react";
+import React, { useActionState, useEffect, useState } from "react";
 import { makeReview } from "../../_actions/reviewActions";
 import {
   Dialog,
@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Star } from "lucide-react";
+import { toast } from "sonner";
 
 interface GiveReviewBtnProps {
   propertyId: string;
@@ -20,7 +21,15 @@ interface GiveReviewBtnProps {
 const GiveReviewBtn = ({ propertyId }: GiveReviewBtnProps) => {
   const [state, action, isPending] = useActionState(makeReview, null);
   const [rating, setRating] = useState(0);
+  useEffect(() => {
+    if (!state) return;
 
+    if (state.success) {
+      toast.success(state.message || "Review added successfully.");
+    } else {
+      toast.error(state.message ?? "Something went wrong.");
+    }
+  }, [state]);
   return (
     <Dialog>
       <DialogTrigger>

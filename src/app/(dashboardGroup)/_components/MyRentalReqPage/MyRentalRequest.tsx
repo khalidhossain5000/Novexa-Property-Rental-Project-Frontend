@@ -12,7 +12,6 @@ interface MyRentalReqProps {
 }
 const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
   const myRentalReq = myRentalReqRes.data;
-console.log(myRentalReq,'my rental req here')
   return (
     <div>
       {/* Desktop Table */}
@@ -83,7 +82,7 @@ console.log(myRentalReq,'my rental req here')
                     {rentalReq.status === "APPROVED" && (
                       <Link
                         href={`/dashboard/requests/${rentalReq?.id}/pay`}
-                        className="flex items-center gap-2 cursor-pointer bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 px-3 py-2 rounded-sm shadow-sm font-inter hover:scale-105 hover:bg-emerald-300 transition duration-400"
+                        className="flex items-center gap-2 cursor-pointer bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 px-3 py-1 rounded-sm shadow-sm font-inter hover:scale-105 hover:bg-emerald-300 transition duration-400 text-sm"
                       >
                         <CreditCard size={16} />
                         Proceed to Payment
@@ -170,7 +169,7 @@ console.log(myRentalReq,'my rental req here')
                 {rentalReq.status === "APPROVED" && (
                   <Link
                     href={`/dashboard/requests/${rentalReq?.id}/pay`}
-                    className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700 active:scale-95 font-lora"
+                    className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700 active:scale-95 font-lora"
                   >
                     <CreditCard size={16} />
                     Proceed to Payment
