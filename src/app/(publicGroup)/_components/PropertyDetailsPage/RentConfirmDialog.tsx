@@ -44,9 +44,7 @@ const RentRequestDialog = ({
       toast.success("Request Send Wait for approval")
       setOpen(false);
     }
-    if(!state.success){
-      toast.error(state?.message || "Already request send wait for approval")
-    }
+   
   }, [state]);
 
 
