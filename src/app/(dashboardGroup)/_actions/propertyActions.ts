@@ -63,8 +63,8 @@ export const createProperty = async (prevState: null, formData: FormData) => {
   if (result.success) {
     revalidateTag("landlord-properties", {
       expire: 0,
-    }); 
-    
+    });
+
     revalidateTag("all-properties", {
       expire: 0,
     });
@@ -162,8 +162,8 @@ export const updatePropertyAction = async (
   if (result.success) {
     revalidateTag("landlord-properties", {
       expire: 0,
-    }); 
-    
+    });
+
     revalidateTag("all-properties", {
       expire: 0,
     });
@@ -204,13 +204,13 @@ export const deletePropertyAction = async (
   );
   const result = await res.json();
 
-//cache invalidation
-if (result.success) {
-  revalidateTag("landlord-properties", "max");
-  revalidateTag("all-properties", "max");
-}
+  //cache invalidation
+  if (result.success) {
+    revalidateTag("landlord-properties", "max");
+    revalidateTag("all-properties", "max");
+  }
 
-  console.log(result,'delete result')
+ 
 
   return result;
 };
@@ -231,7 +231,13 @@ export const getRentalRequestForLandlord = async () => {
 
   const res = await fetch(
     `${process.env.BACKEND_URL}/api/landlord/properties/requests`,
+
     {
+      cache: "force-cache",
+      next: {
+        revalidate: 60 * 60 * 24,
+        tags: ["landlord-rentals"],
+      },
       headers: {
         Cookie: `accessToken=${accessToken}`,
       },
@@ -243,10 +249,13 @@ export const getRentalRequestForLandlord = async () => {
 };
 
 //update rental req status
-
+interface IRentalState {
+  success: boolean;
+  message: string;
+}
 export const updateRentalReqStatus = async (
   rentalReqId: string,
-  prevState: any,
+  prevState: IRentalState,
   formData: FormData,
 ) => {
   const cookieStore = await cookies();
@@ -277,6 +286,20 @@ export const updateRentalReqStatus = async (
   );
   const result = await res.json();
   console.log(status, "this isupdated data and result", result);
+
+  //cache invalidation
+  if (result.success) {
+    revalidateTag("landlord-rentals", {
+      expire: 0,
+    })
+     revalidateTag("landlord-properties", {
+      expire: 0,
+    });
+
+    revalidateTag("all-properties", {
+      expire: 0,
+    });
+  }
 
   return result;
 };

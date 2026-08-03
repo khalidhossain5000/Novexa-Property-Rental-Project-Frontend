@@ -1,44 +1,61 @@
 "use client";
 
 import { updateRentalReqStatus } from "@/app/(dashboardGroup)/_actions/propertyActions";
-import { useActionState } from "react";
-
+import { useActionState, useEffect, useState } from "react";
+import { toast } from "sonner";
+enum RentalRequestStatus {
+    PENDING="PENDING",
+    APPROVED="APPROVED",
+    REJECTED="REJECTED",
+    ACTIVE="ACTIVE",
+    COMPLETED="COMPLETED"
+}
 interface IRentalRequestActionsProps {
   rentalReqId: string;
+  currentStatus:RentalRequestStatus
 }
 
-const RentalRequestActions = ({
-  rentalReqId,
-}: IRentalRequestActionsProps) => {
+const RentalRequestActions = ({ rentalReqId ,currentStatus}: IRentalRequestActionsProps) => {
+  const [clickedStatus, setClickedStatus] = useState("");
+
   const [state, action, isPending] = useActionState(
     updateRentalReqStatus.bind(null, rentalReqId),
-    false,
+    {
+      success: false,
+      message: "",
+    },
   );
 
+  useEffect(() => {
+    if (state.success) {
+      toast.success("Rental Request Status Updated");
+    }
+  }, [state]);
+
+  console.log(isPending, "dsfds",state);
   return (
     <form action={action} className="flex gap-2 justify-end">
-
       <button
         type="submit"
         name="status"
         value="APPROVED"
-        disabled={isPending}
-        className="rounded-lg bg-emerald-100 px-3 py-2 text-xs font-semibold text-emerald-700 hover:bg-emerald-200 disabled:opacity-50 cursor-pointer"
+        onClick={() => setClickedStatus("APPROVED")}
+        disabled={isPending || currentStatus!=="APPROVED"}
+        className="rounded-lg bg-emerald-100 px-3 py-2 text-xs font-semibold text-emerald-700 hover:bg-emerald-200 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
       >
-        {isPending ? "Updating..." : "Approve"}
+        {isPending && clickedStatus === "APPROVED" ? "Updating..." : "Approve"}
       </button>
-
 
       <button
         type="submit"
         name="status"
         value="REJECTED"
-        disabled={isPending}
-        className="rounded-lg bg-rose-100 px-3 py-2 text-xs font-semibold text-rose-700 hover:bg-rose-200 disabled:opacity-50 cursor-pointer"
+        disabled={isPending || currentStatus!=="REJECTED"}
+        onClick={() => setClickedStatus("REJECTED")}
+        className="rounded-lg bg-rose-100 px-3 py-2 text-xs font-semibold text-rose-700 hover:bg-rose-200 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
       >
-        Reject
+        {isPending && clickedStatus === "REJECTED" ? "Updating..." : "Reject"}
       </button>
-
     </form>
   );
 };

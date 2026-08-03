@@ -30,17 +30,17 @@ const DeletePropertyDialog = ({ propertyId }: DeletePropertyDialogProps) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   useEffect(() => {
-    console.log("CLIENT STATE CHANGED", state);
+   
 
     if (state.success) {
-      toast.error(state.message);
+      toast.success(state.message || "Property Deleted Successfully");
       setOpen(false);
           router.refresh();
 
     }
-  }, [state]);
+  }, [state,router]);
 
-  console.log("RENDER DELETE COMPONENT", state);
+  
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       {/* Delete Button */}

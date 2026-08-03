@@ -75,7 +75,7 @@ const LandlordRentalRequest = ({
                     )}
                   </>
                 }
-                actions={<RentalRequestActions rentalReqId={rentalReq.id} />}
+                actions={<RentalRequestActions rentalReqId={rentalReq.id} currentStatus={rentalReq.status}/>}
               />
             ))}
 
@@ -138,7 +138,7 @@ const LandlordRentalRequest = ({
               </>
             }
             description={rentalReq.created_At.split("T")[0]}
-            actions={<RentalRequestActions rentalReqId={rentalReq.id} />}
+            actions={<RentalRequestActions rentalReqId={rentalReq.id} currentStatus={rentalReq.status}/>}
           />
         ))}
       </div>

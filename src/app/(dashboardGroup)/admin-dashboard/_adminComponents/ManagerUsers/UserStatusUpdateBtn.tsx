@@ -2,8 +2,8 @@
 
 import { IUserTypes } from "@/app/(authGroup)/_authTypes/authTypes";
 import { updateUserStatus } from "@/app/(dashboardGroup)/_actions/adminActions";
-import { useActionState } from "react";
-
+import { useActionState, useEffect } from "react";
+import { toast } from "sonner";
 
 interface IUserStatusActionProps {
   user: IUserTypes;
@@ -16,7 +16,11 @@ const UserStatusActionBtn = ({ user }: IUserStatusActionProps) => {
   );
 
   const nextStatus = user.status === "ACTIVE" ? "BAN" : "ACTIVE";
-
+  useEffect(() => {
+    if (state.success) {
+      toast.success("User Status Updated Successfully");
+    }
+  }, [state]);
   return (
     <form action={action}>
       <input type="hidden" name="status" value={nextStatus} />
