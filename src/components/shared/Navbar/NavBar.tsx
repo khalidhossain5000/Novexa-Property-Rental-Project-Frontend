@@ -48,7 +48,7 @@ const NavBar = ({ user }: NavBarProps) => {
             <Link href="/">
               <h1 className="text-3xl font-extrabold font-montserrat">
                 <span className="text-primary">Rent</span>
-                <span className="text-secondary pl-2">Nest</span>
+                <span className="text-secondary pl-1">Nest</span>
               </h1>
             </Link>
           </div>

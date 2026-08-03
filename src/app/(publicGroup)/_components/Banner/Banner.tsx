@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
+import bannerImg from "./banner.jpg"
 import {
   ShieldCheck,
   BadgePercent,
@@ -66,13 +67,13 @@ const Banner = () => {
             <span className="inline-block w-full py-2 font-lora text-[#C98A00] dark:text-[#FFC72C] sm:py-3 ">
               <TypeAnimation
                 sequence={[
-                  "apartment",
+                  "Apartment",
                   2000,
-                  "studio",
+                  "Studio",
                   2000,
-                  "family home",
+                  "Family Home",
                   2000,
-                  "office space",
+                  "Office Space",
                   2000,
                 ]}
                 wrapper="span"
@@ -163,12 +164,12 @@ const Banner = () => {
             className="relative overflow-hidden rounded-4xl border-4 border-white shadow-[0_30px_60px_-20px_rgba(23,20,10,0.35)] dark:border-neutral-800 dark:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]"
           >
             <Image
-              src="/banner/banner.jpg"
+              src={bannerImg}
               width={600}
               height={700}
               alt="Bright modern living room in a rental apartment"
               className="h-105 w-full object-cover sm:h-125"
-              unoptimized
+              // unoptimized
             />
           </motion.div>
 
