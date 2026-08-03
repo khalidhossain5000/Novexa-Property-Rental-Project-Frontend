@@ -26,7 +26,7 @@ export const getAllProperties = async ({ query }: ISearchProps={}) => {
     `${process.env.BACKEND_URL}/api/properties?${params.toString()}`,{
       cache:"force-cache",
       next:{
-        revalidate: 60*60*12,
+        revalidate: 60*60*5,
         tags:["all-properties"]
       }
     }
@@ -46,7 +46,7 @@ export const getPorpertyDetails=async(id:string)=>{
   const res = await fetch(
     `${process.env.BACKEND_URL}/api/properties/${id}`,
     {
-      cache:"force-cache",
+      cache:"no-cache",
       next:{
         revalidate: 60*60*12,
         tags:["property-details"]

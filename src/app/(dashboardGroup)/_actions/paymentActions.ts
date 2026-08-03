@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 export const createPayment = async (rentalRequestId: string) => {
@@ -24,7 +25,15 @@ export const createPayment = async (rentalRequestId: string) => {
   });
 
   const result = await res.json();
+  if (result.success) {
+    revalidateTag("rental-request", {
+      expire: 0,
+    });
 
+    revalidateTag("all-properties", {
+      expire: 0,
+    });
+  }
 
   return result;
 };
