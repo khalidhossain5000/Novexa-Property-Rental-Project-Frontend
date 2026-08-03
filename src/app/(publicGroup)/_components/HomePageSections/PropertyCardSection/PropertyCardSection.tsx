@@ -44,7 +44,7 @@ const PropertyCardSection = ({ homeData }: IPropertyCardSectionProps) => {
         }}
       />
 
-      <div className="container mx-auto relative z-40">
+      <div className="container px-4 md:px-6 lg:px-8 xl:px-14 2xl:px-20 mx-auto relative z-40">
         {/* title and button */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-5 lg:gap-0">
           {/* Small Label */}

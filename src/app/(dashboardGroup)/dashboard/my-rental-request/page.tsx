@@ -1,10 +1,8 @@
 import { getTenantRentalRequest } from "@/app/(publicGroup)/_actions/rentalRequestActions";
-import React from "react";
 import MyRentalRequest from "../../_components/MyRentalReqPage/MyRentalRequest";
 
 const MyRentalRequestPage = async () => {
   const myRentalReqRes = await getTenantRentalRequest();
-
  
   return (
     <div>

@@ -4,18 +4,21 @@ import { updateRentalReqStatus } from "@/app/(dashboardGroup)/_actions/propertyA
 import { useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
 enum RentalRequestStatus {
-    PENDING="PENDING",
-    APPROVED="APPROVED",
-    REJECTED="REJECTED",
-    ACTIVE="ACTIVE",
-    COMPLETED="COMPLETED"
+  PENDING = "PENDING",
+  APPROVED = "APPROVED",
+  REJECTED = "REJECTED",
+  ACTIVE = "ACTIVE",
+  COMPLETED = "COMPLETED",
 }
 interface IRentalRequestActionsProps {
   rentalReqId: string;
-  currentStatus:RentalRequestStatus
+  currentStatus: RentalRequestStatus;
 }
 
-const RentalRequestActions = ({ rentalReqId ,currentStatus}: IRentalRequestActionsProps) => {
+const RentalRequestActions = ({
+  rentalReqId,
+  currentStatus,
+}: IRentalRequestActionsProps) => {
   const [clickedStatus, setClickedStatus] = useState("");
 
   const [state, action, isPending] = useActionState(
@@ -32,7 +35,7 @@ const RentalRequestActions = ({ rentalReqId ,currentStatus}: IRentalRequestActio
     }
   }, [state]);
 
-  console.log(isPending, "dsfds",state);
+  console.log(isPending, "dsfds", state);
   return (
     <form action={action} className="flex gap-2 justify-end">
       <button
@@ -40,7 +43,7 @@ const RentalRequestActions = ({ rentalReqId ,currentStatus}: IRentalRequestActio
         name="status"
         value="APPROVED"
         onClick={() => setClickedStatus("APPROVED")}
-        disabled={isPending || currentStatus!=="APPROVED"}
+        disabled={isPending || currentStatus === "APPROVED"}
         className="rounded-lg bg-emerald-100 px-3 py-2 text-xs font-semibold text-emerald-700 hover:bg-emerald-200 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
       >
         {isPending && clickedStatus === "APPROVED" ? "Updating..." : "Approve"}
@@ -50,7 +53,7 @@ const RentalRequestActions = ({ rentalReqId ,currentStatus}: IRentalRequestActio
         type="submit"
         name="status"
         value="REJECTED"
-        disabled={isPending || currentStatus!=="REJECTED"}
+        disabled={isPending || currentStatus === "REJECTED"}
         onClick={() => setClickedStatus("REJECTED")}
         className="rounded-lg bg-rose-100 px-3 py-2 text-xs font-semibold text-rose-700 hover:bg-rose-200 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
       >

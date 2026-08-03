@@ -12,7 +12,7 @@ interface MyRentalReqProps {
 }
 const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
   const myRentalReq = myRentalReqRes.data;
-
+console.log(myRentalReq,'my rental req here')
   return (
     <div>
       {/* Desktop Table */}

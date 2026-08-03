@@ -298,6 +298,10 @@ export const updateRentalReqStatus = async (
 
     revalidateTag("all-properties", {
       expire: 0,
+    });  
+    
+    revalidateTag("rental-request", {
+      expire: 0,
     });
   }
 
