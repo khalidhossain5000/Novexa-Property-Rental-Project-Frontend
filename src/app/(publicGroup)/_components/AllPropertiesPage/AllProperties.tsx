@@ -215,7 +215,7 @@ const AllProperties = ({
                             </span>
                           </p>
                         </div>
-                        <Link href={`/all-properties/${property.id}`}>
+                        <Link href={`/all-properties/${property?.id}`}>
                           <PrimaryBtn>Details</PrimaryBtn>
                         </Link>
                       </div>

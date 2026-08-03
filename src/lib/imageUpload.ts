@@ -19,11 +19,8 @@ export const imageUpload = async (image: File) => {
     },
   );
 
-  if (!response.ok)
-    return {
-      success: false,
-      message: "Failed To Upload image",
-    };
+  if (!response.ok) throw new Error("Failed to upload")
+   
 
   const result: IImageUploadResponse = await response.json();
 
@@ -32,6 +29,5 @@ export const imageUpload = async (image: File) => {
       success: false,
       message: "Failed To Upload image",
     };
-
   return result.data.url;
 };

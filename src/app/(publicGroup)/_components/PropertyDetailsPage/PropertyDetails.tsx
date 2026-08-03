@@ -35,7 +35,8 @@ const PropertyDetails = ({
   propertyDetailsRes,
   currentUserId,
 }: IPropertyDetailsProps) => {
-  const details = propertyDetailsRes.data;
+  const details = propertyDetailsRes?.data;
+
 
   const myRentalRequest = details.rentalRequest?.find(
     (req) => req.tenantId === currentUserId,
@@ -43,6 +44,7 @@ const PropertyDetails = ({
 
   const myRentalRequestStatus = myRentalRequest?.status;
 
+console.log(myRentalRequest,"rental request is here");
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-50 dark:bg-[#0d1117]">
       {/* Ambient page glow */}
@@ -63,11 +65,11 @@ const PropertyDetails = ({
             href="/all-properties"
             className="shrink-0 transition-colors hover:text-teal-600 dark:hover:text-teal-400 font-inter"
           >
-            {details.category.name || "Not Found"}
+            {details?.category.name || "Not Found"}
           </Link>
           <ChevronRight size={12} className="shrink-0" />
           <span className="line-clamp-1 max-w-45 font-medium text-teal-600 dark:text-teal-400 font-lora">
-            {details.title}
+            {details?.title}
           </span>
         </nav>
 
@@ -102,7 +104,7 @@ const PropertyDetails = ({
             <div className="mb-4 flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-teal-200 bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-700 dark:border-teal-800/60 dark:bg-teal-950/50 dark:text-teal-300 font-inter">
                 <Hash size={10} />
-                {details.category.name || "not-found"}
+                {details?.category.name || "not-found"}
               </span>
               <span
                 className={`font-inter inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${

@@ -40,7 +40,6 @@ const NavBar = ({ user }: NavBarProps) => {
   };
 
 
-  console.log(userInfo,'user info here')
   return (
     <header className="sticky top-0 w-full border-b dark:border-b-0 dark:shadow-2xl shadow-sm border-gray-200 bg-white dark:bg-background z-999999">
       <nav className="container px-6 md:px-8 lg:px-13 xl:px-16 mx-auto ">

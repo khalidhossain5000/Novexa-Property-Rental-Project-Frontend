@@ -26,7 +26,7 @@ const ListingMobileCard = ({
 
         {image && (
           <div className="relative h-16 w-16 md:h-20 md:w-16 shrink-0 overflow-hidden rounded-full md:rounded-3xl border border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-slate-800">
-            <Image src={image} alt={title || "Image"} fill className="object-cover" />
+            <Image src={image} alt={title || "Image"} width={200} height={100} className="object-cover" />
           </div>
         )}
 
