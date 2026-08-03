@@ -9,13 +9,19 @@ export const navLinks = [
     name: "All Properties",
     path: "/all-properties",
   },
+  {
+    id: 3,
+    name: "Dashboard",
+    path: "/dashhboard",
+    private:true
+  },
 
 
   {
     id: 5,
     name: "Contact",
     path: "/contact",
-     private: true,
+    private: true,
   }
 
 ];

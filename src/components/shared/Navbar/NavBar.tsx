@@ -14,8 +14,6 @@ import { navLinks } from "./NavLinks";
 import PrimaryBtn from "../Button/PrimaryBtn";
 import SecondaryBtn from "../Button/SecondaryBtn";
 
-
-
 const isActiveRoute = (pathname: string, path: string): boolean => {
   if (path === "/") return pathname === "/";
   return pathname === path || pathname.startsWith(`${path}/`);
@@ -49,14 +47,12 @@ const NavBar = ({ user }: NavBarProps) => {
             {/* LOGO */}
             <Link href="/">
               <h1 className="text-3xl font-extrabold font-montserrat">
-                <span className="text-primary">
-                  Rent
-                </span>
-                <span className="text-secondary">Nest</span>
+                <span className="text-primary">Rent</span>
+                <span className="text-secondary pl-2">Nest</span>
               </h1>
             </Link>
           </div>
-          {/* middle side */}
+
           {/* DESKTOP NAV */}
           <div className="hidden lg:flex items-center gap-1">
             {filteredNavLinks.map((link) => {
@@ -65,7 +61,15 @@ const NavBar = ({ user }: NavBarProps) => {
               return (
                 <Link
                   key={link.id}
-                  href={link.path}
+                  href={
+                    link.name === "Dashboard"
+                      ? userInfo?.role === "TENANT"
+                        ? "/dashboard"
+                        : userInfo?.role === "LANDLORD"
+                          ? "/landlord-dashboard"
+                          : "/admin-dashboard"
+                      : link.path
+                  }
                   aria-current={isActive ? "page" : undefined}
                   className={`relative rounded-lg px-4 py-2 font-medium transition-all duration-300 group ${
                     isActive
@@ -89,13 +93,17 @@ const NavBar = ({ user }: NavBarProps) => {
             {/* Theme toggle */}
             <ThemeToggle />
 
-       
-
             {/* AUTH: show user info and logout when signed in, otherwise show auth buttons */}
             {user ? (
               <div className="hidden md:flex items-center gap-3">
                 <Link
-                  href="/dashboard"
+                  href={
+                    userInfo?.role === "TENANT"
+                      ? "/dashboard"
+                      : userInfo?.role === "LANDLORD"
+                        ? "/landlord-dashboard"
+                        : "/admin-dashboard"
+                  }
                   className="flex items-center hover:opacity-80 transition-opacity duration-200"
                 >
                   {userInfo?.profilePhoto ? (
@@ -124,12 +132,9 @@ const NavBar = ({ user }: NavBarProps) => {
             ) : (
               <div className="hidden md:flex items-center gap-4 font-inter">
                 <Link href="/auth/register">
-                 
                   <PrimaryBtn>Register</PrimaryBtn>
                 </Link>
                 <Link href="/login">
-                 
-
                   <SecondaryBtn>Login</SecondaryBtn>
                 </Link>
               </div>
