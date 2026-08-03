@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
 import {
@@ -12,23 +13,41 @@ import {
 } from "@/components/ui/dialog";
 
 import { Button } from "@/components/ui/button";
-import { useActionState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { deletePropertyAction } from "../../_actions/propertyActions";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 type DeletePropertyDialogProps = {
   propertyId: string;
 };
 
 const DeletePropertyDialog = ({ propertyId }: DeletePropertyDialogProps) => {
-  const [state, formAction, pending] = useActionState(
-    deletePropertyAction,
-    null,
-  );
+  const [state, formAction, pending] = useActionState(deletePropertyAction, {
+    success: false,
+    message: "string",
+  });
+  const [open, setOpen] = useState(false);
+  const router = useRouter();
+  useEffect(() => {
+    console.log("CLIENT STATE CHANGED", state);
 
+    if (state.success) {
+      toast.error(state.message);
+      setOpen(false);
+          router.refresh();
+
+    }
+  }, [state]);
+
+  console.log("RENDER DELETE COMPONENT", state);
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       {/* Delete Button */}
-      <DialogTrigger className="flex items-center justify-center gap-2 cursor-pointer bg-rose-300 text-rose-700 dark:bg-rose-900 dark:text-rose-300 px-3 py-2 rounded-sm shadow-sm font-inter hover:scale-105 hover:bg-rose-300 transition duration-400 w-full ">
+      <DialogTrigger
+        onClick={() => setOpen(true)}
+        className="flex items-center justify-center gap-2 cursor-pointer bg-rose-300 text-rose-700 dark:bg-rose-900 dark:text-rose-300 px-3 py-2 rounded-sm shadow-sm font-inter hover:scale-105 hover:bg-rose-300 transition duration-400 w-full "
+      >
         Delete
       </DialogTrigger>
 

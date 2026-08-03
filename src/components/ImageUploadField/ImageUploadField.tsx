@@ -10,13 +10,16 @@ interface IImageUploadProps {
   onUploadSuccess: (url: string) => void;
   onUploadStateChange: (loading: boolean) => void;
   onRemove: () => void;
+    defaultImage?: string;
 }
 const ImageUploadField = ({
   onUploadSuccess,
   onUploadStateChange,
   onRemove,
+  defaultImage
+  
 }: IImageUploadProps) => {
-  const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
+  const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(defaultImage  || null);
   const [isUploading, setIsUploading] = useState(false);
 
   const handleThumbnailChange = async (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -21,6 +21,7 @@ import {
 } from "../../_dashboardTypes/dashboardTypes";
 import ImageUploadField from "@/components/ImageUploadField/ImageUploadField";
 import { updatePropertyAction } from "../../_actions/propertyActions";
+import { toast } from "sonner";
 
 interface IUpdatePropertyDialogProps {
   property: IPropertyTypes;
@@ -36,10 +37,19 @@ const UpdatePropertyDialog = ({
   const [imageUploading, setImageUploading] = useState(false);
   const [state, action, isPending] = useActionState(
     updatePropertyAction.bind(null, property.id),
-    false,
+      {
+    success: false,
+    message: "",
+  }
   );
- const categories = propertyCategories.data;
+  const categories = propertyCategories.data;
+console.log(state,'this is state upadte proerpty')
 
+useEffect(() => {
+  if (state.success) {
+    toast.success("Property Updated Successfully");
+  }
+}, [state.success]);
   return (
     <Dialog>
       <DialogTrigger>
@@ -61,6 +71,7 @@ const UpdatePropertyDialog = ({
 
             <Input
               name="title"
+                key={property.id}
               defaultValue={property.title}
               className="border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
             />
@@ -72,6 +83,7 @@ const UpdatePropertyDialog = ({
 
             <Textarea
               name="description"
+                key={property.id}
               defaultValue={property.description}
               className="border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
               rows={5}
@@ -85,6 +97,7 @@ const UpdatePropertyDialog = ({
 
               <Input
                 name="location"
+                  key={property.id}
                 defaultValue={property.location}
                 className="border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
               />
@@ -95,6 +108,7 @@ const UpdatePropertyDialog = ({
               <Label>Price</Label>
 
               <Input
+                key={property.id}
                 name="price"
                 type="number"
                 defaultValue={property.price}
@@ -107,6 +121,7 @@ const UpdatePropertyDialog = ({
               <Label>Amenities</Label>
 
               <Input
+                key={property.id}
                 name="amenities"
                 defaultValue={property.amenities}
                 className="border-border bg-surface text-text-primary placeholder:text-text-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
@@ -123,7 +138,7 @@ const UpdatePropertyDialog = ({
               <select
                 id="category"
                 name="categoryId"
-              defaultValue={property.categoryId}
+                defaultValue={property.categoryId}
                 className="flex h-10 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <option value="" disabled>
@@ -131,7 +146,7 @@ const UpdatePropertyDialog = ({
                 </option>
 
                 {categories?.map((cat) => (
-                  <option key={cat.id} value={cat.id} >
+                  <option key={cat.id} value={cat.id}>
                     {cat.name}
                   </option>
                 ))}
@@ -151,6 +166,7 @@ const UpdatePropertyDialog = ({
             onRemove={() => {
               setThumbnailUrl("");
             }}
+              defaultImage={property.thumbnailImage}
           />
 
           {/* to get thumbnail url */}
@@ -159,7 +175,7 @@ const UpdatePropertyDialog = ({
           <button
             disabled={imageUploading}
             type="submit"
-            className="cursor-pointer w-full rounded-xl bg-primary px-5 py-3 font-semibold text-white transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
+            className=" w-full rounded-xl bg-primary px-5 py-3 font-semibold text-white transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
           >
             {imageUploading
               ? "Uploading image..."

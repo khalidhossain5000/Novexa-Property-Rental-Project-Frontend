@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useActionState, useState } from "react";
+import React, { useActionState, useEffect, useState } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,6 +11,7 @@ import { ICategoryResponse } from "@/app/(dashboardGroup)/_dashboardTypes/dashbo
 import ImageUploadField from "@/components/ImageUploadField/ImageUploadField";
 import { createProperty } from "@/app/(dashboardGroup)/_actions/propertyActions";
 import PrimaryBtn from "@/components/shared/Button/PrimaryBtn";
+import { toast } from "sonner";
 
 interface AddPropertyFormProps {
   propertyCategories: ICategoryResponse;
@@ -24,6 +25,15 @@ const AddPropertyForm = ({ propertyCategories }: AddPropertyFormProps) => {
 
   //form submit
   const [state, action, isPending] = useActionState(createProperty, false);
+
+
+  console.log(state,'after add property')
+
+  useEffect(() => {
+  if (state.success) {
+    toast.success("Property Created Successfully");
+  }
+}, [state.success]);
   return (
     <div className="flex min-h-screen items-start justify-center  px-4 py-10">
       <div className="w-full max-w-3xl space-y-6">
@@ -213,7 +223,7 @@ const AddPropertyForm = ({ propertyCategories }: AddPropertyFormProps) => {
             {/* Submit Button */}
             <PrimaryBtn
               type="submit"
-              disabled={imageUploading || !thumbnailUrl}
+              // disabled={imageUploading || !thumbnailUrl}
               className="w-full text-center justify-center"
             >
               {imageUploading

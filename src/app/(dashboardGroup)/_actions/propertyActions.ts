@@ -2,6 +2,7 @@
 "use server";
 
 import { propertySchema } from "@/zod/propertySchema";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import z from "zod";
 
@@ -55,7 +56,19 @@ export const createProperty = async (prevState: null, formData: FormData) => {
       body: JSON.stringify(payload),
     },
   );
+
   const result = await res.json();
+
+  //cache invalidation
+  if (result.success) {
+    revalidateTag("landlord-properties", {
+      expire: 0,
+    }); 
+    
+    revalidateTag("all-properties", {
+      expire: 0,
+    });
+  }
 
   return result;
 };
@@ -76,7 +89,13 @@ export const getCurrentLandlordProperties = async () => {
 
   const res = await fetch(
     `${process.env.BACKEND_URL}/api/landlord/properties/my-properties`,
+
     {
+      cache: "force-cache",
+      next: {
+        revalidate: 60 * 60 * 24,
+        tags: ["landlord-properties"],
+      },
       headers: {
         Cookie: `accessToken=${accessToken}`,
       },
@@ -88,10 +107,13 @@ export const getCurrentLandlordProperties = async () => {
 };
 
 //update property
-
+interface IUpdatePropertyState {
+  success: boolean;
+  message: string;
+}
 export const updatePropertyAction = async (
   propertyId: string,
-  prevState: null,
+  prevState: IUpdatePropertyState,
   formData: FormData,
 ) => {
   const cookieStore = await cookies();
@@ -135,19 +157,31 @@ export const updatePropertyAction = async (
     },
   );
   const result = await res.json();
-  console.log(payload, "this isupdated data and result", result);
+
+  //cache invalidation
+  if (result.success) {
+    revalidateTag("landlord-properties", {
+      expire: 0,
+    }); 
+    
+    revalidateTag("all-properties", {
+      expire: 0,
+    });
+  }
 
   return result;
 };
 
 //delete property
-
+interface IDeletePropertyState {
+  success: boolean;
+  message: string;
+}
 export const deletePropertyAction = async (
-  prevState: null,
+  prevState: IDeletePropertyState,
   formData: FormData,
 ) => {
   const cookieStore = await cookies();
-
   const accessToken = cookieStore.get("accessToken")?.value || null;
 
   if (!accessToken) {
@@ -170,7 +204,14 @@ export const deletePropertyAction = async (
   );
   const result = await res.json();
 
-  console.log(result, "delete result");
+//cache invalidation
+if (result.success) {
+  revalidateTag("landlord-properties", "max");
+  revalidateTag("all-properties", "max");
+}
+
+  console.log(result,'delete result')
+
   return result;
 };
 
