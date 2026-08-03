@@ -1,5 +1,5 @@
 import { IPropertyTypes } from "@/app/(dashboardGroup)/_dashboardTypes/dashboardTypes";
-import PropertiesSkeleton from "../AllPropertiesPage/PropertiesSkeleton";
+import PropertiesSkeleton from "../../AllPropertiesPage/PropertiesSkeleton";
 import PropertyCard from "./PropertyCard";
 import SectionTitle from "@/components/shared/SectionTitle/SectionTItle";
 import Link from "next/link";
@@ -10,7 +10,7 @@ interface IPropertyCardSectionProps {
 const PropertyCardSection = ({ homeData }: IPropertyCardSectionProps) => {
   if (homeData.length === 0) return <PropertiesSkeleton />;
   return (
-      <div className="bg-[#fcf7f6] dark:bg-[#050911] relative py-12 lg:py-22">
+    <div className="bg-[#fcf7f6] dark:bg-[#050911] relative py-12 lg:py-22">
       <div
         className="absolute inset-0 z-0 dark:hidden"
         style={{
@@ -61,30 +61,30 @@ const PropertyCardSection = ({ homeData }: IPropertyCardSectionProps) => {
               className={"font-lora"}
             />
           </div>
-      
+
           <div>
             {/* Button */}
-            <Link href="/all-rooms">
+            <Link href="/all-properties">
               <PrimaryBtn className={"hover:opacity-90 "}>
                 Explore More
               </PrimaryBtn>
             </Link>
           </div>
         </div>
-      {/* card render */}
-      <div>
-        {homeData.length > 0 && (
-          <div className="xl:px-20 pt-12 grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-8">
-            {homeData.map((property) => (
-              <PropertyCard
-                key={property.id}
-                property={property}
-              ></PropertyCard>
-            ))}
-          </div>
-        )}
+        {/* card render */}
+        <div>
+          {homeData.length > 0 && (
+            <div className="xl:px-20 pt-12 grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-8">
+              {homeData.map((property) => (
+                <PropertyCard
+                  key={property.id}
+                  property={property}
+                ></PropertyCard>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
     </div>
   );
 };
