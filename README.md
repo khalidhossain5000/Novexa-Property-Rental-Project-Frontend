@@ -230,6 +230,6 @@ README.md
 
 ## Live and Relevant Links
 
-- **Live Site:** [\[Add deployment link here\]](https://next-level-assingment-5-rent-nest.vercel.app/)
-- **Backend Repository:** [\[Add backend repo link here\]](https://github.com/khalidhossain5000/Next-Level-Assignment-4)
+- **Live Site:** [\[Rent Nest Live\]](https://next-level-assingment-5-rent-nest.vercel.app/)
+- **Backend Repository:** [\[Rent Nest Backend\]](https://github.com/khalidhossain5000/Next-Level-Assignment-4)
 - **API Integration Docs:** [`apiIntregration.md`](./apiIntregration.md)
