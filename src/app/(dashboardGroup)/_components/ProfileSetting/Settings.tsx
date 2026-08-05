@@ -96,7 +96,7 @@ const SettingsProfile = ({ userInfo }: NavBarProps) => {
               </div>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6 flex flex-col lg:flex-row gap-6 items-center">
               <div>
                 <h3 className="text-sm font-semibold text-foreground/50 uppercase tracking-wider font-montserrat mb-3 font-lora">
                   User Status
@@ -115,9 +115,7 @@ const SettingsProfile = ({ userInfo }: NavBarProps) => {
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* profile status */}
+              {/* profile status */}
             <div className="space-y-6">
               <div>
                 <h3 className="text-sm font-semibold text-foreground/50 uppercase tracking-wider font-montserrat mb-3 font-lora">
@@ -138,6 +136,9 @@ const SettingsProfile = ({ userInfo }: NavBarProps) => {
                 </div>
               </div>
             </div>
+            </div>
+
+            
           </div>
         </div>
       </div>
