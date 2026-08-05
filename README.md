@@ -204,6 +204,7 @@ README.md
 ```json
 {
   "dependencies": {
+    "Shadcn":"1.1.0",
     "@base-ui/react": "^1.6.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -225,8 +226,6 @@ README.md
   }
 }
 ```
-
----
 
 ## Live and Relevant Links
 
