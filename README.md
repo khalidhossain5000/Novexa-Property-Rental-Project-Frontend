@@ -1,8 +1,8 @@
-# RentNest
+# Novexa Property
 
 **Find & List Rental Properties with Ease**
 
-RentNest is a modern, responsive rental property marketplace built with Next.js. Tenants can browse and filter listings, submit rental requests, and pay securely. Landlords can manage properties and approve/reject requests. Admins moderate the entire platform through a dedicated dashboard.
+Novexa is a modern, responsive rental property marketplace built with Next.js. Tenants can browse and filter listings, submit rental requests, and pay securely. Landlords can manage properties and approve/reject requests. Admins moderate the entire platform through a dedicated dashboard.
 
 
 ---
