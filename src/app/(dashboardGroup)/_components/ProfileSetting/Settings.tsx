@@ -41,8 +41,10 @@ const SettingsProfile = ({ userInfo }: NavBarProps) => {
                 className="object-cover"
               />
             </div>
-            <PrimaryBtn className="bg-teal-600 hover:bg-teal-700 text-white rounded-lg shadow-md transition-all active:scale-95 flex items-center gap-2 font-lora">
-              <Edit3 className="w-4 h-4" />
+            <PrimaryBtn
+              icon={<Edit3 className="w-4 h-4" />}
+              className="bg-teal-600 hover:bg-teal-700 text-white rounded-lg shadow-md transition-all active:scale-95 flex items-center gap-2 font-lora"
+            >
               Update Profile Coming Soon
             </PrimaryBtn>
           </div>
