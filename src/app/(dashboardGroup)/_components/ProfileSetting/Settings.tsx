@@ -96,7 +96,7 @@ const SettingsProfile = ({ userInfo }: NavBarProps) => {
               </div>
             </div>
 
-            <div className="space-y-6 flex flex-col lg:flex-row gap-6 items-center">
+            <div className="space-y-6 ">
               <div>
                 <h3 className="text-sm font-semibold text-foreground/50 uppercase tracking-wider font-montserrat mb-3 font-lora">
                   User Status
@@ -116,29 +116,27 @@ const SettingsProfile = ({ userInfo }: NavBarProps) => {
                 </div>
               </div>
               {/* profile status */}
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-sm font-semibold text-foreground/50 uppercase tracking-wider font-montserrat mb-3 font-lora">
-                  Profile Status
-                </h3>
-                <div className="flex items-center gap-4 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
-                  <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 shrink-0">
-                    <StampIcon className="w-5 h-5" />
-                  </div>
-                  <div className="flex flex-col overflow-hidden">
-                    <span className="text-xs text-foreground/50 font-medium font-lora">
-                      Status
-                    </span>
-                    <span className="text-base font-semibold text-foreground uppercase tracking-wide font-inter">
-                      {userInfo.status || "Not Found"}
-                    </span>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-sm font-semibold text-foreground/50 uppercase tracking-wider font-montserrat mb-3 font-lora">
+                    Profile Status
+                  </h3>
+                  <div className="flex items-center gap-4 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+                    <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 shrink-0">
+                      <StampIcon className="w-5 h-5" />
+                    </div>
+                    <div className="flex flex-col overflow-hidden">
+                      <span className="text-xs text-foreground/50 font-medium font-lora">
+                        Status
+                      </span>
+                      <span className="text-base font-semibold text-foreground uppercase tracking-wide font-inter">
+                        {userInfo.status || "Not Found"}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            </div>
-
-            
           </div>
         </div>
       </div>
