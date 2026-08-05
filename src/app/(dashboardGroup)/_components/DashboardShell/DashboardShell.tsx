@@ -134,7 +134,7 @@ export function DashboardShell({
             }`}
           >
             <Settings
-              className={`h-5 w-5 ${pathname === "/dashboard/profile-setting" ? "text-primary" : "text-foreground/50"}`}
+              className={`h-5 w-5 ${pathname === "/dashboard/common/profile" ? "text-primary" : "text-foreground/50"}`}
             />
             Settings
           </Link>
