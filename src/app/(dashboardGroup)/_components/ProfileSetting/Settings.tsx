@@ -25,7 +25,7 @@ const SettingsProfile = ({ userInfo }: NavBarProps) => {
       {/* Profile Overview Card */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
         {/* Cover Banner */}
-        <div className="h-32 w-full bg-linear-to-r from-teal-600 to-teal-400 dark:from-teal-900 dark:to-teal-700"></div>
+        <div className="h-32 w-full bg-linear-to-r from-amber-600 to-amber-400 dark:from-amber-900 dark:to-yellow-700"></div>
 
         <div className="px-6 sm:px-10 pb-10 relative">
           {/* Avatar Profile */}
@@ -41,7 +41,7 @@ const SettingsProfile = ({ userInfo }: NavBarProps) => {
                 className="object-cover"
               />
             </div>
-            <PrimaryBtn className="bg-teal-600 hover:bg-teal-700 text-white font-inter rounded-lg shadow-md transition-all active:scale-95 flex items-center gap-2">
+            <PrimaryBtn className="bg-teal-600 hover:bg-teal-700 text-white rounded-lg shadow-md transition-all active:scale-95 flex items-center gap-2 font-lora">
               <Edit3 className="w-4 h-4" />
               Update Profile Coming Soon
             </PrimaryBtn>
@@ -51,7 +51,7 @@ const SettingsProfile = ({ userInfo }: NavBarProps) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-6">
               <div>
-                <h3 className="text-sm font-semibold text-foreground/50 uppercase tracking-wider font-montserrat mb-3">
+                <h3 className="text-sm font-semibold text-foreground/50 uppercase tracking-wider font-montserrat mb-3 font-lora">
                   Personal Details
                 </h3>
                 <div className="flex items-center gap-4 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
@@ -59,15 +59,15 @@ const SettingsProfile = ({ userInfo }: NavBarProps) => {
                     <User className="w-5 h-5" />
                   </div>
                   <div className="flex flex-col overflow-hidden">
-                    <span className="text-xs text-foreground/50 font-medium">
+                    <span className="text-xs text-foreground/50 font-medium font-inter">
                       First Name
                     </span>
-                    <span className="text-base font-semibold text-foreground truncate font-inter">
+                    <span className=" text-base font-semibold text-foreground truncate font-inter">
                       {userInfo?.firstName || "N/A"}
                     </span>
                   </div>
                   <div className="flex flex-col overflow-hidden">
-                    <span className="text-xs text-foreground/50 font-medium">
+                    <span className="text-xs text-foreground/50 font-medium font-lora">
                       Last Name
                     </span>
                     <span className="text-base font-semibold text-foreground truncate font-inter">
@@ -83,7 +83,7 @@ const SettingsProfile = ({ userInfo }: NavBarProps) => {
                     <Mail className="w-5 h-5" />
                   </div>
                   <div className="flex flex-col overflow-hidden">
-                    <span className="text-xs text-foreground/50 font-medium">
+                    <span className="text-xs text-foreground/50 font-medium font-lora">
                       Email Address
                     </span>
                     <span className="text-base font-semibold text-foreground truncate font-inter">
@@ -96,7 +96,7 @@ const SettingsProfile = ({ userInfo }: NavBarProps) => {
 
             <div className="space-y-6">
               <div>
-                <h3 className="text-sm font-semibold text-foreground/50 uppercase tracking-wider font-montserrat mb-3">
+                <h3 className="text-sm font-semibold text-foreground/50 uppercase tracking-wider font-montserrat mb-3 font-lora">
                   User Status
                 </h3>
                 <div className="flex items-center gap-4 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
@@ -104,7 +104,7 @@ const SettingsProfile = ({ userInfo }: NavBarProps) => {
                     <Shield className="w-5 h-5" />
                   </div>
                   <div className="flex flex-col overflow-hidden">
-                    <span className="text-xs text-foreground/50 font-medium">
+                    <span className="text-xs text-foreground/50 font-medium font-lora">
                       Role
                     </span>
                     <span className="text-base font-semibold text-foreground uppercase tracking-wide font-inter">
@@ -116,9 +116,9 @@ const SettingsProfile = ({ userInfo }: NavBarProps) => {
             </div>
 
             {/* profile status */}
-               <div className="space-y-6">
+            <div className="space-y-6">
               <div>
-                <h3 className="text-sm font-semibold text-foreground/50 uppercase tracking-wider font-montserrat mb-3">
+                <h3 className="text-sm font-semibold text-foreground/50 uppercase tracking-wider font-montserrat mb-3 font-lora">
                   Profile Status
                 </h3>
                 <div className="flex items-center gap-4 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
@@ -126,7 +126,7 @@ const SettingsProfile = ({ userInfo }: NavBarProps) => {
                     <StampIcon className="w-5 h-5" />
                   </div>
                   <div className="flex flex-col overflow-hidden">
-                    <span className="text-xs text-foreground/50 font-medium">
+                    <span className="text-xs text-foreground/50 font-medium font-lora">
                       Status
                     </span>
                     <span className="text-base font-semibold text-foreground uppercase tracking-wide font-inter">
