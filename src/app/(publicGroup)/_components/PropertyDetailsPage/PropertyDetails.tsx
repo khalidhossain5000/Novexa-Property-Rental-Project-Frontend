@@ -202,7 +202,18 @@ const PropertyDetails = ({
                   <BookMarked size={16} />
                   Request Rejected
                 </button>
-              ) : currentUserId ? (
+              ) : !currentUserId ? (
+           
+                <Link href="/login">
+                  <PrimaryBtn>Login to Rent This Property</PrimaryBtn>
+                </Link>
+              ) : currentUserRole !== "TENANT" ? (
+           
+                <p className="inline-flex cursor-not-allowed items-center gap-2 rounded-2xl bg-rose-500 px-6 py-3 text-sm font-semibold text-text-primary opacity-90 inter font-inter">
+                  Rental Available For Tenant Only
+                </p>
+              ) : (
+           
                 <RentRequestDialog
                   propertyId={details.id}
                   price={details.price}
@@ -211,14 +222,6 @@ const PropertyDetails = ({
                   thumbnailImage={details.thumbnailImage}
                   triggerLabel="Send Rent Request"
                 />
-              ) : currentUserRole !== "TENANT" ? (
-                <p className="inline-flex cursor-not-allowed items-center gap-2 rounded-2xl bg-rose-500 px-6 py-3 text-sm font-semibold text-text-primary opacity-90 inter font-inter">
-                  Rental Available For Tenant Only
-                </p>
-              ) : (
-                <Link href="/login">
-                  <PrimaryBtn>Login to Rent This Property</PrimaryBtn>
-                </Link>
               )}
             </div>
           </div>
