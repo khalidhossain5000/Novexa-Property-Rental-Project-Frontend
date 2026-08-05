@@ -1,5 +1,5 @@
 "use client";
-import { IPropertyDetailsRes } from "@/lib/types";
+import { IPropertyDetailsRes, IUserRole } from "@/lib/types";
 import {
   ArrowLeft,
   BookMarked,
@@ -19,6 +19,7 @@ import PrimaryBtn from "@/components/shared/Button/PrimaryBtn";
 interface IPropertyDetailsProps {
   propertyDetailsRes: IPropertyDetailsRes;
   currentUserId: string;
+  currentUserRole: IUserRole;
 }
 
 //
@@ -34,9 +35,9 @@ const formatDate = (date: string) => {
 const PropertyDetails = ({
   propertyDetailsRes,
   currentUserId,
+  currentUserRole,
 }: IPropertyDetailsProps) => {
   const details = propertyDetailsRes?.data;
-
 
   const myRentalRequest = details.rentalRequest?.find(
     (req) => req.tenantId === currentUserId,
@@ -44,7 +45,6 @@ const PropertyDetails = ({
 
   const myRentalRequestStatus = myRentalRequest?.status;
 
-console.log(myRentalRequest,"rental request is here");
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-50 dark:bg-[#0d1117]">
       {/* Ambient page glow */}
@@ -178,7 +178,7 @@ console.log(myRentalRequest,"rental request is here");
             <div className="flex flex-wrap items-center gap-3">
               {myRentalRequestStatus === "APPROVED" ? (
                 <Link
-                  href={`/dashboard/requests/${myRentalRequest?.id}/pay`} 
+                  href={`/dashboard/requests/${myRentalRequest?.id}/pay`}
                   className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700 active:scale-95 font-inter"
                 >
                   <CreditCard size={16} />
@@ -211,6 +211,10 @@ console.log(myRentalRequest,"rental request is here");
                   thumbnailImage={details.thumbnailImage}
                   triggerLabel="Send Rent Request"
                 />
+              ) : currentUserRole !== "TENANT" ? (
+                <p className="inline-flex cursor-not-allowed items-center gap-2 rounded-2xl bg-rose-500 px-6 py-3 text-sm font-semibold text-text-primary opacity-90 inter font-inter">
+                  Rental Available For Tenant Only
+                </p>
               ) : (
                 <Link href="/login">
                   <PrimaryBtn>Login to Rent This Property</PrimaryBtn>

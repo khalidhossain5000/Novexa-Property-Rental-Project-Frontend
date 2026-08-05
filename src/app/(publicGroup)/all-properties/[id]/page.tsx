@@ -11,7 +11,7 @@ const PropertyDetailsPage = async ({ params }: IParamsProps) => {
   const propertyDetailsRes = await getPorpertyDetails(id);
   const currentUser = await getMe();
   const currentUserId = currentUser?.data?.id;
-
+  const currentUserRole=currentUser?.data.role
   console.log(id,propertyDetailsRes,currentUserId,"all info over here in detials page")
   return (
     <div>
@@ -19,6 +19,7 @@ const PropertyDetailsPage = async ({ params }: IParamsProps) => {
         <PropertyDetails
           propertyDetailsRes={propertyDetailsRes}
           currentUserId={currentUserId}
+          currentUserRole={currentUserRole}
         />
       </Suspense>
     </div>

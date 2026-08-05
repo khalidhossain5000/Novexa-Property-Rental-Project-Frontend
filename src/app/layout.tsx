@@ -17,8 +17,8 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "Rent Nest",
-  description: "Premium Land rent and management platform",
+  title: "Novexa Property ",
+  description: "Premium Property rental and management platform",
 };
 
 export default function RootLayout({

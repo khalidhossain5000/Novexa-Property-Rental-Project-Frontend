@@ -1,6 +1,6 @@
 
 import Footer from '@/components/shared/Footer/Footer';
-import NavBar from '@/components/shared/Navbar/Navbar';
+import NavBar from '@/components/shared/Navbar/NavBar';
 import { getMe } from '@/service/getMe';
 import React from 'react';
 

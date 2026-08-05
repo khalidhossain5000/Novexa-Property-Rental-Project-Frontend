@@ -40,3 +40,9 @@ export interface IPropertyDetailsRes{
     data:IPropertyDetailsTypes
 }
 
+
+export enum IUserRole{
+    TENANT="TENANT",
+    LANDLORD="LANDLORD",
+    ADMIN="ADMIN"
+}
