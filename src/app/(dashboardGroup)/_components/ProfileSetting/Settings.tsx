@@ -4,13 +4,19 @@ import { IUserTypes } from "@/app/(authGroup)/_authTypes/authTypes";
 import PrimaryBtn from "@/components/shared/Button/PrimaryBtn";
 import { Edit3, Mail, Shield, StampIcon, User } from "lucide-react";
 import Image from "next/image";
+import UpdateProfileModal from "./UpdateProfileModal";
 interface NavBarProps {
   userInfo: IUserTypes | null;
 }
 
 const SettingsProfile = ({ userInfo }: NavBarProps) => {
   if (!userInfo) return <div className="p-6">User not found</div>;
-
+const payload={
+  firstName:userInfo.firstName,
+  lastName:userInfo.lastName,
+  profilePhoto:userInfo.profilePhoto,
+  id:userInfo.id
+}
   return (
     <div className="max-w-4xl w-full mx-auto">
       <div className="mb-8">
@@ -47,6 +53,7 @@ const SettingsProfile = ({ userInfo }: NavBarProps) => {
             >
               Update Profile Coming Soon
             </PrimaryBtn>
+            <UpdateProfileModal payload={payload}/>
           </div>
 
           {/* User Details */}

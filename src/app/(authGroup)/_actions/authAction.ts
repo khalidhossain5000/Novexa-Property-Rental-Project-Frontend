@@ -78,9 +78,8 @@ export const loginAction = async (
       redirect("/admin-dashboard");
     } else if (uerRole === "LANDLORD") {
       redirect("/landlord-dashboard");
-    }
-    else{
-      redirect("/")
+    } else {
+      redirect("/");
     }
   }
   return result;
@@ -158,4 +157,42 @@ export const registerAction = async (
     redirect("/");
   }
   return loginResult;
+};
+
+//update profile
+
+export const updateProfile = async (id: string, formData: FormData) => {
+  const cookieStore = await cookies();
+
+  const accessToken = cookieStore.get("accessToken")?.value || null;
+
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "User not logged in",
+    };
+  }
+  const firstName = formData.get("firstName");
+  const lastName = formData.get("lastName");
+  const profilePhoto = formData.get("profilePhoto");
+
+  const payload = {
+    firstName,
+    lastName,
+    profilePhoto,
+  };
+  const res = await fetch(
+    `${process.env.BACKEND_URL}/api/auth/update-profile/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        Cookie: `accessToken=${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    },
+  );
+  const result = await res.json();
+
+  return result;
 };
