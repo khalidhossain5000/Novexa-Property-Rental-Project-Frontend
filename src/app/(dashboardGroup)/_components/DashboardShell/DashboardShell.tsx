@@ -125,10 +125,10 @@ export function DashboardShell({
             Preferences
           </p>
           <Link
-            href="/dashboard"
+            href="/common/profile"
             onClick={closeSidebar}
             className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-inter font-medium transition-colors ${
-              pathname === "/dashboard"
+              pathname === "/common/profile"
                 ? "bg-primary/10 text-primary"
                 : "text-foreground/70 hover:text-foreground hover:bg-muted/50"
             }`}
@@ -136,7 +136,7 @@ export function DashboardShell({
             <Settings
               className={`h-5 w-5 ${pathname === "/common/profile" ? "text-primary" : "text-foreground/50"}`}
             />
-            Settings
+            Setting
           </Link>
           <button
             onClick={handleLogOut}
