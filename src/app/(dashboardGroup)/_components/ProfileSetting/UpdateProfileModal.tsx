@@ -27,10 +27,10 @@ const UpdateProfileModal = ({ payload }: IUpdateProfileProps) => {
   const [imageUploading, setImageUploading] = useState(false);
 
   const [state, action, isPending] = useActionState(
-    updateProfile.bind(null, payload.id),
+    updateProfile,
     false,
   );
-  console.log(payload, "update payload here");
+  console.log(payload, "update payload here he update mal modal bro");
   return (
     <Dialog>
       <DialogTrigger>
@@ -75,11 +75,11 @@ const UpdateProfileModal = ({ payload }: IUpdateProfileProps) => {
                     placeholder="Rahim"
                     className="border-border bg-background text-text-primary placeholder:text-slate-400 focus-visible:ring-primary/30 dark:placeholder:text-slate-500 dark:focus-visible:ring-primary/40 py-3"
                   />
-                  {/* {state.errors?.firstName && (
+                  {state.errors?.firstName && (
                     <p className="text-red-600 font-lora">
                       {state.errors.firstName[0]}
                     </p>
-                  )} */}
+                  )}
                 </div>
                 <div className="space-y-2">
                   <Label
@@ -96,22 +96,16 @@ const UpdateProfileModal = ({ payload }: IUpdateProfileProps) => {
                     placeholder="Uddin"
                     className="border-border bg-background text-text-primary placeholder:text-slate-400 focus-visible:ring-primary/30 dark:placeholder:text-slate-500 dark:focus-visible:ring-primary/40 py-3"
                   />
-                  {/* {state.errors?.lastName && (
+                  {state.errors?.lastName && (
                     <p className="text-red-600 font-lora">
                       {state.errors.lastName[0]}
                     </p>
-                  )} */}
+                  )}
                 </div>
               </div>
 
               <div className="relative h-20 w-20 overflow-hidden rounded-lg">
-                <Image
-                  src={payload?.profilePhoto || "google.com"}
-                  alt={"title"}
-                  fill
-                  className="object-cover"
-                />
-
+            
                 {/* Image Upload */}
 
                 <ImageUploadField
@@ -132,6 +126,11 @@ const UpdateProfileModal = ({ payload }: IUpdateProfileProps) => {
                   name="thumbnailImage"
                   value={profilePhoto}
                 />
+                 {state.errors?.message && (
+                    <p className="text-red-600 font-lora">
+                      {state.errors.message}
+                    </p>
+                  )}
               </div>
               {/* Submit */}
 

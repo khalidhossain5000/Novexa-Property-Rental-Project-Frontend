@@ -160,8 +160,11 @@ export const registerAction = async (
 };
 
 //update profile
-
-export const updateProfile = async (id: string, formData: FormData) => {
+interface UpdatePrev{
+  success:false,
+  message:string
+}
+export const updateProfile = async (prevState:UpdatePrev, formData: FormData) => {
   const cookieStore = await cookies();
 
   const accessToken = cookieStore.get("accessToken")?.value || null;
@@ -181,8 +184,10 @@ export const updateProfile = async (id: string, formData: FormData) => {
     lastName,
     profilePhoto,
   };
+
+  console.log(payload,'in server payload')
   const res = await fetch(
-    `${process.env.BACKEND_URL}/api/auth/update-profile/${id}`,
+    `${process.env.BACKEND_URL}/api/auth/profile`,
     {
       method: "PUT",
       headers: {
@@ -192,7 +197,10 @@ export const updateProfile = async (id: string, formData: FormData) => {
       body: JSON.stringify(payload),
     },
   );
+  console.log("BACKEND URL:", process.env.BACKEND_URL);
+console.log("UPDATE URL:", `${process.env.BACKEND_URL}/api/auth/profile`);
   const result = await res.json();
 
+ console.log(result,'in server result result result result')
   return result;
 };
