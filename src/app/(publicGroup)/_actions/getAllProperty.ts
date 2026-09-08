@@ -20,7 +20,7 @@ export const getAllProperties = async ({ query }: ISearchProps = {}) => {
   if (query && query.type) {
     params.set("type", query.type as string);
   }
-
+  
   const res = await fetch(
     `${process.env.BACKEND_URL}/api/properties?${params.toString()}`,
     {
@@ -31,7 +31,6 @@ export const getAllProperties = async ({ query }: ISearchProps = {}) => {
       },
     },
   );
-
   const result = await res.json();
 
   return result;

@@ -11,9 +11,9 @@ import { useSearchParams } from "next/navigation";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-      const searchParams = useSearchParams();
-    const redirectTo = searchParams.get("redirectTo") ?? ""
-  const [state, action, isPending] = useActionState(loginAction.bind(null,redirectTo), false);
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo") ?? ""
+  const [state, action, isPending] = useActionState(loginAction.bind(null, redirectTo), false);
   const errorMessage = state?.message;
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-background px-4 py-12">
@@ -95,7 +95,9 @@ const LoginForm = () => {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full rounded-lg bg-primary py-2.5 text-sm font-semibold text-white shadow-sm shadow-primary/20 transition-colors hover:bg-primary-hover dark:text-background dark:shadow-primary/10 cursor-pointer"
+            disabled={isPending}
+            className={`w-full rounded-lg bg-primary py-2.5 text-sm font-semibold text-white shadow-sm shadow-primary/20 transition-colors hover:bg-primary-hover dark:text-background dark:shadow-primary/10 ${isPending ? "cursor-not-allowed" : "cursor-pointer"
+              }`}
           >
             {isPending ? "Login in ......" : " Log in"}
           </button>

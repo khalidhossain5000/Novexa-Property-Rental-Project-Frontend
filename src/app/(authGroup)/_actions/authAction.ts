@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import z from "zod";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import { revalidatePath } from "next/cache";
 type TPrevState = {
   success: boolean;
   message: string;
@@ -160,11 +161,16 @@ export const registerAction = async (
 };
 
 //update profile
-interface UpdatePrev{
-  success:false,
-  message:string
+interface UpdatePrev {
+  success: boolean;
+  message?: string;
+  errors?: Record<string, string[]>;
 }
-export const updateProfile = async (prevState:UpdatePrev, formData: FormData) => {
+
+export const updateProfile = async (
+  prevState: UpdatePrev,
+  formData: FormData,
+) => {
   const cookieStore = await cookies();
 
   const accessToken = cookieStore.get("accessToken")?.value || null;
@@ -175,6 +181,7 @@ export const updateProfile = async (prevState:UpdatePrev, formData: FormData) =>
       message: "User not logged in",
     };
   }
+
   const firstName = formData.get("firstName");
   const lastName = formData.get("lastName");
   const profilePhoto = formData.get("profilePhoto");
@@ -185,22 +192,20 @@ export const updateProfile = async (prevState:UpdatePrev, formData: FormData) =>
     profilePhoto,
   };
 
-  console.log(payload,'in server payload')
-  const res = await fetch(
-    `${process.env.BACKEND_URL}/api/auth/profile`,
-    {
-      method: "PUT",
-      headers: {
-        Cookie: `accessToken=${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
+  const res = await fetch(`${process.env.BACKEND_URL}/api/auth/update-profile`, {
+    method: "PUT",
+    headers: {
+      Cookie: `accessToken=${accessToken}`,
+      "Content-Type": "application/json",
     },
-  );
-  console.log("BACKEND URL:", process.env.BACKEND_URL);
-console.log("UPDATE URL:", `${process.env.BACKEND_URL}/api/auth/profile`);
+    body: JSON.stringify(payload),
+  });
+
   const result = await res.json();
 
- console.log(result,'in server result result result result')
+  if (result.success) {
+    revalidatePath("/common/profile");
+  }
+
   return result;
 };

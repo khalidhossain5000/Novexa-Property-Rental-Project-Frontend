@@ -1,8 +1,7 @@
 "use client";
 
 import { IUserTypes } from "@/app/(authGroup)/_authTypes/authTypes";
-import PrimaryBtn from "@/components/shared/Button/PrimaryBtn";
-import { Edit3, Mail, Shield, StampIcon, User } from "lucide-react";
+import { Mail, Shield, StampIcon, User } from "lucide-react";
 import Image from "next/image";
 import UpdateProfileModal from "./UpdateProfileModal";
 interface NavBarProps {
@@ -47,12 +46,6 @@ const payload={
                 className="object-cover"
               />
             </div>
-            <PrimaryBtn
-              icon={<Edit3 className="w-4 h-4" />}
-              className="bg-teal-600 hover:bg-teal-700 text-white rounded-lg shadow-md transition-all active:scale-95 flex items-center gap-2 font-lora"
-            >
-              Update Profile Coming Soon
-            </PrimaryBtn>
             <UpdateProfileModal payload={payload}/>
           </div>
 

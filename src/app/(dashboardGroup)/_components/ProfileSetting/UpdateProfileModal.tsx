@@ -105,7 +105,7 @@ const UpdateProfileModal = ({ payload }: IUpdateProfileProps) => {
               </div>
 
               <div className="relative h-20 w-20 overflow-hidden rounded-lg">
-            
+
                 {/* Image Upload */}
 
                 <ImageUploadField
@@ -120,17 +120,21 @@ const UpdateProfileModal = ({ payload }: IUpdateProfileProps) => {
                   }}
                   defaultImage={payload.profilePhoto}
                 />
-                {/* to get thumbnail url */}
                 <input
                   type="hidden"
-                  name="thumbnailImage"
+                  name="profilePhoto"
                   value={profilePhoto}
                 />
-                 {state.errors?.message && (
-                    <p className="text-red-600 font-lora">
-                      {state.errors.message}
-                    </p>
-                  )}
+                {state.errors?.message && (
+                  <p className="text-red-600 font-lora">
+                    {state.errors.message}
+                  </p>
+                )}
+                {state.message && (
+                  <p className={state.success ? "text-green-600 font-lora" : "text-red-600 font-lora"}>
+                    {state.message}
+                  </p>
+                )}
               </div>
               {/* Submit */}
 
@@ -143,7 +147,7 @@ const UpdateProfileModal = ({ payload }: IUpdateProfileProps) => {
                   ? "Uploading image..."
                   : isPending
                     ? "Updating......"
-                    : "Update Property"}
+                    : "Update Profile"}
               </button>
             </form>
           </div>
