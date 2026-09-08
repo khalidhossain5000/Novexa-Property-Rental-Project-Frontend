@@ -197,7 +197,6 @@ postcss.config.mjs
 README.md
 ```
 
----
 
 ## Dependencies
 
