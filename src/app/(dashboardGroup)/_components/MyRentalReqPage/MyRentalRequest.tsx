@@ -82,16 +82,17 @@ const MyRentalRequest = ({ myRentalReqRes }: MyRentalReqProps) => {
                     {rentalReq.status === "APPROVED" && (
                       <Link
                         href={`/dashboard/requests/${rentalReq?.id}/pay`}
-                        className="flex items-center gap-2 cursor-pointer bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 px-3 py-1 rounded-sm shadow-sm font-inter hover:scale-105 hover:bg-emerald-300 transition duration-400 text-sm"
+                        className="flex items-center gap-2 cursor-pointer bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 px-2 py-1 rounded-sm shadow-sm font-inter hover:scale-105 hover:bg-emerald-300 transition duration-400 text-sm flex-1"
                       >
                         <CreditCard size={16} />
                         Proceed to Payment
                       </Link>
                     )}
 
-                    {rentalReq.status === "ACTIVE" && (
+                     {rentalReq.status === "ACTIVE" && (
                       <GiveReviewBtn propertyId={rentalReq.property.id} />
                     )}
+             
                     {}
                   </div>
                 }
