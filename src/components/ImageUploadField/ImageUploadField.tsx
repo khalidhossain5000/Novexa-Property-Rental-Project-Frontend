@@ -10,16 +10,17 @@ interface IImageUploadProps {
   onUploadSuccess: (url: string) => void;
   onUploadStateChange: (loading: boolean) => void;
   onRemove: () => void;
-    defaultImage?: string;
+  defaultImage?: string;
 }
 const ImageUploadField = ({
   onUploadSuccess,
   onUploadStateChange,
   onRemove,
-  defaultImage
-  
+  defaultImage,
 }: IImageUploadProps) => {
-  const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(defaultImage  || null);
+  const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(
+    defaultImage || null,
+  );
   const [isUploading, setIsUploading] = useState(false);
 
   const handleThumbnailChange = async (
@@ -58,7 +59,7 @@ const ImageUploadField = ({
   return (
     <div className="space-y-2">
       <Label className="text-sm font-medium text-text-secondary">
-        Thumbnail Image
+        Profile Image
       </Label>
 
       {isUploading ? (
@@ -93,12 +94,12 @@ const ImageUploadField = ({
           />
         </Label>
       ) : (
-        <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-border">
+        <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-border bg-surface dark:bg-background">
           <Image
             src={thumbnailPreview}
-            alt="Thumbnail preview"
+            alt="Profile preview"
             fill
-            className="object-cover "
+            className="object-contain p-2"
             sizes="(max-width: 640px) 90vw, 50vw"
           />
 

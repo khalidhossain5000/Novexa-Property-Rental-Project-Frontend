@@ -10,7 +10,6 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@base-ui/react";
 import { Edit, Home } from "lucide-react";
-import Image from "next/image";
 import React, { useActionState, useState } from "react";
 interface IUpdateProfile {
   firstName: string;
@@ -30,7 +29,6 @@ const UpdateProfileModal = ({ payload }: IUpdateProfileProps) => {
     updateProfile,
     false,
   );
-  console.log(payload, "update payload here he update mal modal bro");
   return (
     <Dialog>
       <DialogTrigger>
@@ -40,15 +38,15 @@ const UpdateProfileModal = ({ payload }: IUpdateProfileProps) => {
         </div>
       </DialogTrigger>
 
-      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-2xl mx-auto bg-primary border-none">
+      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-2xl mx-auto border-border bg-background text-foreground">
         <DialogHeader>
-          <DialogTitle className="text-xl font-bold font-lora dark:text-black">
-            Current Profile Details
+          <DialogTitle className="text-xl font-bold font-lora text-foreground">
+            Update Profile
           </DialogTitle>
         </DialogHeader>
 
         <div className="space-y-6 rounded-xl  dark:shadow-xl dark:shadow-primary/20 shadow-sm">
-          <div className="w-full max-w-md mx-auto rounded-2xl border border-border bg-card p-8 shadow-xl dark:shadow-2xl dark:shadow-black/40">
+          <div className="w-full max-w-md mx-auto rounded-2xl border border-border bg-card p-6 shadow-xl dark:shadow-2xl dark:shadow-black/40 sm:p-8">
             {/* Brand mark */}
             <div className="mb-6 flex flex-col items-center justify-center text-center">
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 dark:bg-primary/15">
@@ -104,8 +102,7 @@ const UpdateProfileModal = ({ payload }: IUpdateProfileProps) => {
                 </div>
               </div>
 
-              <div className="relative h-20 w-20 overflow-hidden rounded-lg">
-
+              <div className="space-y-2">
                 {/* Image Upload */}
 
                 <ImageUploadField
@@ -139,9 +136,9 @@ const UpdateProfileModal = ({ payload }: IUpdateProfileProps) => {
               {/* Submit */}
 
               <button
-                disabled={imageUploading}
+                disabled={imageUploading || isPending}
                 type="submit"
-                className=" w-full rounded-xl bg-primary px-5 py-3 font-semibold text-white transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                className="w-full rounded-xl bg-secondary px-5 py-3 font-semibold text-white transition hover:bg-secondary-hover disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-secondary dark:text-background cursor-pointer"
               >
                 {imageUploading
                   ? "Uploading image..."
