@@ -6,6 +6,8 @@ import { getAllProperties } from "./_actions/getAllProperty";
 import PropertyCardSection from "./_components/HomePageSections/PropertyCardSection/PropertyCardSection";
 import About from "./_components/HomePageSections/AboutSection/AboutSection";
 import Faq from "./_components/HomePageSections/FaqSection/Faq";
+import HowItWorksSection from "./_components/HomePageSections/HowItWorksSection/HowItWorksSection";
+import LandlordSection from "./_components/HomePageSections/LandlordSection/LandlordSection";
 
 const HomePage = async () => {
   const roomDataRes = await getAllProperties();
@@ -15,8 +17,10 @@ const HomePage = async () => {
       <Banner />
       <StatsSection />
       <PropertyCardSection homeData={homeData} />
+      <HowItWorksSection />
       <About />
-      <Faq/>
+      <LandlordSection />
+      <Faq />
     </div>
   );
 };

@@ -20,8 +20,8 @@ const Footer = () => {
           <div className="flex flex-col items-center gap-5">
             <Link href="/">
               <h1 className="text-3xl font-extrabold font-lora">
-                <span className="text-primary">Rent</span>
-                <span className="text-secondary pl-1">Nest</span>
+                <span className="text-primary">Novexa</span>
+                <span className="text-secondary pl-1">Property</span>
               </h1>
             </Link>
 
@@ -61,7 +61,7 @@ const Footer = () => {
               +929 333 9296
             </p>
             <p className="text-lg font-semibold text-text-secondary">
-              contact@rentnest.com
+              contact@novexaproperty.com
             </p>
           </div>
         </div>
@@ -70,7 +70,7 @@ const Footer = () => {
       {/* Copyright */}
       <div className="relative z-10 border-t border-border py-4">
         <p className="text-center text-lg font-medium text-text-muted font-inter">
-          ©2026 <span className="font-bold text-text-secondary font-lora">RentNest</span>{" "}
+          ©2026 <span className="font-bold text-text-secondary font-lora">Novexa-Property</span>{" "}
           All Rights Reserved
         </p>
       </div>

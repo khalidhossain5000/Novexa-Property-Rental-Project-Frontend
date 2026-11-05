@@ -49,8 +49,8 @@ const NavBar = ({ user }: NavBarProps) => {
             {/* LOGO */}
             <Link href="/">
               <h1 className="text-3xl font-extrabold font-montserrat">
-                <span className="text-primary">Rent</span>
-                <span className="text-secondary pl-1">Nest</span>
+                <span className="text-primary">Novexa</span>
+                <span className="text-secondary pl-1">Property</span>
               </h1>
             </Link>
           </div>
@@ -82,7 +82,7 @@ const NavBar = ({ user }: NavBarProps) => {
                   {link.name}
 
                   <span
-                    className={`absolute bottom-0 left-0 h-[2px] bg-teal-600 transition-all duration-300 dark:bg-teal-300 ${
+                    className={`absolute bottom-0 left-0 h-0.5 bg-teal-600 transition-all duration-300 dark:bg-teal-300 ${
                       isActive ? "w-full" : "w-0 group-hover:w-full"
                     }`}
                   ></span>
@@ -95,7 +95,6 @@ const NavBar = ({ user }: NavBarProps) => {
             {/* Theme toggle */}
             <ThemeToggle />
 
-            {/* AUTH: show user info and logout when signed in, otherwise show auth buttons */}
             {user ? (
               <div className="hidden md:flex items-center gap-3">
                 <Link
