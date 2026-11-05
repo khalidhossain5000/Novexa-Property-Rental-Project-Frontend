@@ -8,9 +8,10 @@ import About from "./_components/HomePageSections/AboutSection/AboutSection";
 import Faq from "./_components/HomePageSections/FaqSection/Faq";
 import HowItWorksSection from "./_components/HomePageSections/HowItWorksSection/HowItWorksSection";
 import LandlordSection from "./_components/HomePageSections/LandlordSection/LandlordSection";
+import { getMe } from "@/service/getMe";
 
 const HomePage = async () => {
-  const roomDataRes = await getAllProperties();
+  const [roomDataRes, user] = await Promise.all([getAllProperties(), getMe()]);
   const homeData = roomDataRes.data.slice(0, 6);
   return (
     <div>
@@ -19,7 +20,7 @@ const HomePage = async () => {
       <PropertyCardSection homeData={homeData} />
       <HowItWorksSection />
       <About />
-      <LandlordSection />
+      <LandlordSection user={user} />
       <Faq />
     </div>
   );

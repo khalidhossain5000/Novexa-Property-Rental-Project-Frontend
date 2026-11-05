@@ -1,5 +1,10 @@
 import Link from "next/link";
 import { ArrowRight, ClipboardList, Home, Users } from "lucide-react";
+import { IUser } from "@/app/(authGroup)/_authTypes/authTypes";
+
+interface LandlordSectionProps {
+  user: IUser | null;
+}
 
 const benefits = [
   {
@@ -22,7 +27,21 @@ const benefits = [
   },
 ];
 
-const LandlordSection = () => {
+const LandlordSection = ({ user }: LandlordSectionProps) => {
+  const role = user?.data?.role;
+  const dashboardPath =
+    role === "LANDLORD"
+      ? "/landlord-dashboard"
+      : role === "ADMIN"
+        ? "/admin-dashboard"
+        : "/dashboard";
+  const buttonHref = user ? dashboardPath : "/register";
+  const buttonLabel = user
+    ? role === "LANDLORD"
+      ? "Manage your properties"
+      : "Go to your dashboard"
+    : "Get started as a landlord";
+
   return (
     <section className="relative overflow-hidden bg-primary/10 px-4 py-16 dark:bg-primary/5 lg:py-24">
       <div
@@ -43,10 +62,10 @@ const LandlordSection = () => {
             organized from your landlord dashboard.
           </p>
           <Link
-            href="/register"
+            href={buttonHref}
             className="mt-8 inline-flex items-center gap-2 rounded-lg bg-secondary px-6 py-3 font-semibold text-white transition hover:bg-secondary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
           >
-            Get started as a landlord
+            {buttonLabel}
             <ArrowRight size={18} />
           </Link>
         </div>
